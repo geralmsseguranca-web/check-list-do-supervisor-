@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M.s Segurança e Serviços - Sistema de Inspeção</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.min.js"></script>
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --surface2: #1a2236;
+    --border: #1e3a5f;
+    --accent: #00b4d8;
+    --accent2: #0077b6;
+    --green: #06d6a0;
+    --red: #ef476f;
+    --yellow: #ffd166;
+    --text: #e0eaf5;
+    --muted: #6b88a8;
+    --glow: 0 0 12px rgba(0,180,216,0.3);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Exo 2', sans-serif;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse at 20% 0%, rgba(0,119,182,0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 100%, rgba(0,180,216,0.08) 0%, transparent 50%);
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #0d1b2e 0%, #112240 100%);
+    border-bottom: 3px solid var(--accent);
+    padding: 16px 32px;
+    display: flex; align-items: center; gap: 16px;
+    box-shadow: 0 8px 40px rgba(0,180,216,0.2);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .logo-container {
+    display: flex; align-items: center; gap: 12px; border-right: 2px solid var(--border); padding-right: 16px;
+  }
+  .logo-icon {
+    width:48px; height:48px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    display: flex; align-items: center; justify-content: center; font-size: 24px;
+    box-shadow: var(--glow); flex-shrink: 0;
+    font-weight: 700; color: white;
+  }
+  .header-text h1 {
+    font-family: 'Rajdhani', sans-serif; font-size: 1.3rem; font-weight: 700;
+    letter-spacing: 2px; color: var(--accent); text-transform: uppercase;
+  }
+  .header-text p {
+    font-family: 'Share Tech Mono', monospace; font-size: 0.7rem;
+    color: var(--muted); letter-spacing: 1px;
+  }
+  .header-right {
+    margin-left: auto; text-align: right;
+  }
+  .header-right .time {
+    font-family: 'Share Tech Mono', monospace; font-size: 0.9rem;
+    color: var(--accent); font-weight: 600; display: flex; gap: 8px; align-items: center;
+  }
+  .header-right .time::before {
+    content: '⏰'; font-size: 1.1rem;
+  }
+
+  /* TABS */
+  .tabs { display: flex; background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 32px; gap: 8px; overflow-x: auto; }
+  .tab-btn {
+    padding: 14px 24px; background: none; border: none; border-bottom: 3px solid transparent;
+    color: var(--muted); font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; gap: 8px; white-space: nowrap;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); background: rgba(0,180,216,0.05); }
+
+  /* CONTENT */
+  .tab-content { display: none; padding: 32px; max-width: 1400px; margin: 0 auto; }
+  .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px) } to { opacity: 1; transform: translateY(0) } }
+
+  /* DASHBOARD */
+  .dashboard-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 32px;
+  }
+  .stat-card {
+    background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+    border: 1px solid var(--border); border-radius: 12px; padding: 24px;
+    text-align: center; transition: all 0.3s; position: relative; overflow: hidden;
+  }
+  .stat-card::before {
+    content: ''; position: absolute; top: -50%; right: -50%; width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(0,180,216,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .stat-card:hover {
+    border-color: var(--accent); transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,180,216,0.15);
+  }
+  .stat-num {
+    font-family: 'Rajdhani', sans-serif; font-size: 2.8rem; font-weight: 700;
+    color: var(--accent); display: block; margin: 8px 0;
+    position: relative; z-index: 1;
+  }
+  .stat-label {
+    font-family: 'Share Tech Mono', monospace; font-size: 0.75rem;
+    color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px;
+    position: relative; z-index: 1;
+  }
+
+  /* CHART - POSTOS */
+  .chart-container {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 24px; margin-bottom: 32px;
+  }
+  .chart-title {
+    font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+  }
+  .chart-title::before {
+    content: '📊'; font-size: 1.2rem;
+  }
+  .posto-bar {
+    display: grid; grid-template-columns: 120px 1fr 100px; align-items: center;
+    gap: 12px; margin-bottom: 12px;
+  }
+  .posto-name {
+    font-weight: 600; color: var(--text);
+    font-family: 'Share Tech Mono', monospace; font-size: 0.85rem;
+  }
+  .bar-wrapper {
+    background: var(--surface2); border-radius: 6px; overflow: hidden; height: 28px;
+    border: 1px solid var(--border); position: relative;
+  }
+  .bar-fill {
+    height: 100%; background: linear-gradient(90deg, var(--accent2), var(--accent));
+    border-radius: 6px; transition: width 0.4s ease; display: flex;
+    align-items: center; justify-content: flex-end; padding-right: 8px;
+    color: white; font-size: 0.75rem; font-weight: 700;
+  }
+  .posto-count {
+    font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 700;
+    color: var(--accent); text-align: right;
+  }
+
+  /* FORM */
+  .form-header {
+    display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px;
+    margin-bottom: 28px; padding: 20px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+  .field-group { display: flex; flex-direction: column; gap: 6px; }
+  label {
+    font-family: 'Share Tech Mono', monospace; font-size: 0.7rem;
+    letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent);
+  }
+  select, input[type="text"], input[type="date"], input[type="time"], textarea {
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+    color: var(--text); font-family: 'Exo 2', sans-serif; font-size: 0.9rem;
+    padding: 10px 14px; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%; appearance: none;
+  }
+  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M6 8L0 0h12z' fill='%2300b4d8'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+  select:focus, input:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,180,216,0.15); }
+  select option { background: #1a2236; }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase; color: var(--muted);
+    margin: 24px 0 12px; display: flex; align-items: center; gap: 10px;
+    padding-bottom: 8px; border-bottom: 1px solid var(--border);
+  }
+  .section-title::before { content: ''; display: block; width: 4px; height: 18px; background: linear-gradient(to bottom, var(--accent), var(--accent2)); border-radius: 2px; }
+
+  /* ITEMS GRID */
+  .items-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; margin-bottom: 8px;
+  }
+  .item-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 16px; display: grid; grid-template-columns: auto 1fr auto;
+    align-items: center; gap: 12px; transition: border-color 0.2s;
+  }
+  .item-card:hover { border-color: var(--accent2); }
+  .item-icon { width: 36px; height: 36px; background: var(--surface2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; border: 1px solid var(--border); }
+  .item-label { font-weight: 600; font-size: 0.9rem; color: var(--text); }
+  .item-sub { font-size: 0.75rem; color: var(--muted); margin-top: 2px; font-family: 'Share Tech Mono', monospace; }
+  .status-select { width: 110px; padding: 7px 10px; font-size: 0.8rem; border-radius: 6px; font-weight: 600; }
+  .status-ok { border-color: var(--green) !important; color: var(--green) !important; }
+  .status-falha { border-color: var(--red) !important; color: var(--red) !important; }
+  .status-manut { border-color: var(--yellow) !important; color: var(--yellow) !important; }
+  .status-na { border-color: var(--muted) !important; color: var(--muted) !important; }
+  .obs-row { margin-top: 8px; display: none; }
+  .obs-row.show { display: block; }
+  .obs-row textarea { font-size: 0.82rem; min-height: 56px; resize: vertical; border-color: var(--yellow); }
+
+  /* BUTTONS */
+  .form-actions {
+    margin-top: 28px; display: flex; gap: 12px; justify-content: flex-end;
+    align-items: center; flex-wrap: wrap;
+  }
+  .btn {
+    padding: 12px 28px; border-radius: 8px; border: none; font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent2), var(--accent)); color: #fff;
+    box-shadow: var(--glow);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(0,180,216,0.4); }
+  .btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-export {
+    background: linear-gradient(135deg, rgba(6,214,160,0.2), rgba(0,180,216,0.2));
+    border: 1px solid var(--accent);
+    color: var(--accent);
+  }
+  .btn-export:hover {
+    background: linear-gradient(135deg, rgba(6,214,160,0.3), rgba(0,180,216,0.3));
+  }
+  .btn-sm { padding: 7px 14px; font-size: 0.82rem; border-radius: 6px; border: none; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 1px; cursor: pointer; transition: all 0.2s; text-transform: uppercase; }
+  .btn-del { background: rgba(239,71,111,0.1); color: var(--red); border: 1px solid rgba(239,71,111,0.35); }
+  .btn-del:hover { background: rgba(239,71,111,0.25); }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--border); margin-bottom: 32px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  thead { background: linear-gradient(135deg, #0d1b2e, #112240); }
+  th { padding: 14px; text-align: left; font-weight: 700; letter-spacing: 1px; color: var(--accent); border-bottom: 2px solid var(--border); }
+  td { padding: 14px; border-bottom: 1px solid var(--border); }
+  tbody tr:hover { background: rgba(0,180,216,0.05); }
+  .badge {
+    display: inline-block; padding: 4px 10px; border-radius: 20px;
+    font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .badge-ok { background: rgba(6,214,160,0.2); color: var(--green); }
+  .badge-falha { background: rgba(239,71,111,0.2); color: var(--red); }
+  .badge-manut { background: rgba(255,209,102,0.2); color: var(--yellow); }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 24px; right: 24px;
+    background: var(--green); color: #021a12;
+    font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 1px;
+    padding: 14px 24px; border-radius: 10px; display: none; align-items: center;
+    gap: 10px; z-index: 999; box-shadow: 0 8px 32px rgba(6,214,160,0.3);
+  }
+
+  /* TOOLBAR */
+  .db-toolbar { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+  .search-box { flex: 1; min-width: 200px; padding: 10px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: 'Exo 2', sans-serif; font-size: 0.9rem; outline: none; }
+  .search-box:focus { border-color: var(--accent); }
+
+  /* EMPTY STATE */
+  .empty-state {
+    text-align: center; padding: 60px 32px; color: var(--muted);
+  }
+  .empty-state-icon { font-size: 3rem; margin-bottom: 16px; }
+  .empty-state h3 { font-family: 'Rajdhani', sans-serif; font-size: 1.2rem; margin-bottom: 8px; color: var(--text); }
+
+  @media (max-width: 900px) {
+    .form-header { grid-template-columns: 1fr 1fr; }
+    .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    header { flex-direction: column; align-items: flex-start; }
+    .logo-container { border-right: none; border-bottom: 2px solid var(--border); padding-right: 0; padding-bottom: 12px; width: 100%; }
+    .header-right { width: 100%; margin-left: 0; margin-top: 12px; }
+    .form-header { grid-template-columns: 1fr; }
+    .dashboard-grid { grid-template-columns: 1fr; }
+    .form-actions { flex-direction: column-reverse; }
+    .btn { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-container">
+    <div class="logo-icon">M</div>
+    <div class="header-text">
+      <h1>M.s Segurança e Serviços</h1>
+      <p>Sistema de Inspeção de Condomínios</p>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="time">
+      <span id="current-date"></span> • <span id="current-time"></span>
+    </div>
+  </div>
+</header>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('form', this)">📝 Formulário</button>
+  <button class="tab-btn" onclick="switchTab('dashboard', this)">📊 Dashboard</button>
+  <button class="tab-btn" onclick="switchTab('db', this)">💾 Histórico</button>
+</div>
+
+<!-- FORMULÁRIO -->
+<div id="tab-form" class="tab-content active">
+  <div class="form-header">
+    <div class="field-group">
+      <label>Data da Inspeção</label>
+      <input type="date" id="data" required>
+    </div>
+    <div class="field-group">
+      <label>Hora Início</label>
+      <input type="time" id="hora-inicio" required>
+    </div>
+    <div class="field-group">
+      <label>Hora Término</label>
+      <input type="time" id="hora-fim">
+    </div>
+    <div class="field-group">
+      <label>Posto de Segurança</label>
+      <select id="posto" required>
+        <option value="">Selecionar...</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-header">
+    <div class="field-group">
+      <label>Supervisor</label>
+      <select id="supervisor" required>
+        <option value="">Selecionar...</option>
+      </select>
+    </div>
+    <div class="field-group">
+      <label>Colaborador</label>
+      <select id="colaborador" required>
+        <option value="">Selecionar...</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="section-title">Itens de Inspeção</div>
+  <div id="items-container"></div>
+
+  <div class="section-title">Observações Gerais</div>
+  <textarea id="obs-geral" placeholder="Descreva qualquer observação importante sobre a inspeção..."></textarea>
+
+  <div class="form-actions">
+    <button class="btn btn-secondary" onclick="limparForm()">↻ Limpar</button>
+    <button class="btn btn-primary" onclick="salvarInspecao()">✓ Salvar Inspeção</button>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="tab-dashboard" class="tab-content">
+  <h2 style="margin-bottom: 24px; font-family: 'Rajdhani', sans-serif; font-size: 1.4rem; letter-spacing: 2px; text-transform: uppercase;">Análise de Inspeções</h2>
+
+  <div class="dashboard-grid">
+    <div class="stat-card">
+      <span class="stat-label">Total de Inspeções</span>
+      <span class="stat-num" id="stat-total">0</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Inspeções Normais</span>
+      <span class="stat-num" id="stat-ok">0</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Requerem Manutenção</span>
+      <span class="stat-num" id="stat-manut">0</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Falhas Detectadas</span>
+      <span class="stat-num" id="stat-falha">0</span>
+    </div>
+  </div>
+
+  <div class="chart-container">
+    <div class="chart-title">Visitas por Posto de Segurança</div>
+    <div id="chart-postos"></div>
+  </div>
+
+  <div class="chart-container">
+    <div class="chart-title">Últimas Inspeções</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Data / Hora</th>
+            <th>Posto</th>
+            <th>Supervisor</th>
+            <th>Colaborador</th>
+            <th style="text-align:center">✓ OK</th>
+            <th style="text-align:center">❌ Falhas</th>
+            <th style="text-align:center">⚠️ Manut.</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="dashboard-body"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- HISTÓRICO -->
+<div id="tab-db" class="tab-content">
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+    <h2 style="font-family: 'Rajdhani', sans-serif; font-size: 1.4rem; letter-spacing: 2px; text-transform: uppercase;">Histórico de Inspeções</h2>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+      <button class="btn btn-export" onclick="exportarPDF()">📄 Exportar PDF</button>
+      <button class="btn btn-export" onclick="exportarExcel()">📊 Exportar Excel</button>
+      <button class="btn btn-secondary" onclick="limparDB()">🗑️ Limpar Tudo</button>
+    </div>
+  </div>
+
+  <div class="db-toolbar">
+    <input type="text" id="search-input" class="search-box" placeholder="Buscar por posto, supervisor ou colaborador..." onkeyup="renderDB()">
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Data / Hora</th>
+          <th>Posto</th>
+          <th>Supervisor</th>
+          <th>Colaborador</th>
+          <th style="text-align:center">✓ OK</th>
+          <th style="text-align:center">❌ Falhas</th>
+          <th style="text-align:center">⚠️ Manut.</th>
+          <th>Status</th>
+          <th style="text-align:center">Ação</th>
+        </tr>
+      </thead>
+      <tbody id="db-body"></tbody>
+    </table>
+  </div>
+
+  <div id="empty-state" class="empty-state" style="display:none;">
+    <div class="empty-state-icon">📭</div>
+    <h3>Nenhuma inspeção registrada</h3>
+    <p>Preencha o formulário e salve uma inspeção para começar.</p>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
+
+<script>
+// ================================================================
+//  ITEMS CONFIG
+// ================================================================
+const ITEMS = [
+  { id: 'port', label: 'Portaria', icon: '🚪' },
+  { id: 'cctv', label: 'CCTV', icon: '📹' },
+  { id: 'alarme', label: 'Sistema de Alarme', icon: '🚨' },
+  { id: 'ilum', label: 'Iluminação Externa', icon: '💡' },
+  { id: 'cancela', label: 'Cancela/Acesso', icon: '🔑' },
+  { id: 'vigia', label: 'Vigilância (Rondas)', icon: '👁️' },
+];
+
+const POSTOS = ['Portaria Principal', 'Entrada Lateral', 'Garagem', 'Rooftop', 'Hall Principal'];
+const SUPERVISORES = ['Carlos Silva', 'João Santos', 'Maria Oliveira', 'Pedro Costa', 'Ana Souza'];
+const COLABORADORES = ['Rafael Pereira', 'Lucas Martins', 'Fernanda Lima', 'Bruno Alves', 'Carla Dias'];
+
+// ================================================================
+//  DATE & TIME
+// ================================================================
+function updateDateTime() {
+  const now = new Date();
+  const date = now.toLocaleDateString('pt-BR');
+  const time = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  document.getElementById('current-date').textContent = date;
+  document.getElementById('current-time').textContent = time;
+}
+setInterval(updateDateTime, 1000);
+updateDateTime();
+
+// ================================================================
+//  BUILD ITEMS
+// ================================================================
+function buildItems() {
+  const container = document.getElementById('items-container');
+  let html = '';
+  ITEMS.forEach(item => {
+    html += `<div class="items-grid"><div class="item-card">
+      <div class="item-icon">${item.icon}</div>
+      <div>
+        <div class="item-label">${item.label}</div>
+        <div class="item-sub">${item.id}</div>
+      </div>
+      <select id="status-${item.id}" class="status-select">
+        <option value="">-</option>
+        <option value="ok">✓ OK</option>
+        <option value="falha">❌ Falha</option>
+        <option value="manut">⚠️ Manut.</option>
+        <option value="na">N/A</option>
+      </select>
+    </div></div>
+    <div id="obs-row-${item.id}" class="obs-row">
+      <textarea id="obs-${item.id}" placeholder="Observações sobre este item..."></textarea>
+    </div>`;
+  });
+  container.innerHTML = html;
+
+  ITEMS.forEach(item => {
+    const sel = document.getElementById(`status-${item.id}`);
+    if (sel) {
+      sel.addEventListener('change', (e) => {
+        const obsRow = document.getElementById(`obs-row-${item.id}`);
+        if (e.target.value && e.target.value !== 'ok' && e.target.value !== 'na') {
+          obsRow.classList.add('show');
+        } else {
+          obsRow.classList.remove('show');
+        }
+        updateStatusClass(sel);
+      });
+    }
+  });
+}
+
+function updateStatusClass(sel) {
+  sel.className = 'status-select';
+  if (sel.value === 'ok') sel.classList.add('status-ok');
+  else if (sel.value === 'falha') sel.classList.add('status-falha');
+  else if (sel.value === 'manut') sel.classList.add('status-manut');
+  else if (sel.value === 'na') sel.classList.add('status-na');
+}
+
+function getAllItems() { return ITEMS; }
+
+// ================================================================
+//  DROPDOWNS
+// ================================================================
+function initCadastros() {
+  const postoSel = document.getElementById('posto');
+  const supSel = document.getElementById('supervisor');
+  const colabSel = document.getElementById('colaborador');
+
+  POSTOS.forEach(p => { const opt = document.createElement('option'); opt.value = p; opt.textContent = p; postoSel.appendChild(opt); });
+  SUPERVISORES.forEach(s => { const opt = document.createElement('option'); opt.value = s; opt.textContent = s; supSel.appendChild(opt); });
+  COLABORADORES.forEach(c => { const opt = document.createElement('option'); opt.value = c; opt.textContent = c; colabSel.appendChild(opt); });
+}
+
+// ================================================================
+//  SAVE & VALIDATE
+// ================================================================
+function salvarInspecao() {
+  const data = document.getElementById('data').value;
+  const horaInicio = document.getElementById('hora-inicio').value;
+  const horaFim = document.getElementById('hora-fim').value;
+  const posto = document.getElementById('posto').value;
+  const supervisor = document.getElementById('supervisor').value;
+  const colaborador = document.getElementById('colaborador').value;
+
+  if (!data || !horaInicio || !posto || !supervisor || !colaborador) {
+    showToast('Preencha todos os campos obrigatórios!', 'red');
+    return;
+  }
+
+  const itens = {};
+  ITEMS.forEach(item => {
+    const status = document.getElementById(`status-${item.id}`)?.value || '';
+    const obs = document.getElementById(`obs-${item.id}`)?.value || '';
+    if (status) {
+      itens[item.id] = { status, obs };
+    }
+  });
+
+  if (Object.keys(itens).length === 0) {
+    showToast('Preencha pelo menos um item de inspeção!', 'red');
+    return;
+  }
+
+  const db = getDB();
+  const record = {
+    id: Date.now(),
+    data, horaInicio, horaFim, posto, supervisor, colaborador,
+    itens,
+    obsGeral: document.getElementById('obs-geral').value,
+    timestamp: new Date().toISOString()
+  };
+
+  db.push(record);
+  saveDB(db);
+  showToast('✓ Inspeção salva com sucesso!', 'green');
+  limparForm();
+}
+
+// ================================================================
+//  DB
+// ================================================================
+function getDB() { try { return JSON.parse(localStorage.getItem('inspecoes_cond') || '[]'); } catch { return []; } }
+function saveDB(db) { localStorage.setItem('inspecoes_cond', JSON.stringify(db)); updateStats(db); }
+
+function updateStats(db) {
+  document.getElementById('stat-total').textContent = db.length;
+  let ok = 0, manut = 0, falha = 0;
+  db.forEach(r => {
+    const vals = Object.values(r.itens).map(i => i.status);
+    if (vals.some(v => v === 'falha')) falha++;
+    else if (vals.some(v => v === 'manut')) manut++;
+    else ok++;
+  });
+  document.getElementById('stat-ok').textContent = ok;
+  document.getElementById('stat-manut').textContent = manut;
+  document.getElementById('stat-falha').textContent = falha;
+}
+
+function renderDB() {
+  const db = getDB();
+  const query = (document.getElementById('search-input')?.value || '').toLowerCase();
+  const tbody = document.getElementById('db-body');
+  const empty = document.getElementById('empty-state');
+  updateStats(db);
+  const filtered = db.filter(r =>
+    (r.posto || '').toLowerCase().includes(query) ||
+    (r.supervisor || '').toLowerCase().includes(query) ||
+    (r.colaborador || '').toLowerCase().includes(query)
+  );
+  if (!filtered.length) { tbody.innerHTML = ''; empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+  tbody.innerHTML = [...filtered].reverse().map((r, idx) => {
+    const vals = Object.values(r.itens).map(i => i.status);
+    const ok = vals.filter(v => v === 'ok').length;
+    const fa = vals.filter(v => v === 'falha').length;
+    const ma = vals.filter(v => v === 'manut').length;
+    let badge = '<span class="badge badge-ok">✓ Normal</span>';
+    if (fa > 0) badge = `<span class="badge badge-falha">❌ ${fa} Falha(s)</span>`;
+    else if (ma > 0) badge = `<span class="badge badge-manut">⚠️ Manutenção</span>`;
+    const dataFmt = r.data ? r.data.split('-').reverse().join('/') : '—';
+    return `<tr>
+      <td style="font-family:'Share Tech Mono',monospace;color:var(--muted)">${filtered.length - idx}</td>
+      <td style="font-family:'Share Tech Mono',monospace">${dataFmt}<br><span style="color:var(--muted);font-size:0.73rem">${r.horaInicio || ''}${r.horaFim ? ' – ' + r.horaFim : ''}</span></td>
+      <td><strong>${r.posto}</strong></td>
+      <td>${r.supervisor}</td>
+      <td>${r.colaborador}</td>
+      <td style="color:var(--green);font-family:'Share Tech Mono',monospace;text-align:center">${ok}</td>
+      <td style="color:var(--red);font-family:'Share Tech Mono',monospace;text-align:center">${fa}</td>
+      <td style="color:var(--yellow);font-family:'Share Tech Mono',monospace;text-align:center">${ma}</td>
+      <td>${badge}</td>
+      <td style="text-align:center"><button class="btn-sm btn-del" onclick="deletar(${r.id})">Excluir</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function renderDashboard() {
+  const db = getDB();
+  updateStats(db);
+
+  // Agrupar por posto
+  const postoCount = {};
+  db.forEach(r => {
+    postoCount[r.posto] = (postoCount[r.posto] || 0) + 1;
+  });
+
+  const sortedPostos = Object.entries(postoCount).sort((a, b) => b[1] - a[1]);
+  const maxCount = Math.max(...sortedPostos.map(p => p[1]), 1);
+
+  let chartHtml = '';
+  sortedPostos.forEach(([posto, count]) => {
+    const percentage = (count / maxCount) * 100;
+    chartHtml += `<div class="posto-bar">
+      <div class="posto-name">${posto}</div>
+      <div class="bar-wrapper">
+        <div class="bar-fill" style="width: ${percentage}%">${count}</div>
+      </div>
+      <div class="posto-count">${count}</div>
+    </div>`;
+  });
+
+  document.getElementById('chart-postos').innerHTML = chartHtml || '<p style="color: var(--muted); text-align: center; padding: 32px;">Nenhum dado disponível</p>';
+
+  // Renderizar últimas inspeções no dashboard
+  const dashboardBody = document.getElementById('dashboard-body');
+  dashboardBody.innerHTML = [...db].reverse().slice(0, 5).map((r, idx) => {
+    const vals = Object.values(r.itens).map(i => i.status);
+    const ok = vals.filter(v => v === 'ok').length;
+    const fa = vals.filter(v => v === 'falha').length;
+    const ma = vals.filter(v => v === 'manut').length;
+    let badge = '<span class="badge badge-ok">✓ Normal</span>';
+    if (fa > 0) badge = `<span class="badge badge-falha">❌ ${fa} Falha(s)</span>`;
+    else if (ma > 0) badge = `<span class="badge badge-manut">⚠️ Manutenção</span>`;
+    const dataFmt = r.data ? r.data.split('-').reverse().join('/') : '—';
+    return `<tr>
+      <td style="font-family:'Share Tech Mono',monospace;color:var(--muted)">${idx + 1}</td>
+      <td style="font-family:'Share Tech Mono',monospace">${dataFmt}<br><span style="color:var(--muted);font-size:0.73rem">${r.horaInicio || ''}${r.horaFim ? ' – ' + r.horaFim : ''}</span></td>
+      <td><strong>${r.posto}</strong></td>
+      <td>${r.supervisor}</td>
+      <td>${r.colaborador}</td>
+      <td style="color:var(--green);font-family:'Share Tech Mono',monospace;text-align:center">${ok}</td>
+      <td style="color:var(--red);font-family:'Share Tech Mono',monospace;text-align:center">${fa}</td>
+      <td style="color:var(--yellow);font-family:'Share Tech Mono',monospace;text-align:center">${ma}</td>
+      <td>${badge}</td>
+    </tr>`;
+  }).join('');
+}
+
+function deletar(id) {
+  if (!confirm('Excluir este registro de inspeção?')) return;
+  saveDB(getDB().filter(r => r.id !== id));
+  renderDB();
+  renderDashboard();
+}
+
+function limparDB() {
+  if (!confirm('⚠️ Apagar TODOS os registros? Esta ação não pode ser desfeita.')) return;
+  localStorage.removeItem('inspecoes_cond');
+  renderDB();
+  renderDashboard();
+}
+
+// ================================================================
+//  EXPORT PDF
+// ================================================================
+function exportarPDF() {
+  const db = getDB();
+  if (!db.length) { alert('Nenhum dado para exportar.'); return; }
+
+  const element = document.createElement('div');
+  element.style.padding = '20px';
+  element.style.backgroundColor = '#fff';
+  element.style.color = '#000';
+
+  let html = `
+    <h1 style="text-align:center; margin-bottom:10px;">M.s Segurança e Serviços</h1>
+    <h2 style="text-align:center; margin-bottom:20px;">Relatório de Inspeções</h2>
+    <p style="text-align:center; color:#666; margin-bottom:30px;">Gerado em: ${new Date().toLocaleString('pt-BR')}</p>
+    
+    <h3 style="margin-top:20px; margin-bottom:10px;">Resumo Geral</h3>
+    <table style="width:100%; border-collapse:collapse; margin-bottom:30px;">
+      <tr style="background:#f0f0f0;">
+        <td style="border:1px solid #ccc; padding:8px; font-weight:bold;">Total de Inspeções</td>
+        <td style="border:1px solid #ccc; padding:8px;">${db.length}</td>
+      </tr>
+    </table>
+
+    <h3 style="margin-top:20px; margin-bottom:10px;">Histórico de Inspeções</h3>
+    <table style="width:100%; border-collapse:collapse; font-size:11px;">
+      <thead>
+        <tr style="background:#0d1b2e; color:white;">
+          <th style="border:1px solid #ccc; padding:8px; text-align:left;">Data</th>
+          <th style="border:1px solid #ccc; padding:8px; text-align:left;">Hora</th>
+          <th style="border:1px solid #ccc; padding:8px; text-align:left;">Posto</th>
+          <th style="border:1px solid #ccc; padding:8px; text-align:left;">Supervisor</th>
+          <th style="border:1px solid #ccc; padding:8px; text-align:left;">Colaborador</th>
+          <th style="border:1px solid #ccc; padding:8px; text-align:center;">OK</th>
+          <th style="border:1px solid #ccc; padding:8px; text-align:center;">Falhas</th>
+          <th style="border:1px solid #ccc; padding:8px; text-align:center;">Manut.</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+
+  db.forEach(r => {
+    const vals = Object.values(r.itens).map(i => i.status);
+    const ok = vals.filter(v => v === 'ok').length;
+    const fa = vals.filter(v => v === 'falha').length;
+    const ma = vals.filter(v => v === 'manut').length;
+    const dataFmt = r.data ? r.data.split('-').reverse().join('/') : '—';
+    html += `<tr style="background:${db.indexOf(r) % 2 ? '#f9f9f9' : '#fff'};">
+      <td style="border:1px solid #ccc; padding:8px;">${dataFmt}</td>
+      <td style="border:1px solid #ccc; padding:8px;">${r.horaInicio}${r.horaFim ? ' – ' + r.horaFim : ''}</td>
+      <td style="border:1px solid #ccc; padding:8px;">${r.posto}</td>
+      <td style="border:1px solid #ccc; padding:8px;">${r.supervisor}</td>
+      <td style="border:1px solid #ccc; padding:8px;">${r.colaborador}</td>
+      <td style="border:1px solid #ccc; padding:8px; text-align:center; color:#06d6a0;">${ok}</td>
+      <td style="border:1px solid #ccc; padding:8px; text-align:center; color:#ef476f;">${fa}</td>
+      <td style="border:1px solid #ccc; padding:8px; text-align:center; color:#ffd166;">${ma}</td>
+    </tr>`;
+  });
+
+  html += `</tbody></table>`;
+  element.innerHTML = html;
+
+  const opt = {
+    margin: 10,
+    filename: `relatorio_inspecoes_${new Date().toISOString().slice(0, 10)}.pdf`,
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { orientation: 'landscape', unit: 'mm', format: 'a4' }
+  };
+
+  html2pdf().set(opt).from(element).save();
+  showToast('📄 PDF exportado com sucesso!', 'green');
+}
+
+// ================================================================
+//  EXPORT EXCEL
+// ================================================================
+function exportarExcel() {
+  const db = getDB();
+  if (!db.length) { alert('Nenhum dado para exportar.'); return; }
+
+  const items = getAllItems();
+  const headers = ['ID', 'Data', 'Hora Início', 'Hora Fim', 'Posto', 'Supervisor', 'Colaborador',
+    ...items.map(i => i.label), 'Observações Gerais'];
+  
+  const rows = db.map(r => [
+    r.id,
+    r.data,
+    r.horaInicio,
+    r.horaFim || '',
+    r.posto,
+    r.supervisor,
+    r.colaborador,
+    ...items.map(i => {
+      const x = r.itens[i.id];
+      return x ? `${x.status}${x.obs ? ' (' + x.obs + ')' : ''}` : '';
+    }),
+    (r.obsGeral || '').replace(/\n/g, ' ')
+  ]);
+
+  const ws = XLSX.utils.aoa_to_sheet([headers, ...rows]);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Inspeções');
+  XLSX.writeFile(wb, `inspecoes_${new Date().toISOString().slice(0, 10)}.xlsx`);
+
+  showToast('📊 Excel exportado com sucesso!', 'green');
+}
+
+// ================================================================
+//  LIMPAR FORMULÁRIO
+// ================================================================
+function limparForm() {
+  ['posto', 'supervisor', 'colaborador', 'hora-fim'].forEach(id => {
+    const e = document.getElementById(id);
+    if (e) e.value = '';
+  });
+  document.getElementById('data').value = new Date().toISOString().split('T')[0];
+  document.getElementById('hora-inicio').value = new Date().toTimeString().slice(0, 5);
+  document.getElementById('obs-geral').value = '';
+  getAllItems().forEach(item => {
+    const sel = document.getElementById(`status-${item.id}`);
+    if (sel) { sel.value = ''; sel.className = 'status-select'; }
+    const obs = document.getElementById(`obs-${item.id}`);
+    if (obs) obs.value = '';
+    const row = document.getElementById(`obs-row-${item.id}`);
+    if (row) row.classList.remove('show');
+  });
+}
+
+// ================================================================
+//  TOAST
+// ================================================================
+let toastTimer;
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.background = type === 'red' ? 'var(--red)' : 'var(--green)';
+  t.style.color = type === 'red' ? '#fff' : '#021a12';
+  t.style.display = 'flex';
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.style.display = 'none'; }, 3000);
+}
+
+// ================================================================
+//  TAB SWITCHING
+// ================================================================
+function switchTab(tab, btn) {
+  document.querySelectorAll('.tab-content').forEach(e => e.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(e => e.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  btn.classList.add('active');
+  if (tab === 'db') renderDB();
+  if (tab === 'dashboard') renderDashboard();
+}
+
+// ================================================================
+//  INIT
+// ================================================================
+document.getElementById('data').value = new Date().toISOString().split('T')[0];
+document.getElementById('hora-inicio').value = new Date().toTimeString().slice(0, 5);
+buildItems();
+initCadastros();
+renderDB();
+renderDashboard();
+</script>
+
+</body>
+</html>
