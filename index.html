@@ -3,1782 +3,1370 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>M.s Segurança - Sistema de Inspeção</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.min.js"></script>
-<!-- Firebase carregado via ES modules no script principal -->
+<title>CondomSec — Inspeção de Segurança</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;1,300&display=swap" rel="stylesheet">
 <style>
-  :root {
-    /* Paleta Moderna - Segurança & Confiabilidade */
-    --primary: #2E5984;      /* Azul profissional */
-    --primary-light: #4A7BA7; /* Azul mais claro */
-    --primary-dark: #1a3a52; /* Azul escuro */
-    
-    --accent: #00D4AA;       /* Verde-turquesa vibrante */
-    --accent-dark: #00B894;  /* Verde mais escuro */
-    
-    --success: #10B981;      /* Verde sucesso */
-    --warning: #F59E0B;      /* Âmbar aviso */
-    --error: #EF4444;        /* Vermelho erro */
-    --info: #06B6D4;         /* Ciano informação */
-    
-    --bg: #0F172A;           /* Fundo muito escuro */
-    --surface: #1E293B;      /* Superfície escura */
-    --surface-light: #334155; /* Superfície clara */
-    
-    --text: #F1F5F9;         /* Texto claro */
-    --text-secondary: #CBD5E1; /* Texto secundário */
-    --text-muted: #94A3B8;   /* Texto muted */
-    
-    --border: #475569;       /* Borda */
-    --border-light: #64748B; /* Borda clara */
-    
-    --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.4);
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html, body {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, var(--bg) 0%, #1a2f4a 100%);
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  /* SCROLLBAR */
-  ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-  ::-webkit-scrollbar-track {
-    background: var(--surface);
-  }
-  ::-webkit-scrollbar-thumb {
-    background: var(--primary);
-    border-radius: 5px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-light);
-  }
-
-  /* HEADER */
-  header {
-    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-    border-bottom: 2px solid var(--accent);
-    padding: 20px 32px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    box-shadow: var(--shadow-lg);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-
-  .logo-container {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    border-right: 2px solid rgba(0, 212, 170, 0.3);
-    padding-right: 18px;
-  }
-
-  .logo-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--bg);
-    box-shadow: 0 8px 24px rgba(0, 212, 170, 0.3);
-    flex-shrink: 0;
-  }
-
-  .header-text h1 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    color: var(--text);
-  }
-
-  .header-text p {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-    margin-top: 2px;
-  }
-
-  .header-right {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .time-display {
-    text-align: right;
-    font-family: 'IBM Plex Mono', monospace;
-  }
-
-  .time-display .date {
-    font-size: 0.9rem;
-    color: var(--accent);
-    font-weight: 600;
-  }
-
-  .time-display .clock {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    margin-top: 4px;
-  }
-
-  .auth-btn {
-    padding: 8px 16px;
-    background: rgba(0, 212, 170, 0.15);
-    border: 1px solid var(--accent);
-    border-radius: 8px;
-    color: var(--accent);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-  }
-
-  .auth-btn:hover {
-    background: rgba(0, 212, 170, 0.25);
-    box-shadow: 0 0 12px rgba(0, 212, 170, 0.3);
-  }
-
-  /* TABS */
-  .tabs {
-    display: flex;
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 0 32px;
-    gap: 8px;
-    overflow-x: auto;
-  }
-
-  .tab-btn {
-    padding: 14px 20px;
-    background: none;
-    border: none;
-    border-bottom: 3px solid transparent;
-    color: var(--text-muted);
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-    white-space: nowrap;
-  }
-
-  .tab-btn:hover {
-    color: var(--text-secondary);
-  }
-
-  .tab-btn.active {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
-    background: rgba(0, 212, 170, 0.05);
-  }
-
-  /* CONTENT */
-  .tab-content {
-    display: none;
-    padding: 32px;
-    max-width: 1400px;
-    margin: 0 auto;
-    animation: fadeIn 0.3s ease;
-  }
-
-  .tab-content.active {
-    display: block;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* DASHBOARD */
-  .dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 16px;
-    margin-bottom: 32px;
-  }
-
-  .stat-card {
-    background: linear-gradient(135deg, var(--surface) 0%, var(--surface-light) 100%);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .stat-card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, rgba(0, 212, 170, 0.08) 0%, transparent 70%);
-    border-radius: 50%;
-  }
-
-  .stat-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 212, 170, 0.15);
-  }
-
-  .stat-num {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 2.8rem;
-    font-weight: 700;
-    color: var(--accent);
-    display: block;
-    margin: 8px 0;
-    position: relative;
-    z-index: 1;
-  }
-
-  .stat-label {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    position: relative;
-    z-index: 1;
-  }
-
-  /* CHART */
-  .chart-container {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 32px;
-  }
-
-  .chart-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    color: var(--accent);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .posto-bar {
-    display: grid;
-    grid-template-columns: 140px 1fr 100px;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
-
-  .posto-name {
-    font-weight: 600;
-    color: var(--text);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.9rem;
-  }
-
-  .bar-wrapper {
-    background: var(--surface-light);
-    border-radius: 6px;
-    overflow: hidden;
-    height: 32px;
-    border: 1px solid var(--border);
-    position: relative;
-  }
-
-  .bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
-    border-radius: 6px;
-    transition: width 0.4s ease;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right: 12px;
-    color: white;
-    font-size: 0.8rem;
-    font-weight: 700;
-  }
-
-  .posto-count {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--accent);
-    text-align: right;
-  }
-
-  /* FORM */
-  .form-section {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 24px;
-  }
-
-  .form-header {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
-  }
-
-  .field-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  label {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    color: var(--accent);
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-
-  input[type="text"],
-  input[type="date"],
-  input[type="time"],
-  input[type="file"],
-  select,
-  textarea {
-    background: var(--surface-light);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    padding: 10px 12px;
-    outline: none;
-    transition: all 0.3s;
-    width: 100%;
-  }
-
-  input[type="text"]:focus,
-  input[type="date"]:focus,
-  input[type="time"]:focus,
-  input[type="file"]:focus,
-  select:focus,
-  textarea:focus {
-    border-color: var(--accent);
-    background: var(--surface);
-    box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.1);
-  }
-
-  select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M6 8L0 0h12z' fill='%2300D4AA'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    padding-right: 32px;
-  }
-
-  select option {
-    background: var(--surface);
-    color: var(--text);
-  }
-
-  /* PHOTO UPLOAD */
-  .photo-upload-area {
-    border: 2px dashed var(--primary);
-    border-radius: 10px;
-    padding: 24px;
-    text-align: center;
-    background: rgba(46, 89, 132, 0.05);
-    cursor: pointer;
-    transition: all 0.3s;
-  }
-
-  .photo-upload-area:hover {
-    border-color: var(--accent);
-    background: rgba(0, 212, 170, 0.08);
-  }
-
-  .photo-upload-area.dragover {
-    border-color: var(--accent);
-    background: rgba(0, 212, 170, 0.15);
-  }
-
-  .photo-upload-area input[type="file"] {
-    display: none;
-  }
-
-  .upload-icon {
-    font-size: 2.5rem;
-    margin-bottom: 12px;
-  }
-
-  .upload-text {
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    margin-bottom: 4px;
-  }
-
-  .upload-hint {
-    color: var(--text-muted);
-    font-size: 0.8rem;
-  }
-
-  /* PHOTO GALLERY */
-  .photo-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 12px;
-    margin-top: 16px;
-  }
-
-  .photo-item {
-    position: relative;
-    border-radius: 8px;
-    overflow: hidden;
-    aspect-ratio: 1;
-    background: var(--surface-light);
-    border: 1px solid var(--border);
-  }
-
-  .photo-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .photo-item .delete-btn {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    background: var(--error);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 28px;
-    height: 28px;
-    cursor: pointer;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    transition: all 0.2s;
-  }
-
-  .photo-item:hover .delete-btn {
-    display: flex;
-  }
-
-  .photo-item .delete-btn:hover {
-    background: #DC2626;
-  }
-
-  /* SECTION TITLE */
-  .section-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    color: var(--text);
-    margin: 24px 0 16px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid var(--primary);
-  }
-
-  /* ITEMS GRID */
-  .items-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 12px;
-    margin-bottom: 12px;
-  }
-
-  .item-card {
-    background: var(--surface-light);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: 12px;
-    transition: all 0.2s;
-  }
-
-  .item-card:hover {
-    border-color: var(--accent);
-    background: var(--surface);
-  }
-
-  .item-icon {
-    width: 40px;
-    height: 40px;
-    background: var(--surface);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    border: 1px solid var(--border);
-  }
-
-  .item-label {
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: var(--text);
-  }
-
-  .item-sub {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    margin-top: 2px;
-    font-family: 'IBM Plex Mono', monospace;
-  }
-
-  .status-select {
-    width: 120px;
-    padding: 7px 10px;
-    font-size: 0.8rem;
-    border-radius: 6px;
-    font-weight: 600;
-  }
-
-  .status-ok { border-color: var(--success) !important; color: var(--success) !important; }
-  .status-falha { border-color: var(--error) !important; color: var(--error) !important; }
-  .status-manut { border-color: var(--warning) !important; color: var(--warning) !important; }
-  .status-na { border-color: var(--text-muted) !important; color: var(--text-muted) !important; }
-
-  .obs-row {
-    margin-top: 8px;
-    display: none;
-    grid-column: 1 / -1;
-  }
-
-  .obs-row.show {
-    display: block;
-  }
-
-  .obs-row textarea {
-    font-size: 0.85rem;
-    min-height: 56px;
-    resize: vertical;
-    border-color: var(--warning);
-  }
-
-  /* BUTTONS */
-  .form-actions {
-    margin-top: 28px;
-    display: flex;
-    gap: 12px;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-  }
-
-  .btn {
-    padding: 12px 24px;
-    border-radius: 8px;
-    border: none;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .btn-primary {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-    color: white;
-    box-shadow: 0 8px 24px rgba(46, 89, 132, 0.3);
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(46, 89, 132, 0.4);
-  }
-
-  .btn-secondary {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--text-secondary);
-  }
-
-  .btn-secondary:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  .btn-export {
-    background: linear-gradient(135deg, rgba(0, 212, 170, 0.15), rgba(46, 89, 132, 0.15));
-    border: 1px solid var(--accent);
-    color: var(--accent);
-  }
-
-  .btn-export:hover {
-    background: linear-gradient(135deg, rgba(0, 212, 170, 0.25), rgba(46, 89, 132, 0.25));
-    box-shadow: 0 8px 20px rgba(0, 212, 170, 0.2);
-  }
-
-  .btn-sm {
-    padding: 6px 12px;
-    font-size: 0.75rem;
-    border-radius: 6px;
-    border: none;
-  }
-
-  .btn-del {
-    background: rgba(239, 68, 68, 0.1);
-    color: var(--error);
-    border: 1px solid rgba(239, 68, 68, 0.3);
-  }
-
-  .btn-del:hover {
-    background: rgba(239, 68, 68, 0.2);
-  }
-
-  /* TABLE */
-  .table-wrap {
-    overflow-x: auto;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    margin-bottom: 32px;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9rem;
-  }
-
-  thead {
-    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-  }
-
-  th {
-    padding: 14px;
-    text-align: left;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    color: var(--text);
-    border-bottom: 2px solid var(--border);
-  }
-
-  td {
-    padding: 14px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  tbody tr:hover {
-    background: rgba(0, 212, 170, 0.03);
-  }
-
-  .badge {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .badge-ok { background: rgba(16, 185, 129, 0.2); color: var(--success); }
-  .badge-falha { background: rgba(239, 68, 68, 0.2); color: var(--error); }
-  .badge-manut { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
-
-  /* TOAST */
-  .toast {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    background: var(--success);
-    color: white;
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 0.95rem;
-    padding: 14px 20px;
-    border-radius: 10px;
-    display: none;
-    align-items: center;
-    gap: 10px;
-    z-index: 999;
-    box-shadow: var(--shadow-lg);
-  }
-
-  .toast.error {
-    background: var(--error);
-  }
-
-  .toast.warning {
-    background: var(--warning);
-    color: #000;
-  }
-
-  /* TOOLBAR */
-  .db-toolbar {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-  }
-
-  .search-box {
-    flex: 1;
-    min-width: 200px;
-    padding: 10px 14px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    outline: none;
-    transition: all 0.3s;
-  }
-
-  .search-box:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.1);
-  }
-
-  /* EMPTY STATE */
-  .empty-state {
-    text-align: center;
-    padding: 60px 32px;
-    color: var(--text-muted);
-  }
-
-  .empty-state-icon {
-    font-size: 3.5rem;
-    margin-bottom: 16px;
-  }
-
-  .empty-state h3 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.3rem;
-    margin-bottom: 8px;
-    color: var(--text);
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    .form-header { grid-template-columns: 1fr 1fr; }
-    .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
-    .items-grid { grid-template-columns: 1fr; }
-  }
-
-  @media (max-width: 600px) {
-    header {
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 16px;
-    }
-    .logo-container {
-      border-right: none;
-      border-bottom: 2px solid rgba(0, 212, 170, 0.3);
-      padding-right: 0;
-      padding-bottom: 12px;
-      width: 100%;
-    }
-    .header-right {
-      width: 100%;
-      margin-left: 0;
-      margin-top: 12px;
-    }
-    .form-header { grid-template-columns: 1fr; }
-    .dashboard-grid { grid-template-columns: 1fr; }
-    .form-actions { flex-direction: column-reverse; }
-    .btn { width: 100%; }
-    .tabs { padding: 0 16px; }
-    .tab-content { padding: 16px; }
-  }
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+  --bg:       #070d18;
+  --surface:  #0d1624;
+  --surface2: #121e30;
+  --surface3: #17263d;
+  --border:   #1c3352;
+  --border2:  #254569;
+  --accent:   #00c8f0;
+  --accent2:  #0082cc;
+  --accent3:  #00aadb;
+  --green:    #00e5a0;
+  --red:      #ff4d75;
+  --yellow:   #ffcc44;
+  --text:     #ddeeff;
+  --text2:    #a8c4de;
+  --muted:    #4e728e;
+  --glow:     0 0 18px rgba(0,200,240,0.25);
+  --glow-sm:  0 0 10px rgba(0,200,240,0.18);
+  --radius:   10px;
+  --radius-lg:14px;
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Exo 2', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Mesh background */
+body::before {
+  content:'';
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 50% at 10% 5%,  rgba(0,130,204,0.10) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 90% 95%,  rgba(0,200,240,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 60% at 50% 50%,  rgba(7,13,24,0)      0%, transparent 100%);
+}
+
+/* Grain overlay */
+body::after {
+  content:'';
+  position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar { width:5px; height:5px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius:4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent2); }
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+header {
+  position:sticky; top:0; z-index:200;
+  background: linear-gradient(180deg, #0a1525 0%, rgba(10,21,37,0.96) 100%);
+  border-bottom: 1px solid var(--border2);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 0 28px;
+  display:flex; align-items:center; gap:16px; height:64px;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.5), 0 1px 0 rgba(0,200,240,0.1);
+}
+
+.logo-wrap {
+  display:flex; align-items:center; gap:14px; flex-shrink:0;
+}
+
+.logo-icon {
+  width:40px; height:40px; border-radius:10px; flex-shrink:0;
+  background: linear-gradient(135deg, var(--accent2) 0%, var(--accent) 100%);
+  display:flex; align-items:center; justify-content:center;
+  font-size:20px; box-shadow: var(--glow);
+  position:relative; overflow:hidden;
+}
+.logo-icon::after {
+  content:'';
+  position:absolute; top:-50%; left:-50%; width:60%; height:200%;
+  background: rgba(255,255,255,0.12);
+  transform: rotate(25deg);
+}
+
+.logo-text h1 {
+  font-family:'Rajdhani',sans-serif; font-size:1.45rem; font-weight:700;
+  letter-spacing:3px; text-transform:uppercase; color:var(--accent);
+  line-height:1;
+  text-shadow: 0 0 20px rgba(0,200,240,0.35);
+}
+.logo-text p {
+  font-family:'Share Tech Mono',monospace; font-size:0.62rem;
+  letter-spacing:2px; text-transform:uppercase; color:var(--muted);
+  margin-top:2px;
+}
+
+.header-sep { flex:1; }
+
+.header-clock {
+  text-align:right; font-family:'Share Tech Mono',monospace;
+  line-height:1.4;
+}
+.header-clock .time {
+  font-size:1.05rem; color:var(--accent); letter-spacing:2px;
+  text-shadow: 0 0 12px rgba(0,200,240,0.4);
+}
+.header-clock .date {
+  font-size:0.65rem; color:var(--muted); letter-spacing:1.5px;
+  text-transform:uppercase;
+}
+
+/* Status indicator */
+.header-status {
+  display:flex; align-items:center; gap:7px; margin-left:20px;
+  font-family:'Share Tech Mono',monospace; font-size:0.68rem;
+  color:var(--green); letter-spacing:1px;
+}
+.pulse {
+  width:7px; height:7px; border-radius:50%; background:var(--green);
+  box-shadow: 0 0 8px var(--green);
+  animation: pulse-anim 2s infinite;
+}
+@keyframes pulse-anim {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:0.5; transform:scale(0.85); }
+}
+
+/* ============================================================
+   TABS
+   ============================================================ */
+.tabs-bar {
+  position:sticky; top:64px; z-index:150;
+  background: var(--surface);
+  border-bottom:1px solid var(--border);
+  display:flex; padding:0 24px; gap:2px; overflow-x:auto;
+}
+.tabs-bar::-webkit-scrollbar { height:0; }
+
+.tab-btn {
+  padding:0 22px; height:48px;
+  background:none; border:none; border-bottom:3px solid transparent;
+  color:var(--muted);
+  font-family:'Rajdhani',sans-serif; font-size:0.88rem; font-weight:600;
+  letter-spacing:1.5px; text-transform:uppercase; cursor:pointer;
+  display:flex; align-items:center; gap:7px; white-space:nowrap;
+  transition:color 0.2s, border-color 0.2s, background 0.2s;
+}
+.tab-btn:hover { color:var(--text2); background:rgba(255,255,255,0.02); }
+.tab-btn.active {
+  color:var(--accent); border-bottom-color:var(--accent);
+  background:rgba(0,200,240,0.04);
+}
+.tab-btn .tab-icon { font-size:1rem; }
+
+/* ============================================================
+   MAIN CONTENT AREA
+   ============================================================ */
+.main {
+  position:relative; z-index:1;
+  padding:32px 28px; max-width:1280px; margin:0 auto;
+}
+
+.tab-content { display:none; animation:fadeUp 0.3s ease; }
+.tab-content.active { display:block; }
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(10px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ============================================================
+   FORM HEADER CARD
+   ============================================================ */
+.form-header-card {
+  background: var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:22px 24px;
+  margin-bottom:28px;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.03);
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:16px 20px;
+}
+
+.field-group { display:flex; flex-direction:column; gap:6px; }
+
+label {
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.64rem; letter-spacing:2px; text-transform:uppercase;
+  color:var(--accent3); display:flex; align-items:center; gap:5px;
+}
+
+select,
+input[type="text"],
+input[type="date"],
+input[type="time"],
+textarea {
+  background: var(--surface2);
+  border:1px solid var(--border);
+  border-radius:8px;
+  color:var(--text);
+  font-family:'Exo 2',sans-serif;
+  font-size:0.875rem;
+  padding:10px 14px;
+  outline:none;
+  width:100%;
+  transition:border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  appearance:none; -webkit-appearance:none;
+}
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M5 6L0 0h10z' fill='%2300c8f0'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 13px center;
+  padding-right:34px; cursor:pointer;
+}
+select option { background:#121e30; }
+select:focus, input:focus, textarea:focus {
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(0,200,240,0.12);
+  background:var(--surface3);
+}
+select:hover, input:hover { border-color:var(--border2); }
+
+/* ============================================================
+   SECTION TITLES
+   ============================================================ */
+.section-title {
+  display:flex; align-items:center; gap:12px;
+  font-family:'Rajdhani',sans-serif; font-size:0.82rem; font-weight:700;
+  letter-spacing:2.5px; text-transform:uppercase; color:var(--muted);
+  margin:28px 0 14px;
+  padding-bottom:10px; border-bottom:1px solid var(--border);
+}
+.section-title .st-bar {
+  width:3px; height:16px; border-radius:2px; flex-shrink:0;
+  background:linear-gradient(to bottom, var(--accent), var(--accent2));
+  box-shadow:0 0 8px rgba(0,200,240,0.4);
+}
+.section-title .st-count {
+  margin-left:auto; font-family:'Share Tech Mono',monospace;
+  font-size:0.7rem; color:var(--border2); letter-spacing:1px;
+}
+
+/* ============================================================
+   ITEM CARDS
+   ============================================================ */
+.items-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(310px,1fr));
+  gap:10px;
+  margin-bottom:4px;
+}
+
+.item-card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:14px 16px;
+  display:grid;
+  grid-template-columns:40px 1fr auto;
+  align-items:center;
+  gap:12px;
+  transition:border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  cursor:default;
+}
+.item-card:hover {
+  border-color:var(--border2);
+  background:var(--surface2);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+}
+.item-card.has-ok    { border-left:3px solid var(--green); }
+.item-card.has-falha { border-left:3px solid var(--red); }
+.item-card.has-manut { border-left:3px solid var(--yellow); }
+.item-card.has-na    { border-left:3px solid var(--muted); }
+
+.item-icon {
+  width:40px; height:40px; border-radius:9px;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px;
+  flex-shrink:0;
+  transition:border-color 0.2s, background 0.2s;
+}
+.item-card:hover .item-icon { border-color:var(--border2); background:var(--surface3); }
+
+.item-info { min-width:0; }
+.item-label { font-weight:600; font-size:0.875rem; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.item-sub   { font-size:0.7rem; color:var(--muted); margin-top:2px; font-family:'Share Tech Mono',monospace; }
+
+.status-select {
+  width:114px; padding:7px 10px;
+  font-size:0.78rem; border-radius:7px; font-weight:600; cursor:pointer;
+}
+.status-ok    { border-color:var(--green)  !important; color:var(--green)  !important; background:rgba(0,229,160,0.07)  !important; }
+.status-falha { border-color:var(--red)    !important; color:var(--red)    !important; background:rgba(255,77,117,0.07) !important; }
+.status-manut { border-color:var(--yellow) !important; color:var(--yellow) !important; background:rgba(255,204,68,0.07) !important; }
+.status-na    { border-color:var(--muted)  !important; color:var(--muted)  !important; background:rgba(78,114,142,0.07) !important; }
+
+.obs-row {
+  display:none; padding:8px 0 4px;
+  grid-column:1/-1;
+}
+.obs-row.show { display:block; animation:fadeUp 0.2s ease; }
+.obs-row textarea {
+  font-size:0.8rem; min-height:52px; resize:vertical;
+  border-color:rgba(255,204,68,0.35);
+  background:rgba(255,204,68,0.04);
+}
+.obs-row textarea:focus { border-color:var(--yellow); box-shadow:0 0 0 3px rgba(255,204,68,0.1); }
+
+/* ============================================================
+   OBS GERAL
+   ============================================================ */
+.obs-geral-wrap {
+  margin-top:28px; padding-top:20px; border-top:1px solid var(--border);
+}
+.obs-geral-wrap textarea { min-height:88px; }
+
+/* ============================================================
+   FORM ACTIONS
+   ============================================================ */
+.form-actions {
+  display:flex; gap:12px; justify-content:flex-end; align-items:center;
+  margin-top:28px; padding-top:24px; border-top:1px solid var(--border);
+  flex-wrap:wrap;
+}
+
+.progress-wrap {
+  flex:1; display:flex; align-items:center; gap:10px;
+}
+.progress-label {
+  font-family:'Share Tech Mono',monospace; font-size:0.7rem; color:var(--muted);
+  white-space:nowrap;
+}
+.progress-bar-outer {
+  flex:1; max-width:200px; height:4px; background:var(--surface2); border-radius:4px; overflow:hidden;
+}
+.progress-bar-inner {
+  height:100%; border-radius:4px;
+  background:linear-gradient(90deg, var(--accent2), var(--accent));
+  transition:width 0.3s ease;
+  box-shadow: 0 0 8px rgba(0,200,240,0.4);
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  padding:11px 26px; border-radius:8px; border:none;
+  font-family:'Rajdhani',sans-serif; font-size:0.9rem; font-weight:700;
+  letter-spacing:1.5px; text-transform:uppercase; cursor:pointer;
+  transition:all 0.2s; display:inline-flex; align-items:center; gap:7px;
+  white-space:nowrap;
+}
+.btn-primary {
+  background:linear-gradient(135deg, var(--accent2) 0%, var(--accent) 100%);
+  color:#fff;
+  box-shadow:0 4px 18px rgba(0,130,204,0.35), var(--glow-sm);
+}
+.btn-primary:hover {
+  transform:translateY(-2px);
+  box-shadow:0 8px 28px rgba(0,200,240,0.4);
+}
+.btn-primary:active { transform:translateY(0); }
+
+.btn-secondary {
+  background:transparent; border:1px solid var(--border2);
+  color:var(--text2);
+}
+.btn-secondary:hover { border-color:var(--accent2); color:var(--accent); background:rgba(0,130,204,0.05); }
+
+.btn-danger {
+  background:transparent; border:1px solid rgba(255,77,117,0.35);
+  color:var(--red);
+}
+.btn-danger:hover { background:rgba(255,77,117,0.08); border-color:var(--red); }
+
+.btn-sm {
+  padding:6px 13px; font-size:0.75rem; border-radius:6px; border:none;
+  font-family:'Rajdhani',sans-serif; font-weight:700; letter-spacing:1px;
+  cursor:pointer; transition:all 0.2s; text-transform:uppercase;
+  display:inline-flex; align-items:center; gap:5px;
+}
+.btn-add { background:rgba(0,229,160,0.1); color:var(--green); border:1px solid rgba(0,229,160,0.3); }
+.btn-add:hover { background:rgba(0,229,160,0.2); }
+.btn-del { background:rgba(255,77,117,0.08); color:var(--red); border:1px solid rgba(255,77,117,0.3); }
+.btn-del:hover { background:rgba(255,77,117,0.2); }
+
+/* ============================================================
+   DB TAB — STATS
+   ============================================================ */
+.db-stats {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:24px;
+}
+.stat-card {
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+  padding:18px 16px; text-align:center; position:relative; overflow:hidden;
+  transition:border-color 0.2s, transform 0.2s;
+}
+.stat-card:hover { border-color:var(--border2); transform:translateY(-2px); }
+.stat-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg, transparent, var(--accent3), transparent);
+  opacity:0.4;
+}
+.stat-num {
+  display:block; font-family:'Share Tech Mono',monospace;
+  font-size:2rem; font-weight:700; color:var(--accent);
+  text-shadow:0 0 16px rgba(0,200,240,0.3); line-height:1;
+  margin-bottom:6px;
+}
+.stat-num.green { color:var(--green); text-shadow:0 0 16px rgba(0,229,160,0.3); }
+.stat-num.yellow{ color:var(--yellow); text-shadow:0 0 16px rgba(255,204,68,0.3); }
+.stat-num.red   { color:var(--red); text-shadow:0 0 16px rgba(255,77,117,0.3); }
+.stat-label { font-size:0.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:1.5px; font-family:'Share Tech Mono',monospace; }
+
+/* ============================================================
+   DB TOOLBAR
+   ============================================================ */
+.db-toolbar {
+  display:flex; align-items:center; gap:10px; margin-bottom:20px; flex-wrap:wrap;
+}
+.search-box {
+  flex:1; min-width:200px; padding:10px 16px;
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:8px; color:var(--text);
+  font-family:'Exo 2',sans-serif; font-size:0.875rem; outline:none;
+  transition:border-color 0.2s, box-shadow 0.2s;
+}
+.search-box:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(0,200,240,0.1); }
+.search-box::placeholder { color:var(--muted); }
+
+/* ============================================================
+   TABLE
+   ============================================================ */
+.table-wrap {
+  overflow-x:auto; border-radius:var(--radius-lg); border:1px solid var(--border);
+  margin-bottom:36px; box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+table { width:100%; border-collapse:collapse; font-size:0.82rem; }
+thead {
+  background:linear-gradient(135deg, #0a1525, #0f1f36);
+  position:sticky; top:0;
+}
+th {
+  padding:13px 15px; text-align:left;
+  font-family:'Share Tech Mono',monospace; font-size:0.63rem;
+  letter-spacing:2px; text-transform:uppercase; color:var(--accent3);
+  border-bottom:1px solid var(--border2); white-space:nowrap;
+}
+td {
+  padding:13px 15px; border-bottom:1px solid rgba(28,51,82,0.5);
+  color:var(--text); vertical-align:middle;
+}
+tbody tr { transition:background 0.15s; }
+tbody tr:hover { background:rgba(0,200,240,0.03); }
+tbody tr:last-child td { border-bottom:none; }
+
+.badge {
+  display:inline-flex; align-items:center; gap:4px; padding:3px 10px;
+  border-radius:20px; font-size:0.67rem; font-weight:700;
+  font-family:'Share Tech Mono',monospace; letter-spacing:0.5px; white-space:nowrap;
+}
+.badge-ok    { background:rgba(0,229,160,0.12); color:var(--green); border:1px solid rgba(0,229,160,0.3); }
+.badge-falha { background:rgba(255,77,117,0.12); color:var(--red);   border:1px solid rgba(255,77,117,0.3); }
+.badge-manut { background:rgba(255,204,68,0.12); color:var(--yellow);border:1px solid rgba(255,204,68,0.3); }
+
+.mono { font-family:'Share Tech Mono',monospace; }
+.empty-state {
+  text-align:center; padding:60px 24px; color:var(--muted);
+  font-family:'Share Tech Mono',monospace; font-size:0.8rem; line-height:2;
+}
+.empty-state .icon { font-size:3rem; display:block; margin-bottom:12px; opacity:0.25; }
+
+/* ============================================================
+   SUB-TABS
+   ============================================================ */
+.sub-tabs {
+  display:flex; gap:8px; margin-bottom:28px; flex-wrap:wrap;
+}
+.sub-tab-btn {
+  padding:8px 20px; border-radius:20px;
+  border:1px solid var(--border); background:transparent;
+  color:var(--muted); font-family:'Rajdhani',sans-serif;
+  font-weight:600; font-size:0.85rem; letter-spacing:1px;
+  cursor:pointer; transition:all 0.2s; text-transform:uppercase;
+}
+.sub-tab-btn.active { background:rgba(0,200,240,0.1); border-color:var(--accent); color:var(--accent); }
+.sub-tab-btn:hover:not(.active) { border-color:var(--border2); color:var(--text2); }
+
+.sub-section { display:none; }
+.sub-section.active { display:block; animation:fadeUp 0.25s ease; }
+
+/* ============================================================
+   CADASTRO PANELS
+   ============================================================ */
+.cadastro-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.cadastro-panel {
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden;
+  transition:border-color 0.2s;
+}
+.cadastro-panel:hover { border-color:var(--border2); }
+.cadastro-panel-header {
+  padding:13px 18px;
+  background:linear-gradient(135deg, #0a1525, #0f1f36);
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; gap:10px;
+}
+.cadastro-panel-header h3 {
+  font-family:'Rajdhani',sans-serif; font-size:0.95rem; font-weight:700;
+  letter-spacing:1.5px; text-transform:uppercase; color:var(--accent);
+}
+.cadastro-count {
+  margin-left:auto; font-family:'Share Tech Mono',monospace;
+  font-size:0.65rem; color:var(--muted); background:var(--surface2);
+  border:1px solid var(--border); border-radius:20px; padding:2px 10px;
+}
+.cadastro-body { padding:16px; }
+.add-row { display:flex; gap:8px; margin-bottom:14px; }
+.add-row input { flex:1; }
+
+.cadastro-list {
+  display:flex; flex-direction:column; gap:6px;
+  max-height:280px; overflow-y:auto; padding-right:4px;
+}
+.cadastro-item {
+  display:flex; align-items:center; gap:8px;
+  background:var(--surface2); border:1px solid var(--border);
+  border-radius:8px; padding:9px 12px;
+  transition:border-color 0.2s;
+}
+.cadastro-item:hover { border-color:var(--border2); }
+.cadastro-item .idx {
+  font-family:'Share Tech Mono',monospace; font-size:0.65rem;
+  color:var(--muted); min-width:22px;
+}
+.cadastro-item .name { font-size:0.85rem; color:var(--text); flex:1; }
+.cadastro-empty {
+  text-align:center; padding:28px 12px;
+  color:var(--muted); font-size:0.75rem; font-family:'Share Tech Mono',monospace; opacity:0.7;
+}
+
+.hint {
+  color:var(--text2); font-size:0.78rem; line-height:1.7;
+  font-family:'Share Tech Mono',monospace; letter-spacing:0.3px;
+  background:rgba(0,200,240,0.04); border:1px solid rgba(0,200,240,0.12);
+  border-radius:10px; padding:13px 18px; margin-bottom:22px;
+}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+.toast {
+  position:fixed; bottom:24px; right:24px; z-index:999;
+  display:none; align-items:center; gap:10px;
+  padding:13px 22px; border-radius:10px;
+  font-family:'Rajdhani',sans-serif; font-weight:700;
+  font-size:0.95rem; letter-spacing:1px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.4);
+  animation:toastIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.toast.show { display:flex; }
+.toast-green { background:var(--green); color:#001a0d; }
+.toast-red   { background:var(--red);   color:#fff; }
+@keyframes toastIn {
+  from { opacity:0; transform:translateY(20px) scale(0.95); }
+  to   { opacity:1; transform:translateY(0)    scale(1); }
+}
+
+/* ============================================================
+   CONFIRM MODAL
+   ============================================================ */
+.modal-overlay {
+  position:fixed; inset:0; z-index:500;
+  background:rgba(7,13,24,0.85); backdrop-filter:blur(8px);
+  display:none; align-items:center; justify-content:center;
+  padding:20px;
+}
+.modal-overlay.show { display:flex; }
+.modal {
+  background:var(--surface); border:1px solid var(--border2);
+  border-radius:var(--radius-lg); padding:28px 32px; max-width:420px; width:100%;
+  box-shadow:0 24px 64px rgba(0,0,0,0.6);
+  animation:fadeUp 0.25s ease;
+}
+.modal h3 {
+  font-family:'Rajdhani',sans-serif; font-size:1.2rem; font-weight:700;
+  letter-spacing:1.5px; color:var(--text); margin-bottom:10px;
+}
+.modal p { color:var(--text2); font-size:0.88rem; line-height:1.6; margin-bottom:22px; }
+.modal-actions { display:flex; gap:10px; justify-content:flex-end; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:960px){
+  .form-header-card { grid-template-columns:repeat(2,1fr); }
+  .db-stats { grid-template-columns:repeat(2,1fr); }
+  .cadastro-grid { grid-template-columns:1fr; }
+  .main { padding:24px 16px; }
+}
+@media(max-width:600px){
+  .form-header-card { grid-template-columns:1fr; }
+  header { padding:0 16px; }
+  .logo-text p { display:none; }
+  header h1 { font-size:1.15rem; }
+  .tabs-bar { padding:0 12px; }
+  .tab-btn { padding:0 14px; font-size:0.78rem; }
+  .items-grid { grid-template-columns:1fr; }
+  .progress-wrap { display:none; }
+  .form-actions { justify-content:stretch; }
+  .form-actions .btn { flex:1; justify-content:center; }
+}
+
+/* ============================================================
+   PRINT
+   ============================================================ */
+@media print {
+  header, .tabs-bar, .form-actions, .toast, .modal-overlay { display:none !important; }
+  body { background:#fff; color:#000; }
+  .tab-content { display:block !important; }
+  .item-card { border:1px solid #ccc; }
+}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
 <header>
-  <div class="logo-container">
-    <div class="logo-icon">M</div>
-    <div class="header-text">
-      <h1>M.s Segurança & Serviços</h1>
-      <p>Sistema de Inspeção Inteligente</p>
+  <div class="logo-wrap">
+    <div class="logo-icon">🏢</div>
+    <div class="logo-text">
+      <h1>CondomSec</h1>
+      <p>Sistema de Inspeção de Segurança</p>
     </div>
   </div>
-  <div class="header-right">
-    <div class="time-display">
-      <div class="date" id="current-date"></div>
-      <div class="clock" id="current-time"></div>
-    </div>
-    <button class="auth-btn" id="auth-btn" onclick="toggleAuthModal()">📱 Login</button>
+
+  <div class="header-sep"></div>
+
+  <div class="header-status">
+    <span class="pulse"></span>
+    <span>ONLINE</span>
+  </div>
+
+  <div class="header-clock" style="margin-left:16px">
+    <div class="time" id="clock-time">--:--:--</div>
+    <div class="date" id="clock-date">--/--/----</div>
   </div>
 </header>
 
-<!-- TABS -->
-<div class="tabs">
-  <button class="tab-btn active" onclick="switchTab('form', this)">📝 Formulário</button>
-  <button class="tab-btn" onclick="switchTab('dashboard', this)">📊 Dashboard</button>
-  <button class="tab-btn" onclick="switchTab('db', this)">💾 Histórico</button>
+<!-- ============================================================
+     TABS BAR
+     ============================================================ -->
+<div class="tabs-bar">
+  <button class="tab-btn active" onclick="switchTab('form',this)">
+    <span class="tab-icon">📋</span> Formulário de Inspeção
+  </button>
+  <button class="tab-btn" onclick="switchTab('db',this)">
+    <span class="tab-icon">🗄️</span> Banco de Dados &amp; Cadastros
+  </button>
 </div>
 
-<!-- FORMULÁRIO -->
-<div id="tab-form" class="tab-content active">
-  <div class="form-section">
-    <h2 class="section-title">Dados da Inspeção</h2>
-    <div class="form-header">
+<!-- ============================================================
+     MAIN
+     ============================================================ -->
+<div class="main">
+
+  <!-- ══════════════════════════════════════════
+       ABA: FORMULÁRIO
+       ══════════════════════════════════════════ -->
+  <div id="tab-form" class="tab-content active">
+
+    <!-- Cabeçalho do formulário -->
+    <div class="form-header-card">
       <div class="field-group">
-        <label>Data da Inspeção</label>
-        <input type="date" id="data" required>
+        <label>📍 Posto de Serviço</label>
+        <select id="posto"></select>
       </div>
       <div class="field-group">
-        <label>Hora Início</label>
-        <input type="time" id="hora-inicio" required>
+        <label>👤 Supervisor</label>
+        <select id="supervisor"></select>
       </div>
       <div class="field-group">
-        <label>Hora Término</label>
+        <label>🦺 Colaborador</label>
+        <select id="colaborador"></select>
+      </div>
+      <div class="field-group">
+        <label>📅 Data</label>
+        <input type="date" id="data">
+      </div>
+      <div class="field-group">
+        <label>🕐 Hora de Início</label>
+        <input type="time" id="hora-inicio">
+      </div>
+      <div class="field-group">
+        <label>🕐 Hora de Fim</label>
         <input type="time" id="hora-fim">
       </div>
+    </div>
+
+    <!-- Seções de itens (preenchidas via JS) -->
+    <div class="section-title" id="st-seguranca">
+      <span class="st-bar"></span> Segurança &amp; Vigilância
+      <span class="st-count" id="cnt-seguranca"></span>
+    </div>
+    <div class="items-grid" id="itens-seguranca"></div>
+
+    <div class="section-title">
+      <span class="st-bar"></span> Controle de Acesso
+      <span class="st-count" id="cnt-acesso"></span>
+    </div>
+    <div class="items-grid" id="itens-acesso"></div>
+
+    <div class="section-title">
+      <span class="st-bar"></span> Frota &amp; Veículos
+      <span class="st-count" id="cnt-frota"></span>
+    </div>
+    <div class="items-grid" id="itens-frota"></div>
+
+    <div class="section-title">
+      <span class="st-bar"></span> Infraestrutura &amp; Equipamentos
+      <span class="st-count" id="cnt-infra"></span>
+    </div>
+    <div class="items-grid" id="itens-infra"></div>
+
+    <div class="section-title">
+      <span class="st-bar"></span> Tecnologia &amp; Sistemas
+      <span class="st-count" id="cnt-ti"></span>
+    </div>
+    <div class="items-grid" id="itens-ti"></div>
+
+    <!-- Observações gerais -->
+    <div class="obs-geral-wrap">
+      <div class="section-title" style="margin-top:0">
+        <span class="st-bar"></span> Observações Gerais
+      </div>
       <div class="field-group">
-        <label>Posto de Segurança</label>
-        <select id="posto" required>
-          <option value="">Selecionar...</option>
-        </select>
+        <textarea id="obs-geral" placeholder="Registre observações adicionais sobre esta inspeção..." style="min-height:90px;"></textarea>
       </div>
     </div>
-  </div>
 
-  <div class="form-section">
-    <h2 class="section-title">Responsáveis</h2>
-    <div class="form-header">
-      <div class="field-group">
-        <label>Supervisor</label>
-        <select id="supervisor" required>
-          <option value="">Selecionar...</option>
-        </select>
+    <!-- Ações -->
+    <div class="form-actions">
+      <div class="progress-wrap">
+        <span class="progress-label" id="progress-text">0 / 0 itens</span>
+        <div class="progress-bar-outer">
+          <div class="progress-bar-inner" id="progress-bar" style="width:0%"></div>
+        </div>
       </div>
-      <div class="field-group">
-        <label>Colaborador</label>
-        <select id="colaborador" required>
-          <option value="">Selecionar...</option>
-        </select>
+      <button class="btn btn-secondary" onclick="limparForm()">↺ Limpar</button>
+      <button class="btn btn-primary" onclick="salvarInspecao()">✔ Salvar Inspeção</button>
+    </div>
+
+  </div><!-- /tab-form -->
+
+  <!-- ══════════════════════════════════════════
+       ABA: BANCO DE DADOS & CADASTROS
+       ══════════════════════════════════════════ -->
+  <div id="tab-db" class="tab-content">
+
+    <div class="sub-tabs">
+      <button class="sub-tab-btn active" onclick="switchSubTab('registros',this)">📋 Registros de Inspeção</button>
+      <button class="sub-tab-btn" onclick="switchSubTab('cadastros',this)">⚙️ Gerenciar Cadastros</button>
+    </div>
+
+    <!-- SUB: REGISTROS -->
+    <div id="sub-registros" class="sub-section active">
+
+      <div class="db-stats">
+        <div class="stat-card">
+          <span class="stat-num" id="stat-total">0</span>
+          <span class="stat-label">Total de Inspeções</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num green" id="stat-ok">0</span>
+          <span class="stat-label">Sem Ocorrência</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num yellow" id="stat-manut">0</span>
+          <span class="stat-label">Em Manutenção</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num red" id="stat-falha">0</span>
+          <span class="stat-label">Com Falha</span>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="form-section">
-    <h2 class="section-title">Fotos da Inspeção</h2>
-    <div class="photo-upload-area" id="upload-area" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
-      <input type="file" id="photo-input" multiple accept="image/*" onchange="handlePhotoSelect(event)">
-      <div class="upload-icon">📸</div>
-      <div class="upload-text">Clique ou arraste fotos aqui</div>
-      <div class="upload-hint">Suporta JPG, PNG (máx. 5MB por foto)</div>
-    </div>
-    <div class="photo-gallery" id="photo-gallery"></div>
-  </div>
+      <div class="db-toolbar">
+        <input class="search-box" type="text" id="search-input"
+          placeholder="🔍  Buscar por posto, supervisor, colaborador..."
+          oninput="renderDB()">
+        <button class="btn btn-secondary" onclick="exportarCSV()">⬇ Exportar CSV</button>
+        <button class="btn btn-danger" onclick="confirmarLimpar()">🗑 Limpar Tudo</button>
+      </div>
 
-  <div class="form-section">
-    <h2 class="section-title">Itens de Inspeção</h2>
-    <div id="items-container"></div>
-  </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Data / Hora</th>
+              <th>Posto</th>
+              <th>Supervisor</th>
+              <th>Colaborador</th>
+              <th style="text-align:center">✅ OK</th>
+              <th style="text-align:center">❌ Falha</th>
+              <th style="text-align:center">⚠️ Manut.</th>
+              <th>Status Geral</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
+          <tbody id="db-body"></tbody>
+        </table>
+        <div id="empty-state" class="empty-state">
+          <span class="icon">📋</span>
+          Nenhuma inspeção registrada ainda.<br>
+          Preencha o formulário e salve sua primeira inspeção.
+        </div>
+      </div>
 
-  <div class="form-section">
-    <h2 class="section-title">Observações Gerais</h2>
-    <textarea id="obs-geral" placeholder="Descreva qualquer observação importante sobre a inspeção..."></textarea>
-  </div>
+    </div><!-- /sub-registros -->
 
-  <div class="form-actions">
-    <button class="btn btn-secondary" onclick="limparForm()">↻ Limpar</button>
-    <button class="btn btn-primary" onclick="salvarInspecao()">✓ Salvar Inspeção</button>
-  </div>
-</div>
+    <!-- SUB: CADASTROS -->
+    <div id="sub-cadastros" class="sub-section">
+      <div class="hint">
+        ✏️ &nbsp;Adicione ou remova itens abaixo. As listas do <strong>Formulário de Inspeção</strong>
+        são atualizadas automaticamente em tempo real. Pressione <strong>Enter</strong> para adicionar rapidamente.
+      </div>
 
-<!-- DASHBOARD -->
-<div id="tab-dashboard" class="tab-content">
-  <h2 style="margin-bottom: 28px; font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; letter-spacing: -0.5px;">Análise de Inspeções</h2>
+      <div class="cadastro-grid">
 
-  <div class="dashboard-grid">
-    <div class="stat-card">
-      <span class="stat-label">Total de Inspeções</span>
-      <span class="stat-num" id="stat-total">0</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-label">Inspeções Normais</span>
-      <span class="stat-num" id="stat-ok">0</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-label">Requerem Manutenção</span>
-      <span class="stat-num" id="stat-manut">0</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-label">Falhas Detectadas</span>
-      <span class="stat-num" id="stat-falha">0</span>
-    </div>
-  </div>
+        <!-- POSTOS -->
+        <div class="cadastro-panel">
+          <div class="cadastro-panel-header">
+            <span>📍</span>
+            <h3>Postos de Serviço</h3>
+            <span class="cadastro-count" id="count-postos">0</span>
+          </div>
+          <div class="cadastro-body">
+            <div class="add-row">
+              <input type="text" id="novo-posto" placeholder="Nome do posto..."
+                onkeydown="if(event.key==='Enter') addCadastro('postos','novo-posto')">
+              <button class="btn-sm btn-add" onclick="addCadastro('postos','novo-posto')">+ Add</button>
+            </div>
+            <div class="cadastro-list" id="list-postos"></div>
+          </div>
+        </div>
 
-  <div class="chart-container">
-    <div class="chart-title">📍 Visitas por Posto</div>
-    <div id="chart-postos"></div>
-  </div>
+        <!-- SUPERVISORES -->
+        <div class="cadastro-panel">
+          <div class="cadastro-panel-header">
+            <span>👤</span>
+            <h3>Supervisores</h3>
+            <span class="cadastro-count" id="count-supervisores">0</span>
+          </div>
+          <div class="cadastro-body">
+            <div class="add-row">
+              <input type="text" id="novo-supervisor" placeholder="Nome do supervisor..."
+                onkeydown="if(event.key==='Enter') addCadastro('supervisores','novo-supervisor')">
+              <button class="btn-sm btn-add" onclick="addCadastro('supervisores','novo-supervisor')">+ Add</button>
+            </div>
+            <div class="cadastro-list" id="list-supervisores"></div>
+          </div>
+        </div>
 
-  <div class="chart-container">
-    <div class="chart-title">📋 Últimas Inspeções</div>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Data / Hora</th>
-            <th>Posto</th>
-            <th>Supervisor</th>
-            <th>Colaborador</th>
-            <th style="text-align:center">✓ OK</th>
-            <th style="text-align:center">❌ Falhas</th>
-            <th style="text-align:center">⚠️ Manut.</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody id="dashboard-body"></tbody>
-      </table>
-    </div>
-  </div>
-</div>
+        <!-- COLABORADORES -->
+        <div class="cadastro-panel">
+          <div class="cadastro-panel-header">
+            <span>🦺</span>
+            <h3>Colaboradores</h3>
+            <span class="cadastro-count" id="count-colaboradores">0</span>
+          </div>
+          <div class="cadastro-body">
+            <div class="add-row">
+              <input type="text" id="novo-colaborador" placeholder="Nome do colaborador..."
+                onkeydown="if(event.key==='Enter') addCadastro('colaboradores','novo-colaborador')">
+              <button class="btn-sm btn-add" onclick="addCadastro('colaboradores','novo-colaborador')">+ Add</button>
+            </div>
+            <div class="cadastro-list" id="list-colaboradores"></div>
+          </div>
+        </div>
 
-<!-- HISTÓRICO -->
-<div id="tab-db" class="tab-content">
-  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
-    <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; letter-spacing: -0.5px;">Histórico de Inspeções</h2>
-    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-      <button class="btn btn-export" onclick="exportarPDF()">📄 PDF</button>
-      <button class="btn btn-export" onclick="exportarExcel()">📊 Excel</button>
-      <button class="btn btn-export" onclick="window.carregarDoFirestore && window.carregarDoFirestore()" style="border-color:var(--info);color:var(--info);">☁️ Sincronizar</button>
-      <button class="btn btn-secondary" onclick="limparDB()">🗑️ Limpar</button>
-    </div>
-  </div>
+      </div>
+    </div><!-- /sub-cadastros -->
 
-  <div class="db-toolbar">
-    <input type="text" id="search-input" class="search-box" placeholder="Buscar por posto, supervisor ou colaborador..." onkeyup="renderDB()">
-  </div>
+  </div><!-- /tab-db -->
 
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Data / Hora</th>
-          <th>Posto</th>
-          <th>Supervisor</th>
-          <th>Colaborador</th>
-          <th style="text-align:center">✓ OK</th>
-          <th style="text-align:center">❌ Falhas</th>
-          <th style="text-align:center">⚠️ Manut.</th>
-          <th>Status</th>
-          <th style="text-align:center">Ação</th>
-        </tr>
-      </thead>
-      <tbody id="db-body"></tbody>
-    </table>
-  </div>
+</div><!-- /main -->
 
-  <div id="empty-state" class="empty-state" style="display:none;">
-    <div class="empty-state-icon">📭</div>
-    <h3>Nenhuma inspeção registrada</h3>
-    <p>Preencha o formulário e salve uma inspeção para começar.</p>
-  </div>
-</div>
-
-<!-- TOAST -->
+<!-- ============================================================
+     TOAST
+     ============================================================ -->
 <div id="toast" class="toast"></div>
 
-<!-- AUTH MODAL -->
-<div id="auth-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;display:flex;align-items:center;justify-content:center;">
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:32px;max-width:400px;width:90%;">
-    <h3 style="margin-bottom:20px;color:var(--accent);" id="auth-modal-title">Entrar na Conta</h3>
-    <div id="auth-tabs" style="display:flex;gap:8px;margin-bottom:20px;">
-      <button id="tab-login-btn" onclick="switchAuthTab('login')" style="flex:1;padding:8px;border:1px solid var(--accent);background:rgba(0,212,170,0.15);color:var(--accent);border-radius:6px;font-weight:700;cursor:pointer;font-family:'Space Grotesk',sans-serif;">Entrar</button>
-      <button id="tab-register-btn" onclick="switchAuthTab('register')" style="flex:1;padding:8px;border:1px solid var(--border);background:transparent;color:var(--text-muted);border-radius:6px;font-weight:700;cursor:pointer;font-family:'Space Grotesk',sans-serif;">Cadastrar</button>
-    </div>
-    <div id="auth-error" style="display:none;background:rgba(239,68,68,0.15);border:1px solid var(--error);border-radius:8px;padding:10px 14px;color:var(--error);font-size:0.85rem;margin-bottom:14px;"></div>
-    <div class="field-group" style="margin-bottom:12px;">
-      <label>Email</label>
-      <input type="text" id="auth-email" placeholder="seu@email.com">
-    </div>
-    <div class="field-group" style="margin-bottom:20px;">
-      <label>Senha</label>
-      <input type="password" id="auth-password" placeholder="••••••••">
-    </div>
-    <button id="auth-submit-btn" onclick="handleAuth()" class="btn btn-primary" style="width:100%;margin-bottom:10px;">Entrar</button>
-    <button class="btn btn-secondary" onclick="closeAuthModal()" style="width:100%;">Cancelar</button>
-    <div id="auth-logout-area" style="display:none;margin-top:16px;border-top:1px solid var(--border);padding-top:16px;">
-      <p id="auth-user-info" style="color:var(--text-secondary);font-size:0.85rem;margin-bottom:12px;"></p>
-      <button onclick="handleLogout()" class="btn" style="width:100%;background:rgba(239,68,68,0.15);color:var(--error);border:1px solid rgba(239,68,68,0.3);">Sair da Conta</button>
+<!-- ============================================================
+     MODAL DE CONFIRMAÇÃO
+     ============================================================ -->
+<div id="modal-overlay" class="modal-overlay">
+  <div class="modal">
+    <h3 id="modal-title">Confirmar Ação</h3>
+    <p id="modal-msg">Tem certeza?</p>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="fecharModal()">Cancelar</button>
+      <button class="btn btn-danger" id="modal-confirm-btn">Confirmar</button>
     </div>
   </div>
 </div>
 
-<script type="module">
-// ================================================================
-//  FIREBASE - Configuração e Inicialização
-// ================================================================
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, where, orderBy } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
-import { getStorage, ref, uploadString, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-storage.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAWeLn23T-rZJd89amUbNL8v_Y3PxG8laA",
-  authDomain: "check-list-do-supervisor.firebaseapp.com",
-  projectId: "check-list-do-supervisor",
-  storageBucket: "check-list-do-supervisor.firebasestorage.app",
-  messagingSenderId: "115362864630",
-  appId: "1:115362864630:web:e8d8d33a9e2e94657a7bd7",
-  measurementId: "G-7X4WJ2LHH3"
-};
-
-const app = initializeApp(firebaseConfig);
-const fsdb = getFirestore(app);
-const storage = getStorage(app);
-const auth = getAuth(app);
-
-let currentUser = null;
-let authMode = 'login';
-
-// Monitor auth state
-onAuthStateChanged(auth, (user) => {
-  currentUser = user;
-  const btn = document.getElementById('auth-btn');
-  if (user) {
-    btn.textContent = `👤 ${user.email.split('@')[0]}`;
-    btn.style.borderColor = 'var(--success)';
-    btn.style.color = 'var(--success)';
-    showToast(`✓ Conectado como ${user.email}`, 'success');
-    // Load data from Firestore
-    carregarDoFirestore();
-  } else {
-    btn.textContent = '📱 Login';
-    btn.style.borderColor = 'var(--accent)';
-    btn.style.color = 'var(--accent)';
-  }
-});
+<!-- ============================================================
+     SCRIPT
+     ============================================================ -->
+<script>
+'use strict';
 
 // ================================================================
-//  AUTH FUNCTIONS
+//  CONFIGURAÇÃO — ITENS DE INSPEÇÃO
 // ================================================================
-window.switchAuthTab = function(mode) {
-  authMode = mode;
-  const loginBtn = document.getElementById('tab-login-btn');
-  const regBtn = document.getElementById('tab-register-btn');
-  const submitBtn = document.getElementById('auth-submit-btn');
-  const title = document.getElementById('auth-modal-title');
-  if (mode === 'login') {
-    loginBtn.style.borderColor = 'var(--accent)';
-    loginBtn.style.background = 'rgba(0,212,170,0.15)';
-    loginBtn.style.color = 'var(--accent)';
-    regBtn.style.borderColor = 'var(--border)';
-    regBtn.style.background = 'transparent';
-    regBtn.style.color = 'var(--text-muted)';
-    submitBtn.textContent = 'Entrar';
-    title.textContent = 'Entrar na Conta';
-  } else {
-    regBtn.style.borderColor = 'var(--accent)';
-    regBtn.style.background = 'rgba(0,212,170,0.15)';
-    regBtn.style.color = 'var(--accent)';
-    loginBtn.style.borderColor = 'var(--border)';
-    loginBtn.style.background = 'transparent';
-    loginBtn.style.color = 'var(--text-muted)';
-    submitBtn.textContent = 'Cadastrar';
-    title.textContent = 'Criar Conta';
-  }
-  document.getElementById('auth-error').style.display = 'none';
+const CATEGORIAS = {
+  'itens-seguranca': [
+    { id:'camera',     icon:'📷', label:'Câmeras de Segurança',    sub:'CFTV / Monitoramento' },
+    { id:'dvr',        icon:'💾', label:'DVR / NVR',               sub:'Gravação em funcionamento' },
+    { id:'iluminacao', icon:'💡', label:'Iluminação',              sub:'Áreas comuns e emergência' },
+  ],
+  'itens-acesso': [
+    { id:'cancela',         icon:'🚧', label:'Cancela',              sub:'Veicular / Pedestre' },
+    { id:'portao-principal',icon:'🚪', label:'Portão Principal',     sub:'Motor e travamento' },
+    { id:'portao-servico',  icon:'🚪', label:'Portão de Serviço',    sub:'Motor e travamento' },
+    { id:'interfone',       icon:'📞', label:'Interfone / Videofone',sub:'Central de comunicação' },
+    { id:'controle-acesso', icon:'🔑', label:'Controle de Acesso',   sub:'Biometria / Cartão' },
+  ],
+  'itens-frota': [
+    { id:'vtr-moto',    icon:'🏍️', label:'VTR Moto',            sub:'Vistoria e condição geral' },
+    { id:'vtr-carro',   icon:'🚗', label:'VTR Carro',            sub:'Vistoria e condição geral' },
+    { id:'combustivel', icon:'⛽', label:'Nível de Combustível', sub:'Reserva mínima 50%' },
+  ],
+  'itens-infra': [
+    { id:'geladeira',  icon:'🧊', label:'Geladeira',         sub:'Funcionamento e limpeza' },
+    { id:'microondas', icon:'📡', label:'Micro-ondas',        sub:'Funcionamento e limpeza' },
+    { id:'ar-cond',    icon:'❄️', label:'Ar-condicionado',    sub:'Temperatura e filtragem' },
+    { id:'banheiro',   icon:'🚿', label:'Banheiro / Vestiário',sub:'Limpeza e abastecimento' },
+    { id:'copa',       icon:'☕', label:'Copa / Cantina',     sub:'Limpeza geral' },
+  ],
+  'itens-ti': [
+    { id:'computador', icon:'💻', label:'Computador',         sub:'Hardware e conectividade' },
+    { id:'sistema',    icon:'🖥️', label:'Sistema de Gestão',  sub:'Software operacional' },
+    { id:'impressora', icon:'🖨️', label:'Impressora',         sub:'Papel e tinta' },
+    { id:'internet',   icon:'🌐', label:'Internet / Rede',    sub:'Conexão e velocidade' },
+    { id:'radio',      icon:'📻', label:'Rádio Comunicador',  sub:'Bateria e sinal' },
+  ]
 };
 
-window.handleAuth = async function() {
-  const email = document.getElementById('auth-email').value.trim();
-  const password = document.getElementById('auth-password').value;
-  const errDiv = document.getElementById('auth-error');
-  errDiv.style.display = 'none';
-
-  if (!email || !password) {
-    errDiv.textContent = 'Preencha email e senha.';
-    errDiv.style.display = 'block';
-    return;
-  }
-
-  try {
-    if (authMode === 'login') {
-      await signInWithEmailAndPassword(auth, email, password);
-    } else {
-      await createUserWithEmailAndPassword(auth, email, password);
-    }
-    closeAuthModal();
-    document.getElementById('auth-email').value = '';
-    document.getElementById('auth-password').value = '';
-  } catch (err) {
-    const msgs = {
-      'auth/user-not-found': 'Usuário não encontrado.',
-      'auth/wrong-password': 'Senha incorreta.',
-      'auth/invalid-email': 'Email inválido.',
-      'auth/email-already-in-use': 'Este email já está cadastrado.',
-      'auth/weak-password': 'Senha fraca. Use pelo menos 6 caracteres.',
-      'auth/invalid-credential': 'Email ou senha incorretos.',
-      'auth/too-many-requests': 'Muitas tentativas. Tente mais tarde.'
-    };
-    errDiv.textContent = msgs[err.code] || `Erro: ${err.message}`;
-    errDiv.style.display = 'block';
-  }
+const COUNT_MAP = {
+  'itens-seguranca':'cnt-seguranca',
+  'itens-acesso':'cnt-acesso',
+  'itens-frota':'cnt-frota',
+  'itens-infra':'cnt-infra',
+  'itens-ti':'cnt-ti'
 };
 
-window.handleLogout = async function() {
-  try {
-    await signOut(auth);
-    closeAuthModal();
-    showToast('Sessão encerrada', 'success');
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-window.toggleAuthModal = function() {
-  const modal = document.getElementById('auth-modal');
-  const isHidden = modal.style.display === 'none' || modal.style.display === '';
-  if (isHidden) {
-    modal.style.display = 'flex';
-    // Show logout area if logged in
-    const logoutArea = document.getElementById('auth-logout-area');
-    const loginArea = document.getElementById('auth-tabs');
-    const emailInput = document.getElementById('auth-email').parentElement;
-    const passInput = document.getElementById('auth-password').parentElement;
-    const submitBtn = document.getElementById('auth-submit-btn');
-    const cancelBtn = submitBtn.nextElementSibling;
-    if (currentUser) {
-      loginArea.style.display = 'none';
-      emailInput.style.display = 'none';
-      passInput.style.display = 'none';
-      submitBtn.style.display = 'none';
-      cancelBtn.style.display = 'block';
-      logoutArea.style.display = 'block';
-      document.getElementById('auth-user-info').textContent = `Conectado como: ${currentUser.email}`;
-      document.getElementById('auth-modal-title').textContent = 'Conta';
-    } else {
-      loginArea.style.display = 'flex';
-      emailInput.style.display = 'flex';
-      passInput.style.display = 'flex';
-      submitBtn.style.display = 'block';
-      cancelBtn.style.display = 'block';
-      logoutArea.style.display = 'none';
-      document.getElementById('auth-modal-title').textContent = 'Entrar na Conta';
-    }
-  } else {
-    modal.style.display = 'none';
-  }
+const DEFAULTS = {
+  postos:       ['Portaria Principal','Portaria Secundária','Bloco A','Bloco B','Bloco C','Torre 1','Torre 2','Área de Lazer','Garagem Subsolo','Salão de Festas'],
+  supervisores: ['Carlos Mendes','Fernanda Lima','Ricardo Souza','Patrícia Alves','Marcos Ferreira','Juliana Costa','Anderson Rocha','Beatriz Nunes'],
+  colaboradores:['João Silva','Maria Santos','Pedro Oliveira','Ana Rodrigues','Lucas Pereira','Camila Barbosa','Diego Martins','Larissa Carvalho','Felipe Gomes','Renata Freitas']
 };
 
 // ================================================================
-//  FIRESTORE - Salvar e Carregar
+//  UTILS
 // ================================================================
-async function salvarNoFirestore(record) {
-  if (!currentUser) return null;
-  try {
-    const docRef = await addDoc(collection(fsdb, 'inspecoes'), {
-      ...record,
-      userId: currentUser.uid,
-      createdAt: new Date().toISOString()
-    });
-    return docRef.id;
-  } catch (err) {
-    console.error('Erro ao salvar no Firestore:', err);
-    showToast('Erro ao sincronizar com nuvem', 'error');
-    return null;
-  }
-}
+function getAllItems() { return Object.values(CATEGORIAS).flat(); }
 
-async function carregarDoFirestore() {
-  if (!currentUser) return;
-  try {
-    const q = query(
-      collection(fsdb, 'inspecoes'),
-      where('userId', '==', currentUser.uid)
-    );
-    const snapshot = await getDocs(q);
-    const dados = [];
-    snapshot.forEach(d => dados.push({ firestoreId: d.id, ...d.data() }));
-    // Merge with localStorage (local-only records won't have firestoreId)
-    const local = getDB();
-    const localSemNuvem = local.filter(r => !r.firestoreId);
-    const merged = [...dados, ...localSemNuvem].sort((a, b) => (a.timestamp || '') > (b.timestamp || '') ? 1 : -1);
-    saveDB(merged);
-    renderDB();
-    renderDashboard();
-    showToast(`☁️ ${dados.length} inspeção(ões) carregada(s) da nuvem`, 'success');
-  } catch (err) {
-    console.error('Erro ao carregar do Firestore:', err);
-  }
-}
+function el(id) { return document.getElementById(id); }
 
-async function deletarDoFirestore(firestoreId) {
-  if (!currentUser || !firestoreId) return;
-  try {
-    await deleteDoc(doc(fsdb, 'inspecoes', firestoreId));
-  } catch (err) {
-    console.error('Erro ao deletar do Firestore:', err);
-  }
-}
-
-// Expose to global for inline onclick handlers
-window.deletarDoFirestore = deletarDoFirestore;
-window.carregarDoFirestore = carregarDoFirestore;
+function padZ(n) { return String(n).padStart(2,'0'); }
 
 // ================================================================
-//  ITEMS CONFIG
+//  RELÓGIO
 // ================================================================
-const ITEMS = [
-  { id: 'port', label: 'Portaria', icon: '🚪' },
-  { id: 'cctv', label: 'CCTV', icon: '📹' },
-  { id: 'alarme', label: 'Sistema de Alarme', icon: '🚨' },
-  { id: 'ilum', label: 'Iluminação Externa', icon: '💡' },
-  { id: 'cancela', label: 'Cancela/Acesso', icon: '🔑' },
-  { id: 'vigia', label: 'Vigilância (Rondas)', icon: '👁️' },
-];
-
-const POSTOS = ['Portaria Principal', 'Entrada Lateral', 'Garagem', 'Rooftop', 'Hall Principal'];
-const SUPERVISORES = ['Carlos Silva', 'João Santos', 'Maria Oliveira', 'Pedro Costa', 'Ana Souza'];
-const COLABORADORES = ['Rafael Pereira', 'Lucas Martins', 'Fernanda Lima', 'Bruno Alves', 'Carla Dias'];
-
-let currentPhotos = [];
+function updateClock() {
+  const n = new Date();
+  el('clock-time').textContent = `${padZ(n.getHours())}:${padZ(n.getMinutes())}:${padZ(n.getSeconds())}`;
+  el('clock-date').textContent = n.toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'short',year:'numeric'}).toUpperCase();
+}
+setInterval(updateClock, 1000); updateClock();
 
 // ================================================================
-//  DATE & TIME
-// ================================================================
-function updateDateTime() {
-  const now = new Date();
-  const date = now.toLocaleDateString('pt-BR');
-  const time = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-  document.getElementById('current-date').textContent = date;
-  document.getElementById('current-time').textContent = time;
-}
-setInterval(updateDateTime, 1000);
-updateDateTime();
-
-// ================================================================
-//  PHOTO HANDLING
-// ================================================================
-document.getElementById('upload-area').addEventListener('click', () => {
-  document.getElementById('photo-input').click();
-});
-
-function handleDragOver(e) {
-  e.preventDefault();
-  document.getElementById('upload-area').classList.add('dragover');
-}
-
-function handleDragLeave(e) {
-  e.preventDefault();
-  document.getElementById('upload-area').classList.remove('dragover');
-}
-
-function handleDrop(e) {
-  e.preventDefault();
-  document.getElementById('upload-area').classList.remove('dragover');
-  const files = Array.from(e.dataTransfer.files);
-  processFiles(files);
-}
-
-function handlePhotoSelect(e) {
-  const files = Array.from(e.target.files);
-  processFiles(files);
-}
-
-function processFiles(files) {
-  files.forEach(file => {
-    if (file.type.startsWith('image/') && file.size <= 5 * 1024 * 1024) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        currentPhotos.push({
-          id: Date.now() + Math.random(),
-          data: e.target.result
-        });
-        renderPhotos();
-      };
-      reader.readAsDataURL(file);
-    } else {
-      showToast('Arquivo inválido. Use imagens até 5MB.', 'error');
-    }
-  });
-}
-
-function renderPhotos() {
-  const gallery = document.getElementById('photo-gallery');
-  gallery.innerHTML = currentPhotos.map(photo => `
-    <div class="photo-item">
-      <img src="${photo.data}" alt="Foto">
-      <button class="delete-btn" onclick="deletePhoto(${photo.id})">✕</button>
-    </div>
-  `).join('');
-}
-
-function deletePhoto(id) {
-  currentPhotos = currentPhotos.filter(p => p.id !== id);
-  renderPhotos();
-}
-
-// ================================================================
-//  BUILD ITEMS
+//  BUILD ITENS
 // ================================================================
 function buildItems() {
-  const container = document.getElementById('items-container');
-  let html = '';
-  ITEMS.forEach(item => {
-    html += `
-      <div class="items-grid">
-        <div class="item-card">
-          <div class="item-icon">${item.icon}</div>
-          <div>
-            <div class="item-label">${item.label}</div>
-            <div class="item-sub">${item.id}</div>
-          </div>
-          <select id="status-${item.id}" class="status-select">
-            <option value="">-</option>
-            <option value="ok">✓ OK</option>
-            <option value="falha">❌ Falha</option>
-            <option value="manut">⚠️ Manut.</option>
-            <option value="na">N/A</option>
-          </select>
+  Object.entries(CATEGORIAS).forEach(([cid, items]) => {
+    const c = el(cid);
+    if (!c) return;
+    c.innerHTML = '';
+    items.forEach(item => {
+      // Card
+      const card = document.createElement('div');
+      card.className = 'item-card';
+      card.id = `card-${item.id}`;
+      card.innerHTML = `
+        <div class="item-icon">${item.icon}</div>
+        <div class="item-info">
+          <div class="item-label">${item.label}</div>
+          <div class="item-sub">${item.sub}</div>
         </div>
-        <div id="obs-row-${item.id}" class="obs-row">
-          <textarea id="obs-${item.id}" placeholder="Observações sobre este item..."></textarea>
-        </div>
-      </div>
-    `;
-  });
-  container.innerHTML = html;
+        <select class="status-select" id="status-${item.id}" onchange="handleStatus('${item.id}',this)">
+          <option value="">—</option>
+          <option value="ok">✅ OK</option>
+          <option value="falha">❌ Falha</option>
+          <option value="manut">⚠️ Manutenção</option>
+          <option value="na">N/A</option>
+        </select>`;
+      c.appendChild(card);
 
-  ITEMS.forEach(item => {
-    const sel = document.getElementById(`status-${item.id}`);
-    if (sel) {
-      sel.addEventListener('change', (e) => {
-        const obsRow = document.getElementById(`obs-row-${item.id}`);
-        if (e.target.value && e.target.value !== 'ok' && e.target.value !== 'na') {
-          obsRow.classList.add('show');
-        } else {
-          obsRow.classList.remove('show');
-        }
-        updateStatusClass(sel);
-      });
+      // Obs row (inside card as a full-width row)
+      const obsRow = document.createElement('div');
+      obsRow.className = 'obs-row'; obsRow.id = `obs-row-${item.id}`;
+      obsRow.style.gridColumn = '1/-1';
+      obsRow.innerHTML = `<textarea id="obs-${item.id}" placeholder="Observação para ${item.label}..." oninput="updateProgress()"></textarea>`;
+      card.appendChild(obsRow);
+    });
+
+    // Count badge
+    const cnt = el(COUNT_MAP[cid]);
+    if (cnt) cnt.textContent = `${items.length} itens`;
+  });
+  updateProgress();
+}
+
+function handleStatus(itemId, sel) {
+  const v = sel.value;
+  sel.className = 'status-select' +
+    (v==='ok'?' status-ok':v==='falha'?' status-falha':v==='manut'?' status-manut':v==='na'?' status-na':'');
+
+  const card = el(`card-${itemId}`);
+  if (card) {
+    card.classList.remove('has-ok','has-falha','has-manut','has-na');
+    if (v) card.classList.add(`has-${v}`);
+  }
+
+  const row = el(`obs-row-${itemId}`);
+  if (row) {
+    if (v==='falha'||v==='manut') row.classList.add('show');
+    else { row.classList.remove('show'); const o=el(`obs-${itemId}`); if(o) o.value=''; }
+  }
+  updateProgress();
+}
+
+function updateProgress() {
+  const items = getAllItems();
+  const filled = items.filter(i => !!el(`status-${i.id}`)?.value).length;
+  el('progress-text').textContent = `${filled} / ${items.length} itens`;
+  el('progress-bar').style.width = `${Math.round((filled/items.length)*100)}%`;
+}
+
+// ================================================================
+//  CADASTROS
+// ================================================================
+function getCadastros(tipo) {
+  try {
+    const s = localStorage.getItem('cad_'+tipo);
+    if (s !== null) return JSON.parse(s);
+    localStorage.setItem('cad_'+tipo, JSON.stringify(DEFAULTS[tipo]));
+    return [...DEFAULTS[tipo]];
+  } catch { return [...DEFAULTS[tipo]]; }
+}
+function saveCadastros(tipo, lista) {
+  localStorage.setItem('cad_'+tipo, JSON.stringify(lista));
+}
+
+function addCadastro(tipo, inputId) {
+  const input = el(inputId);
+  const val = input.value.trim();
+  if (!val) { input.focus(); return; }
+  const lista = getCadastros(tipo);
+  if (lista.map(i=>i.toLowerCase()).includes(val.toLowerCase())) {
+    showToast('⚠️ Item já existe na lista!', 'red'); return;
+  }
+  lista.push(val);
+  saveCadastros(tipo, lista);
+  input.value = '';
+  renderCadastro(tipo);
+  refreshFormSelect(tipo);
+  showToast(`✔ "${val}" adicionado!`, 'green');
+}
+
+function removeCadastro(tipo, idx) {
+  const lista = getCadastros(tipo);
+  abrirModal(
+    'Remover Item',
+    `Deseja remover <strong>"${lista[idx]}"</strong> da lista?`,
+    () => {
+      lista.splice(idx, 1);
+      saveCadastros(tipo, lista);
+      renderCadastro(tipo);
+      refreshFormSelect(tipo);
+      showToast('🗑 Item removido.', 'red');
     }
-  });
+  );
 }
 
-function updateStatusClass(sel) {
-  sel.className = 'status-select';
-  if (sel.value === 'ok') sel.classList.add('status-ok');
-  else if (sel.value === 'falha') sel.classList.add('status-falha');
-  else if (sel.value === 'manut') sel.classList.add('status-manut');
-  else if (sel.value === 'na') sel.classList.add('status-na');
+function renderCadastro(tipo) {
+  const lista = getCadastros(tipo);
+  const listEl = el('list-'+tipo);
+  const cntEl  = el('count-'+tipo);
+  if (cntEl) cntEl.textContent = lista.length + ' item(s)';
+  if (!listEl) return;
+  if (!lista.length) {
+    listEl.innerHTML = '<div class="cadastro-empty">Nenhum item cadastrado.</div>'; return;
+  }
+  listEl.innerHTML = lista.map((item, i) => `
+    <div class="cadastro-item">
+      <span class="idx">${padZ(i+1)}</span>
+      <span class="name">${item}</span>
+      <button class="btn-sm btn-del" onclick="removeCadastro('${tipo}',${i})" title="Remover">✕</button>
+    </div>`).join('');
 }
 
-function getAllItems() { return ITEMS; }
+function refreshFormSelect(tipo) {
+  const map = { postos:'posto', supervisores:'supervisor', colaboradores:'colaborador' };
+  const sel = el(map[tipo]);
+  if (!sel) return;
+  const current = sel.value;
+  const lista = getCadastros(tipo);
+  sel.innerHTML = '<option value="">— Selecionar —</option>' +
+    lista.map(i=>`<option value="${i}"${i===current?' selected':''}>${i}</option>`).join('');
+}
 
-// ================================================================
-//  DROPDOWNS
-// ================================================================
 function initCadastros() {
-  const postoSel = document.getElementById('posto');
-  const supSel = document.getElementById('supervisor');
-  const colabSel = document.getElementById('colaborador');
-
-  POSTOS.forEach(p => { const opt = document.createElement('option'); opt.value = p; opt.textContent = p; postoSel.appendChild(opt); });
-  SUPERVISORES.forEach(s => { const opt = document.createElement('option'); opt.value = s; opt.textContent = s; supSel.appendChild(opt); });
-  COLABORADORES.forEach(c => { const opt = document.createElement('option'); opt.value = c; opt.textContent = c; colabSel.appendChild(opt); });
-}
-
-// ================================================================
-//  SAVE & VALIDATE
-// ================================================================
-async function salvarInspecao() {
-  const data = document.getElementById('data').value;
-  const horaInicio = document.getElementById('hora-inicio').value;
-  const horaFim = document.getElementById('hora-fim').value;
-  const posto = document.getElementById('posto').value;
-  const supervisor = document.getElementById('supervisor').value;
-  const colaborador = document.getElementById('colaborador').value;
-
-  if (!data || !horaInicio || !posto || !supervisor || !colaborador) {
-    showToast('Preencha todos os campos obrigatórios!', 'error');
-    return;
-  }
-
-  const itens = {};
-  ITEMS.forEach(item => {
-    const status = document.getElementById(`status-${item.id}`)?.value || '';
-    const obs = document.getElementById(`obs-${item.id}`)?.value || '';
-    if (status) {
-      itens[item.id] = { status, obs };
-    }
+  ['postos','supervisores','colaboradores'].forEach(t => {
+    renderCadastro(t);
+    refreshFormSelect(t);
   });
-
-  if (Object.keys(itens).length === 0) {
-    showToast('Preencha pelo menos um item de inspeção!', 'error');
-    return;
-  }
-
-  const localDB = getDB();
-  const record = {
-    id: Date.now(),
-    data, horaInicio, horaFim, posto, supervisor, colaborador,
-    itens,
-    photos: currentPhotos,
-    obsGeral: document.getElementById('obs-geral').value,
-    timestamp: new Date().toISOString()
-  };
-
-  // Save to Firestore if logged in
-  if (currentUser) {
-    const firestoreId = await salvarNoFirestore(record);
-    if (firestoreId) record.firestoreId = firestoreId;
-    showToast('✓ Inspeção salva e sincronizada com a nuvem! ☁️', 'success');
-  } else {
-    showToast('✓ Inspeção salva localmente (faça login para sincronizar)', 'success');
-  }
-
-  localDB.push(record);
-  saveDB(localDB);
-  limparForm();
 }
 
 // ================================================================
-//  DB - LOCAL STORAGE
+//  BANCO DE DADOS (localStorage)
 // ================================================================
-function getDB() { try { return JSON.parse(localStorage.getItem('inspecoes_cond') || '[]'); } catch { return []; } }
-function saveDB(db) { localStorage.setItem('inspecoes_cond', JSON.stringify(db)); updateStats(db); }
+function getDB()        { try { return JSON.parse(localStorage.getItem('inspecoes_cond')||'[]'); } catch { return []; } }
+function saveDB(db)     { localStorage.setItem('inspecoes_cond', JSON.stringify(db)); updateStats(db); }
 
 function updateStats(db) {
-  document.getElementById('stat-total').textContent = db.length;
-  let ok = 0, manut = 0, falha = 0;
+  el('stat-total').textContent = db.length;
+  let ok=0, manut=0, falha=0;
   db.forEach(r => {
-    const vals = Object.values(r.itens).map(i => i.status);
-    if (vals.some(v => v === 'falha')) falha++;
-    else if (vals.some(v => v === 'manut')) manut++;
+    const vals = Object.values(r.itens).map(i=>i.status);
+    if      (vals.some(v=>v==='falha')) falha++;
+    else if (vals.some(v=>v==='manut')) manut++;
     else ok++;
   });
-  document.getElementById('stat-ok').textContent = ok;
-  document.getElementById('stat-manut').textContent = manut;
-  document.getElementById('stat-falha').textContent = falha;
+  el('stat-ok').textContent    = ok;
+  el('stat-manut').textContent = manut;
+  el('stat-falha').textContent = falha;
 }
 
 function renderDB() {
-  const db = getDB();
-  const query = (document.getElementById('search-input')?.value || '').toLowerCase();
-  const tbody = document.getElementById('db-body');
-  const empty = document.getElementById('empty-state');
+  const db    = getDB();
+  const query = (el('search-input')?.value||'').toLowerCase();
+  const tbody = el('db-body');
+  const empty = el('empty-state');
   updateStats(db);
+
   const filtered = db.filter(r =>
-    (r.posto || '').toLowerCase().includes(query) ||
-    (r.supervisor || '').toLowerCase().includes(query) ||
-    (r.colaborador || '').toLowerCase().includes(query)
+    (r.posto||'').toLowerCase().includes(query) ||
+    (r.supervisor||'').toLowerCase().includes(query) ||
+    (r.colaborador||'').toLowerCase().includes(query)
   );
-  if (!filtered.length) { tbody.innerHTML = ''; empty.style.display = 'block'; return; }
+
+  if (!filtered.length) { tbody.innerHTML=''; empty.style.display='block'; return; }
   empty.style.display = 'none';
+
   tbody.innerHTML = [...filtered].reverse().map((r, idx) => {
-    const vals = Object.values(r.itens).map(i => i.status);
-    const ok = vals.filter(v => v === 'ok').length;
-    const fa = vals.filter(v => v === 'falha').length;
-    const ma = vals.filter(v => v === 'manut').length;
-    let badge = '<span class="badge badge-ok">✓ Normal</span>';
-    if (fa > 0) badge = `<span class="badge badge-falha">❌ ${fa} Falha(s)</span>`;
-    else if (ma > 0) badge = `<span class="badge badge-manut">⚠️ Manutenção</span>`;
-    const dataFmt = r.data ? r.data.split('-').reverse().join('/') : '—';
-    const photoCount = r.photos ? r.photos.length : 0;
-    return `<tr>
-      <td style="font-family:'IBM Plex Mono',monospace;color:var(--text-muted)">${filtered.length - idx}</td>
-      <td style="font-family:'IBM Plex Mono',monospace">${dataFmt}<br><span style="color:var(--text-muted);font-size:0.8rem">${r.horaInicio || ''}${r.horaFim ? ' – ' + r.horaFim : ''}</span></td>
-      <td><strong>${r.posto}</strong></td>
-      <td>${r.supervisor}</td>
-      <td>${r.colaborador}</td>
-      <td style="color:var(--success);font-family:'IBM Plex Mono',monospace;text-align:center">${ok}</td>
-      <td style="color:var(--error);font-family:'IBM Plex Mono',monospace;text-align:center">${fa}</td>
-      <td style="color:var(--warning);font-family:'IBM Plex Mono',monospace;text-align:center">${ma}</td>
-      <td>${badge}</td>
-      <td style="text-align:center"><button class="btn-sm btn-del" onclick="deletar(${r.id})">Excluir</button></td>
-    </tr>`;
-  }).join('');
-}
-
-function renderDashboard() {
-  const db = getDB();
-  updateStats(db);
-
-  const postoCount = {};
-  db.forEach(r => {
-    postoCount[r.posto] = (postoCount[r.posto] || 0) + 1;
-  });
-
-  const sortedPostos = Object.entries(postoCount).sort((a, b) => b[1] - a[1]);
-  const maxCount = Math.max(...sortedPostos.map(p => p[1]), 1);
-
-  let chartHtml = '';
-  sortedPostos.forEach(([posto, count]) => {
-    const percentage = (count / maxCount) * 100;
-    chartHtml += `<div class="posto-bar">
-      <div class="posto-name">${posto}</div>
-      <div class="bar-wrapper">
-        <div class="bar-fill" style="width: ${percentage}%">${count}</div>
-      </div>
-      <div class="posto-count">${count}</div>
-    </div>`;
-  });
-
-  document.getElementById('chart-postos').innerHTML = chartHtml || '<p style="color: var(--text-muted); text-align: center; padding: 32px;">Nenhum dado disponível</p>';
-
-  const dashboardBody = document.getElementById('dashboard-body');
-  dashboardBody.innerHTML = [...db].reverse().slice(0, 5).map((r, idx) => {
-    const vals = Object.values(r.itens).map(i => i.status);
-    const ok = vals.filter(v => v === 'ok').length;
-    const fa = vals.filter(v => v === 'falha').length;
-    const ma = vals.filter(v => v === 'manut').length;
-    let badge = '<span class="badge badge-ok">✓ Normal</span>';
-    if (fa > 0) badge = `<span class="badge badge-falha">❌ ${fa} Falha(s)</span>`;
+    const vals  = Object.values(r.itens).map(i=>i.status);
+    const ok    = vals.filter(v=>v==='ok').length;
+    const fa    = vals.filter(v=>v==='falha').length;
+    const ma    = vals.filter(v=>v==='manut').length;
+    let badge   = '<span class="badge badge-ok">✅ Normal</span>';
+    if      (fa > 0) badge = `<span class="badge badge-falha">❌ ${fa} Falha(s)</span>`;
     else if (ma > 0) badge = `<span class="badge badge-manut">⚠️ Manutenção</span>`;
     const dataFmt = r.data ? r.data.split('-').reverse().join('/') : '—';
     return `<tr>
-      <td style="font-family:'IBM Plex Mono',monospace;color:var(--text-muted)">${idx + 1}</td>
-      <td style="font-family:'IBM Plex Mono',monospace">${dataFmt}<br><span style="color:var(--text-muted);font-size:0.8rem">${r.horaInicio || ''}${r.horaFim ? ' – ' + r.horaFim : ''}</span></td>
+      <td class="mono" style="color:var(--muted)">${filtered.length-idx}</td>
+      <td class="mono" style="font-size:0.8rem">
+        ${dataFmt}<br>
+        <span style="color:var(--muted);font-size:0.7rem">${r.horaInicio||''}${r.horaFim?' – '+r.horaFim:''}</span>
+      </td>
       <td><strong>${r.posto}</strong></td>
       <td>${r.supervisor}</td>
       <td>${r.colaborador}</td>
-      <td style="color:var(--success);font-family:'IBM Plex Mono',monospace;text-align:center">${ok}</td>
-      <td style="color:var(--error);font-family:'IBM Plex Mono',monospace;text-align:center">${fa}</td>
-      <td style="color:var(--warning);font-family:'IBM Plex Mono',monospace;text-align:center">${ma}</td>
+      <td class="mono" style="color:var(--green);text-align:center">${ok}</td>
+      <td class="mono" style="color:var(--red);text-align:center">${fa}</td>
+      <td class="mono" style="color:var(--yellow);text-align:center">${ma}</td>
       <td>${badge}</td>
+      <td><button class="btn-sm btn-del" onclick="deletar(${r.id})">Excluir</button></td>
     </tr>`;
   }).join('');
 }
 
 function deletar(id) {
-  if (!confirm('Excluir este registro de inspeção?')) return;
-  const all = getDB();
-  const record = all.find(r => r.id === id);
-  if (record && record.firestoreId) {
-    window.deletarDoFirestore(record.firestoreId);
+  abrirModal('Excluir Registro','Deseja excluir este registro de inspeção? Esta ação não pode ser desfeita.',
+    () => { saveDB(getDB().filter(r=>r.id!==id)); renderDB(); showToast('🗑 Registro excluído.','red'); }
+  );
+}
+
+function confirmarLimpar() {
+  abrirModal('⚠️ Apagar Todos os Registros','Esta ação irá apagar <strong>todos</strong> os registros permanentemente. Tem certeza?',
+    () => { localStorage.removeItem('inspecoes_cond'); renderDB(); showToast('🗑 Base de dados limpa.','red'); }
+  );
+}
+
+// ================================================================
+//  SALVAR INSPEÇÃO
+// ================================================================
+function salvarInspecao() {
+  const posto       = el('posto').value;
+  const supervisor  = el('supervisor').value;
+  const colaborador = el('colaborador').value;
+  const data        = el('data').value;
+
+  if (!posto||!supervisor||!colaborador||!data) {
+    showToast('⚠️ Preencha: Posto, Supervisor, Colaborador e Data.','red'); return;
   }
-  saveDB(all.filter(r => r.id !== id));
-  renderDB();
-  renderDashboard();
-}
 
-function limparDB() {
-  if (!confirm('⚠️ Apagar TODOS os registros? Esta ação não pode ser desfeita.')) return;
-  localStorage.removeItem('inspecoes_cond');
-  renderDB();
-  renderDashboard();
-}
-
-// ================================================================
-//  EXPORT PDF
-// ================================================================
-function exportarPDF() {
-  const db = getDB();
-  if (!db.length) { alert('Nenhum dado para exportar.'); return; }
-
-  const element = document.createElement('div');
-  element.style.padding = '20px';
-  element.style.backgroundColor = '#fff';
-  element.style.color = '#000';
-
-  let html = `
-    <h1 style="text-align:center;margin-bottom:10px;color:#2E5984;">M.s Segurança e Serviços</h1>
-    <h2 style="text-align:center;margin-bottom:20px;">Relatório de Inspeções</h2>
-    <p style="text-align:center;color:#666;margin-bottom:30px;">Gerado em: ${new Date().toLocaleString('pt-BR')}</p>
-    <table style="width:100%;border-collapse:collapse;margin-bottom:30px;">
-      <thead>
-        <tr style="background:#2E5984;color:white;">
-          <th style="border:1px solid #ccc;padding:8px;text-align:left;">Data</th>
-          <th style="border:1px solid #ccc;padding:8px;text-align:left;">Hora</th>
-          <th style="border:1px solid #ccc;padding:8px;text-align:left;">Posto</th>
-          <th style="border:1px solid #ccc;padding:8px;text-align:left;">Supervisor</th>
-          <th style="border:1px solid #ccc;padding:8px;text-align:left;">Colaborador</th>
-          <th style="border:1px solid #ccc;padding:8px;text-align:center;">OK</th>
-          <th style="border:1px solid #ccc;padding:8px;text-align:center;">Falhas</th>
-        </tr>
-      </thead>
-      <tbody>
-  `;
-
-  db.forEach(r => {
-    const vals = Object.values(r.itens).map(i => i.status);
-    const ok = vals.filter(v => v === 'ok').length;
-    const fa = vals.filter(v => v === 'falha').length;
-    const dataFmt = r.data ? r.data.split('-').reverse().join('/') : '—';
-    html += `<tr style="background:${db.indexOf(r) % 2 ? '#f9f9f9' : '#fff'};">
-      <td style="border:1px solid #ccc;padding:8px;">${dataFmt}</td>
-      <td style="border:1px solid #ccc;padding:8px;">${r.horaInicio}${r.horaFim ? ' – ' + r.horaFim : ''}</td>
-      <td style="border:1px solid #ccc;padding:8px;">${r.posto}</td>
-      <td style="border:1px solid #ccc;padding:8px;">${r.supervisor}</td>
-      <td style="border:1px solid #ccc;padding:8px;">${r.colaborador}</td>
-      <td style="border:1px solid #ccc;padding:8px;text-align:center;color:#10B981;">${ok}</td>
-      <td style="border:1px solid #ccc;padding:8px;text-align:center;color:#EF4444;">${fa}</td>
-    </tr>`;
+  const itens = {}; let semStatus = 0;
+  getAllItems().forEach(item => {
+    const s = el(`status-${item.id}`)?.value;
+    const o = el(`obs-${item.id}`)?.value||'';
+    if (!s) semStatus++;
+    itens[item.id] = { label:item.label, status:s||'na', obs:o };
   });
 
-  html += `</tbody></table>`;
-  element.innerHTML = html;
-
-  const opt = {
-    margin: 10,
-    filename: `relatorio_inspecoes_${new Date().toISOString().slice(0, 10)}.pdf`,
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2 },
-    jsPDF: { orientation: 'landscape', unit: 'mm', format: 'a4' }
+  const continuar = () => {
+    const record = {
+      id: Date.now(), posto, supervisor, colaborador, data,
+      horaInicio: el('hora-inicio').value,
+      horaFim:    el('hora-fim').value,
+      itens,
+      obsGeral:   el('obs-geral').value,
+    };
+    const db = getDB(); db.push(record); saveDB(db);
+    showToast('✔ Inspeção salva com sucesso!','green');
+    limparForm();
   };
 
-  html2pdf().set(opt).from(element).save();
-  showToast('📄 PDF exportado!', 'success');
-}
-
-// ================================================================
-//  EXPORT EXCEL
-// ================================================================
-function exportarExcel() {
-  const db = getDB();
-  if (!db.length) { alert('Nenhum dado para exportar.'); return; }
-
-  const items = getAllItems();
-  const headers = ['ID', 'Data', 'Hora Início', 'Hora Fim', 'Posto', 'Supervisor', 'Colaborador', 'Fotos',
-    ...items.map(i => i.label), 'Observações Gerais'];
-  
-  const rows = db.map(r => [
-    r.id,
-    r.data,
-    r.horaInicio,
-    r.horaFim || '',
-    r.posto,
-    r.supervisor,
-    r.colaborador,
-    r.photos ? r.photos.length : 0,
-    ...items.map(i => {
-      const x = r.itens[i.id];
-      return x ? `${x.status}${x.obs ? ' (' + x.obs + ')' : ''}` : '';
-    }),
-    (r.obsGeral || '').replace(/\n/g, ' ')
-  ]);
-
-  const ws = XLSX.utils.aoa_to_sheet([headers, ...rows]);
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, 'Inspeções');
-  XLSX.writeFile(wb, `inspecoes_${new Date().toISOString().slice(0, 10)}.xlsx`);
-
-  showToast('📊 Excel exportado!', 'success');
+  if (semStatus > 0) {
+    abrirModal('Itens sem Status',`${semStatus} item(s) sem status definido. Deseja salvar assim mesmo?`, continuar);
+  } else {
+    continuar();
+  }
 }
 
 // ================================================================
 //  LIMPAR FORMULÁRIO
 // ================================================================
 function limparForm() {
-  ['posto', 'supervisor', 'colaborador', 'hora-fim'].forEach(id => {
-    const e = document.getElementById(id);
-    if (e) e.value = '';
-  });
-  document.getElementById('data').value = new Date().toISOString().split('T')[0];
-  document.getElementById('hora-inicio').value = new Date().toTimeString().slice(0, 5);
-  document.getElementById('obs-geral').value = '';
-  currentPhotos = [];
-  renderPhotos();
+  ['posto','supervisor','colaborador','hora-fim'].forEach(id => { const e=el(id); if(e) e.value=''; });
+  el('data').value        = new Date().toISOString().split('T')[0];
+  el('hora-inicio').value = new Date().toTimeString().slice(0,5);
+  el('obs-geral').value   = '';
   getAllItems().forEach(item => {
-    const sel = document.getElementById(`status-${item.id}`);
-    if (sel) { sel.value = ''; sel.className = 'status-select'; }
-    const obs = document.getElementById(`obs-${item.id}`);
-    if (obs) obs.value = '';
-    const row = document.getElementById(`obs-row-${item.id}`);
-    if (row) row.classList.remove('show');
+    const sel = el(`status-${item.id}`);
+    if (sel) { sel.value=''; sel.className='status-select'; }
+    const obs = el(`obs-${item.id}`); if(obs) obs.value='';
+    const row = el(`obs-row-${item.id}`); if(row) row.classList.remove('show');
+    const card = el(`card-${item.id}`);
+    if (card) card.classList.remove('has-ok','has-falha','has-manut','has-na');
   });
+  updateProgress();
+}
+
+// ================================================================
+//  EXPORTAR CSV
+// ================================================================
+function exportarCSV() {
+  const db = getDB();
+  if (!db.length) { showToast('⚠️ Nenhum dado para exportar.','red'); return; }
+  const items   = getAllItems();
+  const headers = ['ID','Data','Hora Ini','Hora Fim','Posto','Supervisor','Colaborador',
+    ...items.map(i=>i.label),'Obs Geral'];
+  const rows = db.map(r=>[
+    r.id, r.data, r.horaInicio, r.horaFim, r.posto, r.supervisor, r.colaborador,
+    ...items.map(i=>{ const x=r.itens[i.id]; return x?`${x.status}${x.obs?' ('+x.obs+')':''}`:'' }),
+    (r.obsGeral||'').replace(/\n/g,' ')
+  ]);
+  const csv = [headers,...rows].map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const a = document.createElement('a');
+  a.href     = 'data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);
+  a.download = `inspecoes_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  showToast('⬇ CSV exportado com sucesso!','green');
 }
 
 // ================================================================
 //  TOAST
 // ================================================================
 let toastTimer;
-function showToast(msg, type = 'success') {
-  const t = document.getElementById('toast');
+function showToast(msg, type='green') {
+  const t = el('toast');
   t.textContent = msg;
-  t.className = `toast ${type}`;
-  t.style.display = 'flex';
+  t.className = `toast show toast-${type}`;
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { t.style.display = 'none'; }, 3000);
+  toastTimer = setTimeout(() => { t.classList.remove('show'); }, 3200);
 }
 
 // ================================================================
-//  AUTH MODAL
+//  MODAL
 // ================================================================
-function toggleAuthModal() {
-  const modal = document.getElementById('auth-modal');
-  modal.style.display = modal.style.display === 'none' ? 'flex' : 'none';
+let modalCallback = null;
+function abrirModal(titulo, msg, cb) {
+  el('modal-title').textContent = titulo;
+  el('modal-msg').innerHTML     = msg;
+  modalCallback = cb;
+  el('modal-overlay').classList.add('show');
 }
-
-function closeAuthModal() {
-  document.getElementById('auth-modal').style.display = 'none';
-}
+function fecharModal() { el('modal-overlay').classList.remove('show'); modalCallback=null; }
+el('modal-confirm-btn').addEventListener('click', () => {
+  fecharModal(); if (modalCallback) modalCallback();
+});
+el('modal-overlay').addEventListener('click', e => { if(e.target===el('modal-overlay')) fecharModal(); });
+document.addEventListener('keydown', e => { if(e.key==='Escape') fecharModal(); });
 
 // ================================================================
-//  TAB SWITCHING
+//  TABS
 // ================================================================
 function switchTab(tab, btn) {
-  document.querySelectorAll('.tab-content').forEach(e => e.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(e => e.classList.remove('active'));
-  document.getElementById('tab-' + tab).classList.add('active');
+  document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(e=>e.classList.remove('active'));
+  el('tab-'+tab).classList.add('active');
   btn.classList.add('active');
-  if (tab === 'db') renderDB();
-  if (tab === 'dashboard') renderDashboard();
+  if (tab==='db') { renderDB(); renderCadastro('postos'); renderCadastro('supervisores'); renderCadastro('colaboradores'); }
+}
+
+function switchSubTab(sub, btn) {
+  document.querySelectorAll('.sub-section').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.sub-tab-btn').forEach(e=>e.classList.remove('active'));
+  el('sub-'+sub).classList.add('active');
+  btn.classList.add('active');
 }
 
 // ================================================================
 //  INIT
 // ================================================================
-document.getElementById('data').value = new Date().toISOString().split('T')[0];
-document.getElementById('hora-inicio').value = new Date().toTimeString().slice(0, 5);
+el('data').value        = new Date().toISOString().split('T')[0];
+el('hora-inicio').value = new Date().toTimeString().slice(0,5);
 buildItems();
 initCadastros();
 renderDB();
-renderDashboard();
-
-// Expose all functions used by inline onclick handlers to window
-window.salvarInspecao = salvarInspecao;
-window.limparForm = limparForm;
-window.exportarPDF = exportarPDF;
-window.exportarExcel = exportarExcel;
-window.limparDB = limparDB;
-window.deletar = deletar;
-window.switchTab = switchTab;
-window.handleDragOver = handleDragOver;
-window.handleDragLeave = handleDragLeave;
-window.handleDrop = handleDrop;
-window.handlePhotoSelect = handlePhotoSelect;
-window.deletePhoto = deletePhoto;
-window.showToast = showToast;
-window.closeAuthModal = closeAuthModal;
 </script>
-
 </body>
 </html>
