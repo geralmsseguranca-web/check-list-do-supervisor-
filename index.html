@@ -3,285 +3,819 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>M.s Segurança e Serviços - Sistema de Inspeção</title>
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+<title>M.s Segurança - Sistema de Inspeção</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.min.js"></script>
+<!-- Firebase carregado via ES modules no script principal -->
 <style>
   :root {
-    --bg: #0a0e1a;
-    --surface: #111827;
-    --surface2: #1a2236;
-    --border: #1e3a5f;
-    --accent: #00b4d8;
-    --accent2: #0077b6;
-    --green: #06d6a0;
-    --red: #ef476f;
-    --yellow: #ffd166;
-    --text: #e0eaf5;
-    --muted: #6b88a8;
-    --glow: 0 0 12px rgba(0,180,216,0.3);
+    /* Paleta Moderna - Segurança & Confiabilidade */
+    --primary: #2E5984;      /* Azul profissional */
+    --primary-light: #4A7BA7; /* Azul mais claro */
+    --primary-dark: #1a3a52; /* Azul escuro */
+    
+    --accent: #00D4AA;       /* Verde-turquesa vibrante */
+    --accent-dark: #00B894;  /* Verde mais escuro */
+    
+    --success: #10B981;      /* Verde sucesso */
+    --warning: #F59E0B;      /* Âmbar aviso */
+    --error: #EF4444;        /* Vermelho erro */
+    --info: #06B6D4;         /* Ciano informação */
+    
+    --bg: #0F172A;           /* Fundo muito escuro */
+    --surface: #1E293B;      /* Superfície escura */
+    --surface-light: #334155; /* Superfície clara */
+    
+    --text: #F1F5F9;         /* Texto claro */
+    --text-secondary: #CBD5E1; /* Texto secundário */
+    --text-muted: #94A3B8;   /* Texto muted */
+    
+    --border: #475569;       /* Borda */
+    --border-light: #64748B; /* Borda clara */
+    
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.4);
   }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    background: var(--bg);
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--bg) 0%, #1a2f4a 100%);
     color: var(--text);
-    font-family: 'Exo 2', sans-serif;
-    min-height: 100vh;
-    background-image:
-      radial-gradient(ellipse at 20% 0%, rgba(0,119,182,0.12) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 100%, rgba(0,180,216,0.08) 0%, transparent 50%);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--surface);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-light);
   }
 
   /* HEADER */
   header {
-    background: linear-gradient(135deg, #0d1b2e 0%, #112240 100%);
-    border-bottom: 3px solid var(--accent);
-    padding: 16px 32px;
-    display: flex; align-items: center; gap: 16px;
-    box-shadow: 0 8px 40px rgba(0,180,216,0.2);
-    position: sticky; top: 0; z-index: 100;
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+    border-bottom: 2px solid var(--accent);
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: var(--shadow-lg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
+
   .logo-container {
-    display: flex; align-items: center; gap: 12px; border-right: 2px solid var(--border); padding-right: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-right: 2px solid rgba(0, 212, 170, 0.3);
+    padding-right: 18px;
   }
+
   .logo-icon {
-    width:48px; height:48px; border-radius: 10px;
-    background: linear-gradient(135deg, var(--accent2), var(--accent));
-    display: flex; align-items: center; justify-content: center; font-size: 24px;
-    box-shadow: var(--glow); flex-shrink: 0;
-    font-weight: 700; color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--bg);
+    box-shadow: 0 8px 24px rgba(0, 212, 170, 0.3);
+    flex-shrink: 0;
   }
+
   .header-text h1 {
-    font-family: 'Rajdhani', sans-serif; font-size: 1.3rem; font-weight: 700;
-    letter-spacing: 2px; color: var(--accent); text-transform: uppercase;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text);
   }
+
   .header-text p {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.7rem;
-    color: var(--muted); letter-spacing: 1px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 2px;
   }
+
   .header-right {
-    margin-left: auto; text-align: right;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 20px;
   }
-  .header-right .time {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.9rem;
-    color: var(--accent); font-weight: 600; display: flex; gap: 8px; align-items: center;
+
+  .time-display {
+    text-align: right;
+    font-family: 'IBM Plex Mono', monospace;
   }
-  .header-right .time::before {
-    content: '⏰'; font-size: 1.1rem;
+
+  .time-display .date {
+    font-size: 0.9rem;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .time-display .clock {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  .auth-btn {
+    padding: 8px 16px;
+    background: rgba(0, 212, 170, 0.15);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .auth-btn:hover {
+    background: rgba(0, 212, 170, 0.25);
+    box-shadow: 0 0 12px rgba(0, 212, 170, 0.3);
   }
 
   /* TABS */
-  .tabs { display: flex; background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 32px; gap: 8px; overflow-x: auto; }
-  .tab-btn {
-    padding: 14px 24px; background: none; border: none; border-bottom: 3px solid transparent;
-    color: var(--muted); font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 600;
-    letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.2s;
-    display: flex; align-items: center; gap: 8px; white-space: nowrap;
+  .tabs {
+    display: flex;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    gap: 8px;
+    overflow-x: auto;
   }
-  .tab-btn:hover { color: var(--text); }
-  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); background: rgba(0,180,216,0.05); }
+
+  .tab-btn {
+    padding: 14px 20px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--text-muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+
+  .tab-btn:hover {
+    color: var(--text-secondary);
+  }
+
+  .tab-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    background: rgba(0, 212, 170, 0.05);
+  }
 
   /* CONTENT */
-  .tab-content { display: none; padding: 32px; max-width: 1400px; margin: 0 auto; }
-  .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px) } to { opacity: 1; transform: translateY(0) } }
+  .tab-content {
+    display: none;
+    padding: 32px;
+    max-width: 1400px;
+    margin: 0 auto;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
   /* DASHBOARD */
   .dashboard-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 32px;
-  }
-  .stat-card {
-    background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
-    border: 1px solid var(--border); border-radius: 12px; padding: 24px;
-    text-align: center; transition: all 0.3s; position: relative; overflow: hidden;
-  }
-  .stat-card::before {
-    content: ''; position: absolute; top: -50%; right: -50%; width: 200px; height: 200px;
-    background: radial-gradient(circle, rgba(0,180,216,0.1) 0%, transparent 70%);
-    border-radius: 50%;
-  }
-  .stat-card:hover {
-    border-color: var(--accent); transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0,180,216,0.15);
-  }
-  .stat-num {
-    font-family: 'Rajdhani', sans-serif; font-size: 2.8rem; font-weight: 700;
-    color: var(--accent); display: block; margin: 8px 0;
-    position: relative; z-index: 1;
-  }
-  .stat-label {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.75rem;
-    color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px;
-    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
   }
 
-  /* CHART - POSTOS */
+  .stat-card {
+    background: linear-gradient(135deg, var(--surface) 0%, var(--surface-light) 100%);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(0, 212, 170, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .stat-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 212, 170, 0.15);
+  }
+
+  .stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+    margin: 8px 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .stat-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* CHART */
   .chart-container {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
-    padding: 24px; margin-bottom: 32px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 32px;
   }
+
   .chart-title {
-    font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 700;
-    letter-spacing: 2px; text-transform: uppercase; color: var(--accent);
-    margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
-  .chart-title::before {
-    content: '📊'; font-size: 1.2rem;
-  }
+
   .posto-bar {
-    display: grid; grid-template-columns: 120px 1fr 100px; align-items: center;
-    gap: 12px; margin-bottom: 12px;
+    display: grid;
+    grid-template-columns: 140px 1fr 100px;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
   }
+
   .posto-name {
-    font-weight: 600; color: var(--text);
-    font-family: 'Share Tech Mono', monospace; font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9rem;
   }
+
   .bar-wrapper {
-    background: var(--surface2); border-radius: 6px; overflow: hidden; height: 28px;
-    border: 1px solid var(--border); position: relative;
+    background: var(--surface-light);
+    border-radius: 6px;
+    overflow: hidden;
+    height: 32px;
+    border: 1px solid var(--border);
+    position: relative;
   }
+
   .bar-fill {
-    height: 100%; background: linear-gradient(90deg, var(--accent2), var(--accent));
-    border-radius: 6px; transition: width 0.4s ease; display: flex;
-    align-items: center; justify-content: flex-end; padding-right: 8px;
-    color: white; font-size: 0.75rem; font-weight: 700;
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+    border-radius: 6px;
+    transition: width 0.4s ease;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 12px;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 700;
   }
+
   .posto-count {
-    font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 700;
-    color: var(--accent); text-align: right;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-align: right;
   }
 
   /* FORM */
+  .form-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+
   .form-header {
-    display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px;
-    margin-bottom: 28px; padding: 20px;
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 12px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
   }
-  .field-group { display: flex; flex-direction: column; gap: 6px; }
+
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
   label {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.7rem;
-    letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.5px;
   }
-  select, input[type="text"], input[type="date"], input[type="time"], textarea {
-    background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
-    color: var(--text); font-family: 'Exo 2', sans-serif; font-size: 0.9rem;
-    padding: 10px 14px; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
-    width: 100%; appearance: none;
+
+  input[type="text"],
+  input[type="date"],
+  input[type="time"],
+  input[type="file"],
+  select,
+  textarea {
+    background: var(--surface-light);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    padding: 10px 12px;
+    outline: none;
+    transition: all 0.3s;
+    width: 100%;
   }
-  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M6 8L0 0h12z' fill='%2300b4d8'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
-  select:focus, input:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,180,216,0.15); }
-  select option { background: #1a2236; }
+
+  input[type="text"]:focus,
+  input[type="date"]:focus,
+  input[type="time"]:focus,
+  input[type="file"]:focus,
+  select:focus,
+  textarea:focus {
+    border-color: var(--accent);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.1);
+  }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M6 8L0 0h12z' fill='%2300D4AA'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 32px;
+  }
+
+  select option {
+    background: var(--surface);
+    color: var(--text);
+  }
+
+  /* PHOTO UPLOAD */
+  .photo-upload-area {
+    border: 2px dashed var(--primary);
+    border-radius: 10px;
+    padding: 24px;
+    text-align: center;
+    background: rgba(46, 89, 132, 0.05);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .photo-upload-area:hover {
+    border-color: var(--accent);
+    background: rgba(0, 212, 170, 0.08);
+  }
+
+  .photo-upload-area.dragover {
+    border-color: var(--accent);
+    background: rgba(0, 212, 170, 0.15);
+  }
+
+  .photo-upload-area input[type="file"] {
+    display: none;
+  }
+
+  .upload-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+  }
+
+  .upload-text {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+
+  .upload-hint {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+
+  /* PHOTO GALLERY */
+  .photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .photo-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 1;
+    background: var(--surface-light);
+    border: 1px solid var(--border);
+  }
+
+  .photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .photo-item .delete-btn {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: var(--error);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+  }
+
+  .photo-item:hover .delete-btn {
+    display: flex;
+  }
+
+  .photo-item .delete-btn:hover {
+    background: #DC2626;
+  }
 
   /* SECTION TITLE */
   .section-title {
-    font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 700;
-    letter-spacing: 2px; text-transform: uppercase; color: var(--muted);
-    margin: 24px 0 12px; display: flex; align-items: center; gap: 10px;
-    padding-bottom: 8px; border-bottom: 1px solid var(--border);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text);
+    margin: 24px 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--primary);
   }
-  .section-title::before { content: ''; display: block; width: 4px; height: 18px; background: linear-gradient(to bottom, var(--accent), var(--accent2)); border-radius: 2px; }
 
   /* ITEMS GRID */
   .items-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; margin-bottom: 8px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+    margin-bottom: 12px;
   }
+
   .item-card {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
-    padding: 14px 16px; display: grid; grid-template-columns: auto 1fr auto;
-    align-items: center; gap: 12px; transition: border-color 0.2s;
+    background: var(--surface-light);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.2s;
   }
-  .item-card:hover { border-color: var(--accent2); }
-  .item-icon { width: 36px; height: 36px; background: var(--surface2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; border: 1px solid var(--border); }
-  .item-label { font-weight: 600; font-size: 0.9rem; color: var(--text); }
-  .item-sub { font-size: 0.75rem; color: var(--muted); margin-top: 2px; font-family: 'Share Tech Mono', monospace; }
-  .status-select { width: 110px; padding: 7px 10px; font-size: 0.8rem; border-radius: 6px; font-weight: 600; }
-  .status-ok { border-color: var(--green) !important; color: var(--green) !important; }
-  .status-falha { border-color: var(--red) !important; color: var(--red) !important; }
-  .status-manut { border-color: var(--yellow) !important; color: var(--yellow) !important; }
-  .status-na { border-color: var(--muted) !important; color: var(--muted) !important; }
-  .obs-row { margin-top: 8px; display: none; }
-  .obs-row.show { display: block; }
-  .obs-row textarea { font-size: 0.82rem; min-height: 56px; resize: vertical; border-color: var(--yellow); }
+
+  .item-card:hover {
+    border-color: var(--accent);
+    background: var(--surface);
+  }
+
+  .item-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--surface);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    border: 1px solid var(--border);
+  }
+
+  .item-label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+
+  .item-sub {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .status-select {
+    width: 120px;
+    padding: 7px 10px;
+    font-size: 0.8rem;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+
+  .status-ok { border-color: var(--success) !important; color: var(--success) !important; }
+  .status-falha { border-color: var(--error) !important; color: var(--error) !important; }
+  .status-manut { border-color: var(--warning) !important; color: var(--warning) !important; }
+  .status-na { border-color: var(--text-muted) !important; color: var(--text-muted) !important; }
+
+  .obs-row {
+    margin-top: 8px;
+    display: none;
+    grid-column: 1 / -1;
+  }
+
+  .obs-row.show {
+    display: block;
+  }
+
+  .obs-row textarea {
+    font-size: 0.85rem;
+    min-height: 56px;
+    resize: vertical;
+    border-color: var(--warning);
+  }
 
   /* BUTTONS */
   .form-actions {
-    margin-top: 28px; display: flex; gap: 12px; justify-content: flex-end;
-    align-items: center; flex-wrap: wrap;
+    margin-top: 28px;
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
   }
+
   .btn {
-    padding: 12px 28px; border-radius: 8px; border: none; font-family: 'Rajdhani', sans-serif;
-    font-size: 1rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-    cursor: pointer; transition: all 0.2s;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
+
   .btn-primary {
-    background: linear-gradient(135deg, var(--accent2), var(--accent)); color: #fff;
-    box-shadow: var(--glow);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    box-shadow: 0 8px 24px rgba(46, 89, 132, 0.3);
   }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(0,180,216,0.4); }
-  .btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--muted); }
-  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(46, 89, 132, 0.4);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
   .btn-export {
-    background: linear-gradient(135deg, rgba(6,214,160,0.2), rgba(0,180,216,0.2));
+    background: linear-gradient(135deg, rgba(0, 212, 170, 0.15), rgba(46, 89, 132, 0.15));
     border: 1px solid var(--accent);
     color: var(--accent);
   }
+
   .btn-export:hover {
-    background: linear-gradient(135deg, rgba(6,214,160,0.3), rgba(0,180,216,0.3));
+    background: linear-gradient(135deg, rgba(0, 212, 170, 0.25), rgba(46, 89, 132, 0.25));
+    box-shadow: 0 8px 20px rgba(0, 212, 170, 0.2);
   }
-  .btn-sm { padding: 7px 14px; font-size: 0.82rem; border-radius: 6px; border: none; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 1px; cursor: pointer; transition: all 0.2s; text-transform: uppercase; }
-  .btn-del { background: rgba(239,71,111,0.1); color: var(--red); border: 1px solid rgba(239,71,111,0.35); }
-  .btn-del:hover { background: rgba(239,71,111,0.25); }
+
+  .btn-sm {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    border-radius: 6px;
+    border: none;
+  }
+
+  .btn-del {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--error);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+  }
+
+  .btn-del:hover {
+    background: rgba(239, 68, 68, 0.2);
+  }
 
   /* TABLE */
-  .table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--border); margin-bottom: 32px; }
-  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-  thead { background: linear-gradient(135deg, #0d1b2e, #112240); }
-  th { padding: 14px; text-align: left; font-weight: 700; letter-spacing: 1px; color: var(--accent); border-bottom: 2px solid var(--border); }
-  td { padding: 14px; border-bottom: 1px solid var(--border); }
-  tbody tr:hover { background: rgba(0,180,216,0.05); }
-  .badge {
-    display: inline-block; padding: 4px 10px; border-radius: 20px;
-    font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    margin-bottom: 32px;
   }
-  .badge-ok { background: rgba(6,214,160,0.2); color: var(--green); }
-  .badge-falha { background: rgba(239,71,111,0.2); color: var(--red); }
-  .badge-manut { background: rgba(255,209,102,0.2); color: var(--yellow); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  thead {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+  }
+
+  th {
+    padding: 14px;
+    text-align: left;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--text);
+    border-bottom: 2px solid var(--border);
+  }
+
+  td {
+    padding: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  tbody tr:hover {
+    background: rgba(0, 212, 170, 0.03);
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .badge-ok { background: rgba(16, 185, 129, 0.2); color: var(--success); }
+  .badge-falha { background: rgba(239, 68, 68, 0.2); color: var(--error); }
+  .badge-manut { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
 
   /* TOAST */
   .toast {
-    position: fixed; bottom: 24px; right: 24px;
-    background: var(--green); color: #021a12;
-    font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 1px;
-    padding: 14px 24px; border-radius: 10px; display: none; align-items: center;
-    gap: 10px; z-index: 999; box-shadow: 0 8px 32px rgba(6,214,160,0.3);
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--success);
+    color: white;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 14px 20px;
+    border-radius: 10px;
+    display: none;
+    align-items: center;
+    gap: 10px;
+    z-index: 999;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .toast.error {
+    background: var(--error);
+  }
+
+  .toast.warning {
+    background: var(--warning);
+    color: #000;
   }
 
   /* TOOLBAR */
-  .db-toolbar { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
-  .search-box { flex: 1; min-width: 200px; padding: 10px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: 'Exo 2', sans-serif; font-size: 0.9rem; outline: none; }
-  .search-box:focus { border-color: var(--accent); }
+  .db-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .search-box {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.3s;
+  }
+
+  .search-box:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.1);
+  }
 
   /* EMPTY STATE */
   .empty-state {
-    text-align: center; padding: 60px 32px; color: var(--muted);
+    text-align: center;
+    padding: 60px 32px;
+    color: var(--text-muted);
   }
-  .empty-state-icon { font-size: 3rem; margin-bottom: 16px; }
-  .empty-state h3 { font-family: 'Rajdhani', sans-serif; font-size: 1.2rem; margin-bottom: 8px; color: var(--text); }
 
+  .empty-state-icon {
+    font-size: 3.5rem;
+    margin-bottom: 16px;
+  }
+
+  .empty-state h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  /* RESPONSIVE */
   @media (max-width: 900px) {
     .form-header { grid-template-columns: 1fr 1fr; }
     .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
+    .items-grid { grid-template-columns: 1fr; }
   }
+
   @media (max-width: 600px) {
-    header { flex-direction: column; align-items: flex-start; }
-    .logo-container { border-right: none; border-bottom: 2px solid var(--border); padding-right: 0; padding-bottom: 12px; width: 100%; }
-    .header-right { width: 100%; margin-left: 0; margin-top: 12px; }
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 16px;
+    }
+    .logo-container {
+      border-right: none;
+      border-bottom: 2px solid rgba(0, 212, 170, 0.3);
+      padding-right: 0;
+      padding-bottom: 12px;
+      width: 100%;
+    }
+    .header-right {
+      width: 100%;
+      margin-left: 0;
+      margin-top: 12px;
+    }
     .form-header { grid-template-columns: 1fr; }
     .dashboard-grid { grid-template-columns: 1fr; }
     .form-actions { flex-direction: column-reverse; }
     .btn { width: 100%; }
+    .tabs { padding: 0 16px; }
+    .tab-content { padding: 16px; }
   }
 </style>
 </head>
@@ -292,14 +826,16 @@
   <div class="logo-container">
     <div class="logo-icon">M</div>
     <div class="header-text">
-      <h1>M.s Segurança e Serviços</h1>
-      <p>Sistema de Inspeção de Condomínios</p>
+      <h1>M.s Segurança & Serviços</h1>
+      <p>Sistema de Inspeção Inteligente</p>
     </div>
   </div>
   <div class="header-right">
-    <div class="time">
-      <span id="current-date"></span> • <span id="current-time"></span>
+    <div class="time-display">
+      <div class="date" id="current-date"></div>
+      <div class="clock" id="current-time"></div>
     </div>
+    <button class="auth-btn" id="auth-btn" onclick="toggleAuthModal()">📱 Login</button>
   </div>
 </header>
 
@@ -312,47 +848,68 @@
 
 <!-- FORMULÁRIO -->
 <div id="tab-form" class="tab-content active">
-  <div class="form-header">
-    <div class="field-group">
-      <label>Data da Inspeção</label>
-      <input type="date" id="data" required>
-    </div>
-    <div class="field-group">
-      <label>Hora Início</label>
-      <input type="time" id="hora-inicio" required>
-    </div>
-    <div class="field-group">
-      <label>Hora Término</label>
-      <input type="time" id="hora-fim">
-    </div>
-    <div class="field-group">
-      <label>Posto de Segurança</label>
-      <select id="posto" required>
-        <option value="">Selecionar...</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="form-header">
-    <div class="field-group">
-      <label>Supervisor</label>
-      <select id="supervisor" required>
-        <option value="">Selecionar...</option>
-      </select>
-    </div>
-    <div class="field-group">
-      <label>Colaborador</label>
-      <select id="colaborador" required>
-        <option value="">Selecionar...</option>
-      </select>
+  <div class="form-section">
+    <h2 class="section-title">Dados da Inspeção</h2>
+    <div class="form-header">
+      <div class="field-group">
+        <label>Data da Inspeção</label>
+        <input type="date" id="data" required>
+      </div>
+      <div class="field-group">
+        <label>Hora Início</label>
+        <input type="time" id="hora-inicio" required>
+      </div>
+      <div class="field-group">
+        <label>Hora Término</label>
+        <input type="time" id="hora-fim">
+      </div>
+      <div class="field-group">
+        <label>Posto de Segurança</label>
+        <select id="posto" required>
+          <option value="">Selecionar...</option>
+        </select>
+      </div>
     </div>
   </div>
 
-  <div class="section-title">Itens de Inspeção</div>
-  <div id="items-container"></div>
+  <div class="form-section">
+    <h2 class="section-title">Responsáveis</h2>
+    <div class="form-header">
+      <div class="field-group">
+        <label>Supervisor</label>
+        <select id="supervisor" required>
+          <option value="">Selecionar...</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>Colaborador</label>
+        <select id="colaborador" required>
+          <option value="">Selecionar...</option>
+        </select>
+      </div>
+    </div>
+  </div>
 
-  <div class="section-title">Observações Gerais</div>
-  <textarea id="obs-geral" placeholder="Descreva qualquer observação importante sobre a inspeção..."></textarea>
+  <div class="form-section">
+    <h2 class="section-title">Fotos da Inspeção</h2>
+    <div class="photo-upload-area" id="upload-area" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+      <input type="file" id="photo-input" multiple accept="image/*" onchange="handlePhotoSelect(event)">
+      <div class="upload-icon">📸</div>
+      <div class="upload-text">Clique ou arraste fotos aqui</div>
+      <div class="upload-hint">Suporta JPG, PNG (máx. 5MB por foto)</div>
+    </div>
+    <div class="photo-gallery" id="photo-gallery"></div>
+  </div>
+
+  <div class="form-section">
+    <h2 class="section-title">Itens de Inspeção</h2>
+    <div id="items-container"></div>
+  </div>
+
+  <div class="form-section">
+    <h2 class="section-title">Observações Gerais</h2>
+    <textarea id="obs-geral" placeholder="Descreva qualquer observação importante sobre a inspeção..."></textarea>
+  </div>
 
   <div class="form-actions">
     <button class="btn btn-secondary" onclick="limparForm()">↻ Limpar</button>
@@ -362,7 +919,7 @@
 
 <!-- DASHBOARD -->
 <div id="tab-dashboard" class="tab-content">
-  <h2 style="margin-bottom: 24px; font-family: 'Rajdhani', sans-serif; font-size: 1.4rem; letter-spacing: 2px; text-transform: uppercase;">Análise de Inspeções</h2>
+  <h2 style="margin-bottom: 28px; font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; letter-spacing: -0.5px;">Análise de Inspeções</h2>
 
   <div class="dashboard-grid">
     <div class="stat-card">
@@ -384,12 +941,12 @@
   </div>
 
   <div class="chart-container">
-    <div class="chart-title">Visitas por Posto de Segurança</div>
+    <div class="chart-title">📍 Visitas por Posto</div>
     <div id="chart-postos"></div>
   </div>
 
   <div class="chart-container">
-    <div class="chart-title">Últimas Inspeções</div>
+    <div class="chart-title">📋 Últimas Inspeções</div>
     <div class="table-wrap">
       <table>
         <thead>
@@ -414,11 +971,12 @@
 <!-- HISTÓRICO -->
 <div id="tab-db" class="tab-content">
   <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
-    <h2 style="font-family: 'Rajdhani', sans-serif; font-size: 1.4rem; letter-spacing: 2px; text-transform: uppercase;">Histórico de Inspeções</h2>
+    <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; letter-spacing: -0.5px;">Histórico de Inspeções</h2>
     <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-      <button class="btn btn-export" onclick="exportarPDF()">📄 Exportar PDF</button>
-      <button class="btn btn-export" onclick="exportarExcel()">📊 Exportar Excel</button>
-      <button class="btn btn-secondary" onclick="limparDB()">🗑️ Limpar Tudo</button>
+      <button class="btn btn-export" onclick="exportarPDF()">📄 PDF</button>
+      <button class="btn btn-export" onclick="exportarExcel()">📊 Excel</button>
+      <button class="btn btn-export" onclick="window.carregarDoFirestore && window.carregarDoFirestore()" style="border-color:var(--info);color:var(--info);">☁️ Sincronizar</button>
+      <button class="btn btn-secondary" onclick="limparDB()">🗑️ Limpar</button>
     </div>
   </div>
 
@@ -456,7 +1014,244 @@
 <!-- TOAST -->
 <div id="toast" class="toast"></div>
 
-<script>
+<!-- AUTH MODAL -->
+<div id="auth-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;display:flex;align-items:center;justify-content:center;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:32px;max-width:400px;width:90%;">
+    <h3 style="margin-bottom:20px;color:var(--accent);" id="auth-modal-title">Entrar na Conta</h3>
+    <div id="auth-tabs" style="display:flex;gap:8px;margin-bottom:20px;">
+      <button id="tab-login-btn" onclick="switchAuthTab('login')" style="flex:1;padding:8px;border:1px solid var(--accent);background:rgba(0,212,170,0.15);color:var(--accent);border-radius:6px;font-weight:700;cursor:pointer;font-family:'Space Grotesk',sans-serif;">Entrar</button>
+      <button id="tab-register-btn" onclick="switchAuthTab('register')" style="flex:1;padding:8px;border:1px solid var(--border);background:transparent;color:var(--text-muted);border-radius:6px;font-weight:700;cursor:pointer;font-family:'Space Grotesk',sans-serif;">Cadastrar</button>
+    </div>
+    <div id="auth-error" style="display:none;background:rgba(239,68,68,0.15);border:1px solid var(--error);border-radius:8px;padding:10px 14px;color:var(--error);font-size:0.85rem;margin-bottom:14px;"></div>
+    <div class="field-group" style="margin-bottom:12px;">
+      <label>Email</label>
+      <input type="text" id="auth-email" placeholder="seu@email.com">
+    </div>
+    <div class="field-group" style="margin-bottom:20px;">
+      <label>Senha</label>
+      <input type="password" id="auth-password" placeholder="••••••••">
+    </div>
+    <button id="auth-submit-btn" onclick="handleAuth()" class="btn btn-primary" style="width:100%;margin-bottom:10px;">Entrar</button>
+    <button class="btn btn-secondary" onclick="closeAuthModal()" style="width:100%;">Cancelar</button>
+    <div id="auth-logout-area" style="display:none;margin-top:16px;border-top:1px solid var(--border);padding-top:16px;">
+      <p id="auth-user-info" style="color:var(--text-secondary);font-size:0.85rem;margin-bottom:12px;"></p>
+      <button onclick="handleLogout()" class="btn" style="width:100%;background:rgba(239,68,68,0.15);color:var(--error);border:1px solid rgba(239,68,68,0.3);">Sair da Conta</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+// ================================================================
+//  FIREBASE - Configuração e Inicialização
+// ================================================================
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, where, orderBy } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
+import { getStorage, ref, uploadString, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-storage.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAWeLn23T-rZJd89amUbNL8v_Y3PxG8laA",
+  authDomain: "check-list-do-supervisor.firebaseapp.com",
+  projectId: "check-list-do-supervisor",
+  storageBucket: "check-list-do-supervisor.firebasestorage.app",
+  messagingSenderId: "115362864630",
+  appId: "1:115362864630:web:e8d8d33a9e2e94657a7bd7",
+  measurementId: "G-7X4WJ2LHH3"
+};
+
+const app = initializeApp(firebaseConfig);
+const fsdb = getFirestore(app);
+const storage = getStorage(app);
+const auth = getAuth(app);
+
+let currentUser = null;
+let authMode = 'login';
+
+// Monitor auth state
+onAuthStateChanged(auth, (user) => {
+  currentUser = user;
+  const btn = document.getElementById('auth-btn');
+  if (user) {
+    btn.textContent = `👤 ${user.email.split('@')[0]}`;
+    btn.style.borderColor = 'var(--success)';
+    btn.style.color = 'var(--success)';
+    showToast(`✓ Conectado como ${user.email}`, 'success');
+    // Load data from Firestore
+    carregarDoFirestore();
+  } else {
+    btn.textContent = '📱 Login';
+    btn.style.borderColor = 'var(--accent)';
+    btn.style.color = 'var(--accent)';
+  }
+});
+
+// ================================================================
+//  AUTH FUNCTIONS
+// ================================================================
+window.switchAuthTab = function(mode) {
+  authMode = mode;
+  const loginBtn = document.getElementById('tab-login-btn');
+  const regBtn = document.getElementById('tab-register-btn');
+  const submitBtn = document.getElementById('auth-submit-btn');
+  const title = document.getElementById('auth-modal-title');
+  if (mode === 'login') {
+    loginBtn.style.borderColor = 'var(--accent)';
+    loginBtn.style.background = 'rgba(0,212,170,0.15)';
+    loginBtn.style.color = 'var(--accent)';
+    regBtn.style.borderColor = 'var(--border)';
+    regBtn.style.background = 'transparent';
+    regBtn.style.color = 'var(--text-muted)';
+    submitBtn.textContent = 'Entrar';
+    title.textContent = 'Entrar na Conta';
+  } else {
+    regBtn.style.borderColor = 'var(--accent)';
+    regBtn.style.background = 'rgba(0,212,170,0.15)';
+    regBtn.style.color = 'var(--accent)';
+    loginBtn.style.borderColor = 'var(--border)';
+    loginBtn.style.background = 'transparent';
+    loginBtn.style.color = 'var(--text-muted)';
+    submitBtn.textContent = 'Cadastrar';
+    title.textContent = 'Criar Conta';
+  }
+  document.getElementById('auth-error').style.display = 'none';
+};
+
+window.handleAuth = async function() {
+  const email = document.getElementById('auth-email').value.trim();
+  const password = document.getElementById('auth-password').value;
+  const errDiv = document.getElementById('auth-error');
+  errDiv.style.display = 'none';
+
+  if (!email || !password) {
+    errDiv.textContent = 'Preencha email e senha.';
+    errDiv.style.display = 'block';
+    return;
+  }
+
+  try {
+    if (authMode === 'login') {
+      await signInWithEmailAndPassword(auth, email, password);
+    } else {
+      await createUserWithEmailAndPassword(auth, email, password);
+    }
+    closeAuthModal();
+    document.getElementById('auth-email').value = '';
+    document.getElementById('auth-password').value = '';
+  } catch (err) {
+    const msgs = {
+      'auth/user-not-found': 'Usuário não encontrado.',
+      'auth/wrong-password': 'Senha incorreta.',
+      'auth/invalid-email': 'Email inválido.',
+      'auth/email-already-in-use': 'Este email já está cadastrado.',
+      'auth/weak-password': 'Senha fraca. Use pelo menos 6 caracteres.',
+      'auth/invalid-credential': 'Email ou senha incorretos.',
+      'auth/too-many-requests': 'Muitas tentativas. Tente mais tarde.'
+    };
+    errDiv.textContent = msgs[err.code] || `Erro: ${err.message}`;
+    errDiv.style.display = 'block';
+  }
+};
+
+window.handleLogout = async function() {
+  try {
+    await signOut(auth);
+    closeAuthModal();
+    showToast('Sessão encerrada', 'success');
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+window.toggleAuthModal = function() {
+  const modal = document.getElementById('auth-modal');
+  const isHidden = modal.style.display === 'none' || modal.style.display === '';
+  if (isHidden) {
+    modal.style.display = 'flex';
+    // Show logout area if logged in
+    const logoutArea = document.getElementById('auth-logout-area');
+    const loginArea = document.getElementById('auth-tabs');
+    const emailInput = document.getElementById('auth-email').parentElement;
+    const passInput = document.getElementById('auth-password').parentElement;
+    const submitBtn = document.getElementById('auth-submit-btn');
+    const cancelBtn = submitBtn.nextElementSibling;
+    if (currentUser) {
+      loginArea.style.display = 'none';
+      emailInput.style.display = 'none';
+      passInput.style.display = 'none';
+      submitBtn.style.display = 'none';
+      cancelBtn.style.display = 'block';
+      logoutArea.style.display = 'block';
+      document.getElementById('auth-user-info').textContent = `Conectado como: ${currentUser.email}`;
+      document.getElementById('auth-modal-title').textContent = 'Conta';
+    } else {
+      loginArea.style.display = 'flex';
+      emailInput.style.display = 'flex';
+      passInput.style.display = 'flex';
+      submitBtn.style.display = 'block';
+      cancelBtn.style.display = 'block';
+      logoutArea.style.display = 'none';
+      document.getElementById('auth-modal-title').textContent = 'Entrar na Conta';
+    }
+  } else {
+    modal.style.display = 'none';
+  }
+};
+
+// ================================================================
+//  FIRESTORE - Salvar e Carregar
+// ================================================================
+async function salvarNoFirestore(record) {
+  if (!currentUser) return null;
+  try {
+    const docRef = await addDoc(collection(fsdb, 'inspecoes'), {
+      ...record,
+      userId: currentUser.uid,
+      createdAt: new Date().toISOString()
+    });
+    return docRef.id;
+  } catch (err) {
+    console.error('Erro ao salvar no Firestore:', err);
+    showToast('Erro ao sincronizar com nuvem', 'error');
+    return null;
+  }
+}
+
+async function carregarDoFirestore() {
+  if (!currentUser) return;
+  try {
+    const q = query(
+      collection(fsdb, 'inspecoes'),
+      where('userId', '==', currentUser.uid)
+    );
+    const snapshot = await getDocs(q);
+    const dados = [];
+    snapshot.forEach(d => dados.push({ firestoreId: d.id, ...d.data() }));
+    // Merge with localStorage (local-only records won't have firestoreId)
+    const local = getDB();
+    const localSemNuvem = local.filter(r => !r.firestoreId);
+    const merged = [...dados, ...localSemNuvem].sort((a, b) => (a.timestamp || '') > (b.timestamp || '') ? 1 : -1);
+    saveDB(merged);
+    renderDB();
+    renderDashboard();
+    showToast(`☁️ ${dados.length} inspeção(ões) carregada(s) da nuvem`, 'success');
+  } catch (err) {
+    console.error('Erro ao carregar do Firestore:', err);
+  }
+}
+
+async function deletarDoFirestore(firestoreId) {
+  if (!currentUser || !firestoreId) return;
+  try {
+    await deleteDoc(doc(fsdb, 'inspecoes', firestoreId));
+  } catch (err) {
+    console.error('Erro ao deletar do Firestore:', err);
+  }
+}
+
+// Expose to global for inline onclick handlers
+window.deletarDoFirestore = deletarDoFirestore;
+window.carregarDoFirestore = carregarDoFirestore;
+
 // ================================================================
 //  ITEMS CONFIG
 // ================================================================
@@ -473,6 +1268,8 @@ const POSTOS = ['Portaria Principal', 'Entrada Lateral', 'Garagem', 'Rooftop', '
 const SUPERVISORES = ['Carlos Silva', 'João Santos', 'Maria Oliveira', 'Pedro Costa', 'Ana Souza'];
 const COLABORADORES = ['Rafael Pereira', 'Lucas Martins', 'Fernanda Lima', 'Bruno Alves', 'Carla Dias'];
 
+let currentPhotos = [];
+
 // ================================================================
 //  DATE & TIME
 // ================================================================
@@ -487,29 +1284,95 @@ setInterval(updateDateTime, 1000);
 updateDateTime();
 
 // ================================================================
+//  PHOTO HANDLING
+// ================================================================
+document.getElementById('upload-area').addEventListener('click', () => {
+  document.getElementById('photo-input').click();
+});
+
+function handleDragOver(e) {
+  e.preventDefault();
+  document.getElementById('upload-area').classList.add('dragover');
+}
+
+function handleDragLeave(e) {
+  e.preventDefault();
+  document.getElementById('upload-area').classList.remove('dragover');
+}
+
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('upload-area').classList.remove('dragover');
+  const files = Array.from(e.dataTransfer.files);
+  processFiles(files);
+}
+
+function handlePhotoSelect(e) {
+  const files = Array.from(e.target.files);
+  processFiles(files);
+}
+
+function processFiles(files) {
+  files.forEach(file => {
+    if (file.type.startsWith('image/') && file.size <= 5 * 1024 * 1024) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        currentPhotos.push({
+          id: Date.now() + Math.random(),
+          data: e.target.result
+        });
+        renderPhotos();
+      };
+      reader.readAsDataURL(file);
+    } else {
+      showToast('Arquivo inválido. Use imagens até 5MB.', 'error');
+    }
+  });
+}
+
+function renderPhotos() {
+  const gallery = document.getElementById('photo-gallery');
+  gallery.innerHTML = currentPhotos.map(photo => `
+    <div class="photo-item">
+      <img src="${photo.data}" alt="Foto">
+      <button class="delete-btn" onclick="deletePhoto(${photo.id})">✕</button>
+    </div>
+  `).join('');
+}
+
+function deletePhoto(id) {
+  currentPhotos = currentPhotos.filter(p => p.id !== id);
+  renderPhotos();
+}
+
+// ================================================================
 //  BUILD ITEMS
 // ================================================================
 function buildItems() {
   const container = document.getElementById('items-container');
   let html = '';
   ITEMS.forEach(item => {
-    html += `<div class="items-grid"><div class="item-card">
-      <div class="item-icon">${item.icon}</div>
-      <div>
-        <div class="item-label">${item.label}</div>
-        <div class="item-sub">${item.id}</div>
+    html += `
+      <div class="items-grid">
+        <div class="item-card">
+          <div class="item-icon">${item.icon}</div>
+          <div>
+            <div class="item-label">${item.label}</div>
+            <div class="item-sub">${item.id}</div>
+          </div>
+          <select id="status-${item.id}" class="status-select">
+            <option value="">-</option>
+            <option value="ok">✓ OK</option>
+            <option value="falha">❌ Falha</option>
+            <option value="manut">⚠️ Manut.</option>
+            <option value="na">N/A</option>
+          </select>
+        </div>
+        <div id="obs-row-${item.id}" class="obs-row">
+          <textarea id="obs-${item.id}" placeholder="Observações sobre este item..."></textarea>
+        </div>
       </div>
-      <select id="status-${item.id}" class="status-select">
-        <option value="">-</option>
-        <option value="ok">✓ OK</option>
-        <option value="falha">❌ Falha</option>
-        <option value="manut">⚠️ Manut.</option>
-        <option value="na">N/A</option>
-      </select>
-    </div></div>
-    <div id="obs-row-${item.id}" class="obs-row">
-      <textarea id="obs-${item.id}" placeholder="Observações sobre este item..."></textarea>
-    </div>`;
+    `;
   });
   container.innerHTML = html;
 
@@ -555,7 +1418,7 @@ function initCadastros() {
 // ================================================================
 //  SAVE & VALIDATE
 // ================================================================
-function salvarInspecao() {
+async function salvarInspecao() {
   const data = document.getElementById('data').value;
   const horaInicio = document.getElementById('hora-inicio').value;
   const horaFim = document.getElementById('hora-fim').value;
@@ -564,7 +1427,7 @@ function salvarInspecao() {
   const colaborador = document.getElementById('colaborador').value;
 
   if (!data || !horaInicio || !posto || !supervisor || !colaborador) {
-    showToast('Preencha todos os campos obrigatórios!', 'red');
+    showToast('Preencha todos os campos obrigatórios!', 'error');
     return;
   }
 
@@ -578,27 +1441,36 @@ function salvarInspecao() {
   });
 
   if (Object.keys(itens).length === 0) {
-    showToast('Preencha pelo menos um item de inspeção!', 'red');
+    showToast('Preencha pelo menos um item de inspeção!', 'error');
     return;
   }
 
-  const db = getDB();
+  const localDB = getDB();
   const record = {
     id: Date.now(),
     data, horaInicio, horaFim, posto, supervisor, colaborador,
     itens,
+    photos: currentPhotos,
     obsGeral: document.getElementById('obs-geral').value,
     timestamp: new Date().toISOString()
   };
 
-  db.push(record);
-  saveDB(db);
-  showToast('✓ Inspeção salva com sucesso!', 'green');
+  // Save to Firestore if logged in
+  if (currentUser) {
+    const firestoreId = await salvarNoFirestore(record);
+    if (firestoreId) record.firestoreId = firestoreId;
+    showToast('✓ Inspeção salva e sincronizada com a nuvem! ☁️', 'success');
+  } else {
+    showToast('✓ Inspeção salva localmente (faça login para sincronizar)', 'success');
+  }
+
+  localDB.push(record);
+  saveDB(localDB);
   limparForm();
 }
 
 // ================================================================
-//  DB
+//  DB - LOCAL STORAGE
 // ================================================================
 function getDB() { try { return JSON.parse(localStorage.getItem('inspecoes_cond') || '[]'); } catch { return []; } }
 function saveDB(db) { localStorage.setItem('inspecoes_cond', JSON.stringify(db)); updateStats(db); }
@@ -639,15 +1511,16 @@ function renderDB() {
     if (fa > 0) badge = `<span class="badge badge-falha">❌ ${fa} Falha(s)</span>`;
     else if (ma > 0) badge = `<span class="badge badge-manut">⚠️ Manutenção</span>`;
     const dataFmt = r.data ? r.data.split('-').reverse().join('/') : '—';
+    const photoCount = r.photos ? r.photos.length : 0;
     return `<tr>
-      <td style="font-family:'Share Tech Mono',monospace;color:var(--muted)">${filtered.length - idx}</td>
-      <td style="font-family:'Share Tech Mono',monospace">${dataFmt}<br><span style="color:var(--muted);font-size:0.73rem">${r.horaInicio || ''}${r.horaFim ? ' – ' + r.horaFim : ''}</span></td>
+      <td style="font-family:'IBM Plex Mono',monospace;color:var(--text-muted)">${filtered.length - idx}</td>
+      <td style="font-family:'IBM Plex Mono',monospace">${dataFmt}<br><span style="color:var(--text-muted);font-size:0.8rem">${r.horaInicio || ''}${r.horaFim ? ' – ' + r.horaFim : ''}</span></td>
       <td><strong>${r.posto}</strong></td>
       <td>${r.supervisor}</td>
       <td>${r.colaborador}</td>
-      <td style="color:var(--green);font-family:'Share Tech Mono',monospace;text-align:center">${ok}</td>
-      <td style="color:var(--red);font-family:'Share Tech Mono',monospace;text-align:center">${fa}</td>
-      <td style="color:var(--yellow);font-family:'Share Tech Mono',monospace;text-align:center">${ma}</td>
+      <td style="color:var(--success);font-family:'IBM Plex Mono',monospace;text-align:center">${ok}</td>
+      <td style="color:var(--error);font-family:'IBM Plex Mono',monospace;text-align:center">${fa}</td>
+      <td style="color:var(--warning);font-family:'IBM Plex Mono',monospace;text-align:center">${ma}</td>
       <td>${badge}</td>
       <td style="text-align:center"><button class="btn-sm btn-del" onclick="deletar(${r.id})">Excluir</button></td>
     </tr>`;
@@ -658,7 +1531,6 @@ function renderDashboard() {
   const db = getDB();
   updateStats(db);
 
-  // Agrupar por posto
   const postoCount = {};
   db.forEach(r => {
     postoCount[r.posto] = (postoCount[r.posto] || 0) + 1;
@@ -679,9 +1551,8 @@ function renderDashboard() {
     </div>`;
   });
 
-  document.getElementById('chart-postos').innerHTML = chartHtml || '<p style="color: var(--muted); text-align: center; padding: 32px;">Nenhum dado disponível</p>';
+  document.getElementById('chart-postos').innerHTML = chartHtml || '<p style="color: var(--text-muted); text-align: center; padding: 32px;">Nenhum dado disponível</p>';
 
-  // Renderizar últimas inspeções no dashboard
   const dashboardBody = document.getElementById('dashboard-body');
   dashboardBody.innerHTML = [...db].reverse().slice(0, 5).map((r, idx) => {
     const vals = Object.values(r.itens).map(i => i.status);
@@ -693,14 +1564,14 @@ function renderDashboard() {
     else if (ma > 0) badge = `<span class="badge badge-manut">⚠️ Manutenção</span>`;
     const dataFmt = r.data ? r.data.split('-').reverse().join('/') : '—';
     return `<tr>
-      <td style="font-family:'Share Tech Mono',monospace;color:var(--muted)">${idx + 1}</td>
-      <td style="font-family:'Share Tech Mono',monospace">${dataFmt}<br><span style="color:var(--muted);font-size:0.73rem">${r.horaInicio || ''}${r.horaFim ? ' – ' + r.horaFim : ''}</span></td>
+      <td style="font-family:'IBM Plex Mono',monospace;color:var(--text-muted)">${idx + 1}</td>
+      <td style="font-family:'IBM Plex Mono',monospace">${dataFmt}<br><span style="color:var(--text-muted);font-size:0.8rem">${r.horaInicio || ''}${r.horaFim ? ' – ' + r.horaFim : ''}</span></td>
       <td><strong>${r.posto}</strong></td>
       <td>${r.supervisor}</td>
       <td>${r.colaborador}</td>
-      <td style="color:var(--green);font-family:'Share Tech Mono',monospace;text-align:center">${ok}</td>
-      <td style="color:var(--red);font-family:'Share Tech Mono',monospace;text-align:center">${fa}</td>
-      <td style="color:var(--yellow);font-family:'Share Tech Mono',monospace;text-align:center">${ma}</td>
+      <td style="color:var(--success);font-family:'IBM Plex Mono',monospace;text-align:center">${ok}</td>
+      <td style="color:var(--error);font-family:'IBM Plex Mono',monospace;text-align:center">${fa}</td>
+      <td style="color:var(--warning);font-family:'IBM Plex Mono',monospace;text-align:center">${ma}</td>
       <td>${badge}</td>
     </tr>`;
   }).join('');
@@ -708,7 +1579,12 @@ function renderDashboard() {
 
 function deletar(id) {
   if (!confirm('Excluir este registro de inspeção?')) return;
-  saveDB(getDB().filter(r => r.id !== id));
+  const all = getDB();
+  const record = all.find(r => r.id === id);
+  if (record && record.firestoreId) {
+    window.deletarDoFirestore(record.firestoreId);
+  }
+  saveDB(all.filter(r => r.id !== id));
   renderDB();
   renderDashboard();
 }
@@ -733,30 +1609,19 @@ function exportarPDF() {
   element.style.color = '#000';
 
   let html = `
-    <h1 style="text-align:center; margin-bottom:10px;">M.s Segurança e Serviços</h1>
-    <h2 style="text-align:center; margin-bottom:20px;">Relatório de Inspeções</h2>
-    <p style="text-align:center; color:#666; margin-bottom:30px;">Gerado em: ${new Date().toLocaleString('pt-BR')}</p>
-    
-    <h3 style="margin-top:20px; margin-bottom:10px;">Resumo Geral</h3>
-    <table style="width:100%; border-collapse:collapse; margin-bottom:30px;">
-      <tr style="background:#f0f0f0;">
-        <td style="border:1px solid #ccc; padding:8px; font-weight:bold;">Total de Inspeções</td>
-        <td style="border:1px solid #ccc; padding:8px;">${db.length}</td>
-      </tr>
-    </table>
-
-    <h3 style="margin-top:20px; margin-bottom:10px;">Histórico de Inspeções</h3>
-    <table style="width:100%; border-collapse:collapse; font-size:11px;">
+    <h1 style="text-align:center;margin-bottom:10px;color:#2E5984;">M.s Segurança e Serviços</h1>
+    <h2 style="text-align:center;margin-bottom:20px;">Relatório de Inspeções</h2>
+    <p style="text-align:center;color:#666;margin-bottom:30px;">Gerado em: ${new Date().toLocaleString('pt-BR')}</p>
+    <table style="width:100%;border-collapse:collapse;margin-bottom:30px;">
       <thead>
-        <tr style="background:#0d1b2e; color:white;">
-          <th style="border:1px solid #ccc; padding:8px; text-align:left;">Data</th>
-          <th style="border:1px solid #ccc; padding:8px; text-align:left;">Hora</th>
-          <th style="border:1px solid #ccc; padding:8px; text-align:left;">Posto</th>
-          <th style="border:1px solid #ccc; padding:8px; text-align:left;">Supervisor</th>
-          <th style="border:1px solid #ccc; padding:8px; text-align:left;">Colaborador</th>
-          <th style="border:1px solid #ccc; padding:8px; text-align:center;">OK</th>
-          <th style="border:1px solid #ccc; padding:8px; text-align:center;">Falhas</th>
-          <th style="border:1px solid #ccc; padding:8px; text-align:center;">Manut.</th>
+        <tr style="background:#2E5984;color:white;">
+          <th style="border:1px solid #ccc;padding:8px;text-align:left;">Data</th>
+          <th style="border:1px solid #ccc;padding:8px;text-align:left;">Hora</th>
+          <th style="border:1px solid #ccc;padding:8px;text-align:left;">Posto</th>
+          <th style="border:1px solid #ccc;padding:8px;text-align:left;">Supervisor</th>
+          <th style="border:1px solid #ccc;padding:8px;text-align:left;">Colaborador</th>
+          <th style="border:1px solid #ccc;padding:8px;text-align:center;">OK</th>
+          <th style="border:1px solid #ccc;padding:8px;text-align:center;">Falhas</th>
         </tr>
       </thead>
       <tbody>
@@ -766,17 +1631,15 @@ function exportarPDF() {
     const vals = Object.values(r.itens).map(i => i.status);
     const ok = vals.filter(v => v === 'ok').length;
     const fa = vals.filter(v => v === 'falha').length;
-    const ma = vals.filter(v => v === 'manut').length;
     const dataFmt = r.data ? r.data.split('-').reverse().join('/') : '—';
     html += `<tr style="background:${db.indexOf(r) % 2 ? '#f9f9f9' : '#fff'};">
-      <td style="border:1px solid #ccc; padding:8px;">${dataFmt}</td>
-      <td style="border:1px solid #ccc; padding:8px;">${r.horaInicio}${r.horaFim ? ' – ' + r.horaFim : ''}</td>
-      <td style="border:1px solid #ccc; padding:8px;">${r.posto}</td>
-      <td style="border:1px solid #ccc; padding:8px;">${r.supervisor}</td>
-      <td style="border:1px solid #ccc; padding:8px;">${r.colaborador}</td>
-      <td style="border:1px solid #ccc; padding:8px; text-align:center; color:#06d6a0;">${ok}</td>
-      <td style="border:1px solid #ccc; padding:8px; text-align:center; color:#ef476f;">${fa}</td>
-      <td style="border:1px solid #ccc; padding:8px; text-align:center; color:#ffd166;">${ma}</td>
+      <td style="border:1px solid #ccc;padding:8px;">${dataFmt}</td>
+      <td style="border:1px solid #ccc;padding:8px;">${r.horaInicio}${r.horaFim ? ' – ' + r.horaFim : ''}</td>
+      <td style="border:1px solid #ccc;padding:8px;">${r.posto}</td>
+      <td style="border:1px solid #ccc;padding:8px;">${r.supervisor}</td>
+      <td style="border:1px solid #ccc;padding:8px;">${r.colaborador}</td>
+      <td style="border:1px solid #ccc;padding:8px;text-align:center;color:#10B981;">${ok}</td>
+      <td style="border:1px solid #ccc;padding:8px;text-align:center;color:#EF4444;">${fa}</td>
     </tr>`;
   });
 
@@ -792,7 +1655,7 @@ function exportarPDF() {
   };
 
   html2pdf().set(opt).from(element).save();
-  showToast('📄 PDF exportado com sucesso!', 'green');
+  showToast('📄 PDF exportado!', 'success');
 }
 
 // ================================================================
@@ -803,7 +1666,7 @@ function exportarExcel() {
   if (!db.length) { alert('Nenhum dado para exportar.'); return; }
 
   const items = getAllItems();
-  const headers = ['ID', 'Data', 'Hora Início', 'Hora Fim', 'Posto', 'Supervisor', 'Colaborador',
+  const headers = ['ID', 'Data', 'Hora Início', 'Hora Fim', 'Posto', 'Supervisor', 'Colaborador', 'Fotos',
     ...items.map(i => i.label), 'Observações Gerais'];
   
   const rows = db.map(r => [
@@ -814,6 +1677,7 @@ function exportarExcel() {
     r.posto,
     r.supervisor,
     r.colaborador,
+    r.photos ? r.photos.length : 0,
     ...items.map(i => {
       const x = r.itens[i.id];
       return x ? `${x.status}${x.obs ? ' (' + x.obs + ')' : ''}` : '';
@@ -826,7 +1690,7 @@ function exportarExcel() {
   XLSX.utils.book_append_sheet(wb, ws, 'Inspeções');
   XLSX.writeFile(wb, `inspecoes_${new Date().toISOString().slice(0, 10)}.xlsx`);
 
-  showToast('📊 Excel exportado com sucesso!', 'green');
+  showToast('📊 Excel exportado!', 'success');
 }
 
 // ================================================================
@@ -840,6 +1704,8 @@ function limparForm() {
   document.getElementById('data').value = new Date().toISOString().split('T')[0];
   document.getElementById('hora-inicio').value = new Date().toTimeString().slice(0, 5);
   document.getElementById('obs-geral').value = '';
+  currentPhotos = [];
+  renderPhotos();
   getAllItems().forEach(item => {
     const sel = document.getElementById(`status-${item.id}`);
     if (sel) { sel.value = ''; sel.className = 'status-select'; }
@@ -854,14 +1720,25 @@ function limparForm() {
 //  TOAST
 // ================================================================
 let toastTimer;
-function showToast(msg, type) {
+function showToast(msg, type = 'success') {
   const t = document.getElementById('toast');
   t.textContent = msg;
-  t.style.background = type === 'red' ? 'var(--red)' : 'var(--green)';
-  t.style.color = type === 'red' ? '#fff' : '#021a12';
+  t.className = `toast ${type}`;
   t.style.display = 'flex';
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => { t.style.display = 'none'; }, 3000);
+}
+
+// ================================================================
+//  AUTH MODAL
+// ================================================================
+function toggleAuthModal() {
+  const modal = document.getElementById('auth-modal');
+  modal.style.display = modal.style.display === 'none' ? 'flex' : 'none';
+}
+
+function closeAuthModal() {
+  document.getElementById('auth-modal').style.display = 'none';
 }
 
 // ================================================================
@@ -885,6 +1762,22 @@ buildItems();
 initCadastros();
 renderDB();
 renderDashboard();
+
+// Expose all functions used by inline onclick handlers to window
+window.salvarInspecao = salvarInspecao;
+window.limparForm = limparForm;
+window.exportarPDF = exportarPDF;
+window.exportarExcel = exportarExcel;
+window.limparDB = limparDB;
+window.deletar = deletar;
+window.switchTab = switchTab;
+window.handleDragOver = handleDragOver;
+window.handleDragLeave = handleDragLeave;
+window.handleDrop = handleDrop;
+window.handlePhotoSelect = handlePhotoSelect;
+window.deletePhoto = deletePhoto;
+window.showToast = showToast;
+window.closeAuthModal = closeAuthModal;
 </script>
 
 </body>
