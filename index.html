@@ -1854,7 +1854,9 @@ function abrirModal(titulo, msg, cb) {
 }
 function fecharModal() { el('modal-overlay').classList.remove('show'); modalCallback=null; }
 el('modal-confirm-btn').addEventListener('click', () => {
-  fecharModal(); if (modalCallback) modalCallback();
+  const cb = modalCallback;
+  fecharModal();
+  if (cb) cb();
 });
 el('modal-overlay').addEventListener('click', e => { if(e.target===el('modal-overlay')) fecharModal(); });
 document.addEventListener('keydown', e => { if(e.key==='Escape') fecharModal(); });
