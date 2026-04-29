@@ -278,7 +278,7 @@ select:hover, input:hover { border-color:var(--border2); }
   border-radius:var(--radius);
   padding:14px 16px;
   display:grid;
-  grid-template-columns:40px 1fr auto;
+  grid-template-columns:40px 1fr auto auto;
   align-items:center;
   gap:12px;
   transition:border-color 0.2s, box-shadow 0.2s, background 0.2s;
@@ -330,7 +330,23 @@ select:hover, input:hover { border-color:var(--border2); }
 }
 .obs-row textarea:focus { border-color:var(--yellow); box-shadow:0 0 0 3px rgba(255,204,68,0.1); }
 
-/* Foto row — aparece dentro do obs-row */
+/* Botão câmera inline no card */
+.btn-camera {
+  width:36px; height:36px; border-radius:8px; flex-shrink:0;
+  border:1px solid var(--border2); background:var(--surface2);
+  color:var(--muted); font-size:1rem; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:all 0.2s; position:relative;
+}
+.btn-camera:hover { border-color:var(--accent); background:rgba(77,124,222,0.12); color:var(--accent); }
+.btn-camera.has-foto { border-color:var(--green); background:rgba(0,229,160,0.1); color:var(--green); }
+.btn-camera.has-foto::after {
+  content:''; position:absolute; top:-4px; right:-4px;
+  width:9px; height:9px; border-radius:50%;
+  background:var(--green); border:2px solid var(--surface);
+}
+
+/* Foto row — só obs-row agora (sem o botão de câmera) */
 .foto-row {
   margin-top:8px; display:flex; align-items:flex-start; gap:10px; flex-wrap:wrap;
 }
@@ -1352,6 +1368,11 @@ function buildItems() {
           <div class="item-label">${item.label}</div>
           <div class="item-sub">${item.sub}</div>
         </div>
+        <label class="btn-camera" id="btn-camera-${item.id}" for="foto-input-${item.id}" title="Adicionar foto">
+          📷
+          <input type="file" id="foto-input-${item.id}" accept="image/*" capture="environment"
+            style="display:none" onchange="handleFotoUpload('${item.id}', this)">
+        </label>
         <select class="status-select" id="status-${item.id}" onchange="handleStatus('${item.id}',this)">
           <option value="">—</option>
           <option value="ok">✅ OK</option>
@@ -1361,17 +1382,14 @@ function buildItems() {
         </select>`;
       c.appendChild(card);
 
-      // Obs row (inside card as a full-width row)
+      // Obs row — texto de observação + preview da foto
       const obsRow = document.createElement('div');
       obsRow.className = 'obs-row'; obsRow.id = `obs-row-${item.id}`;
       obsRow.style.gridColumn = '1/-1';
       obsRow.innerHTML = `
         <textarea id="obs-${item.id}" placeholder="Observação para ${item.label}..." oninput="updateProgress()"></textarea>
-        <div class="foto-row" id="foto-row-${item.id}">
-          <label class="foto-upload-btn" for="foto-input-${item.id}">📷 Adicionar Foto</label>
-          <input type="file" id="foto-input-${item.id}" accept="image/*" capture="environment"
-            style="display:none" onchange="handleFotoUpload('${item.id}', this)">
-          <div class="foto-preview-wrap" id="foto-preview-wrap-${item.id}" style="display:none">
+        <div class="foto-row" id="foto-row-${item.id}" style="display:none">
+          <div class="foto-preview-wrap" id="foto-preview-wrap-${item.id}">
             <img class="foto-preview" id="foto-preview-${item.id}" src="" alt="Foto"
               onclick="abrirLightbox('foto-preview-${item.id}','${item.label}')">
             <button class="foto-remove-btn" onclick="removerFoto('${item.id}')" title="Remover foto">✕</button>
@@ -1677,7 +1695,7 @@ function salvarInspecao() {
     const o = el(`obs-${item.id}`)?.value||'';
     const f = el(`foto-preview-${item.id}`)?.src || '';
     if (!s) semStatus++;
-    itens[item.id] = { label:item.label, status:s||'na', obs:o, foto: (f && !f.endsWith('#')) ? f : '' };
+    itens[item.id] = { label:item.label, status:s||'na', obs:o, foto: f.startsWith('data:') ? f : '' };
   });
 
   const continuar = () => {
@@ -1732,10 +1750,14 @@ function handleFotoUpload(itemId, input) {
   const reader = new FileReader();
   reader.onload = e => {
     const src = e.target.result;
-    const preview = el(`foto-preview-${itemId}`);
-    const wrap    = el(`foto-preview-wrap-${itemId}`);
-    if (preview) preview.src = src;
-    if (wrap)    wrap.style.display = 'inline-block';
+    const preview  = el(`foto-preview-${itemId}`);
+    const fotoRow  = el(`foto-row-${itemId}`);
+    const btnCam   = el(`btn-camera-${itemId}`);
+    const obsRow   = el(`obs-row-${itemId}`);
+    if (preview)  preview.src = src;
+    if (fotoRow)  fotoRow.style.display = 'flex';
+    if (btnCam)   btnCam.classList.add('has-foto');
+    if (obsRow)   obsRow.classList.add('show');
     showToast('📷 Foto adicionada!', 'green');
   };
   reader.readAsDataURL(file);
@@ -1744,11 +1766,13 @@ function handleFotoUpload(itemId, input) {
 
 function removerFoto(itemId) {
   const preview = el(`foto-preview-${itemId}`);
-  const wrap    = el(`foto-preview-wrap-${itemId}`);
+  const fotoRow = el(`foto-row-${itemId}`);
+  const btnCam  = el(`btn-camera-${itemId}`);
   const input   = el(`foto-input-${itemId}`);
-  if (preview) preview.src = '';
-  if (wrap)    wrap.style.display = 'none';
-  if (input)   input.value = '';
+  if (preview)  preview.src = '';
+  if (fotoRow)  fotoRow.style.display = 'none';
+  if (btnCam)   btnCam.classList.remove('has-foto');
+  if (input)    input.value = '';
 }
 
 // ================================================================
