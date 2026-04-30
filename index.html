@@ -278,7 +278,7 @@ select:hover, input:hover { border-color:var(--border2); }
   border-radius:var(--radius);
   padding:14px 16px;
   display:grid;
-  grid-template-columns:40px 1fr auto auto;
+  grid-template-columns:40px 1fr auto;
   align-items:center;
   gap:12px;
   transition:border-color 0.2s, box-shadow 0.2s, background 0.2s;
@@ -329,96 +329,6 @@ select:hover, input:hover { border-color:var(--border2); }
   background:rgba(255,204,68,0.04);
 }
 .obs-row textarea:focus { border-color:var(--yellow); box-shadow:0 0 0 3px rgba(255,204,68,0.1); }
-
-/* Botão câmera inline no card */
-.btn-camera {
-  width:36px; height:36px; border-radius:8px; flex-shrink:0;
-  border:1px solid var(--border2); background:var(--surface2);
-  color:var(--muted); font-size:1rem; cursor:pointer;
-  display:flex; align-items:center; justify-content:center;
-  transition:all 0.2s; position:relative;
-}
-.btn-camera:hover { border-color:var(--accent); background:rgba(77,124,222,0.12); color:var(--accent); }
-.btn-camera.has-foto { border-color:var(--green); background:rgba(0,229,160,0.1); color:var(--green); }
-.btn-camera.has-foto::after {
-  content:''; position:absolute; top:-4px; right:-4px;
-  width:9px; height:9px; border-radius:50%;
-  background:var(--green); border:2px solid var(--surface);
-}
-
-/* Foto row — só obs-row agora (sem o botão de câmera) */
-.foto-row {
-  margin-top:8px; display:flex; align-items:flex-start; gap:10px; flex-wrap:wrap;
-}
-.foto-upload-btn {
-  display:inline-flex; align-items:center; gap:6px;
-  padding:6px 13px; border-radius:7px; border:1px dashed rgba(77,124,222,0.5);
-  background:rgba(77,124,222,0.06); color:var(--accent3);
-  font-family:'Rajdhani',sans-serif; font-size:0.78rem; font-weight:700;
-  letter-spacing:1px; cursor:pointer; transition:all 0.2s; text-transform:uppercase;
-  white-space:nowrap;
-}
-.foto-upload-btn:hover { border-color:var(--accent); background:rgba(77,124,222,0.14); color:var(--accent); }
-.foto-preview-wrap {
-  position:relative; display:inline-block;
-}
-.foto-preview {
-  width:80px; height:80px; object-fit:cover;
-  border-radius:8px; border:2px solid var(--border2);
-  cursor:pointer; transition:border-color 0.2s;
-  display:block;
-}
-.foto-preview:hover { border-color:var(--accent); }
-.foto-remove-btn {
-  position:absolute; top:-7px; right:-7px;
-  width:20px; height:20px; border-radius:50%;
-  background:var(--red); border:none; color:#fff;
-  font-size:0.65rem; cursor:pointer; line-height:1;
-  display:flex; align-items:center; justify-content:center;
-  box-shadow:0 2px 6px rgba(0,0,0,0.4);
-  transition:transform 0.15s;
-}
-.foto-remove-btn:hover { transform:scale(1.15); }
-
-/* Lightbox */
-.lightbox-overlay {
-  position:fixed; inset:0; z-index:600;
-  background:rgba(4,8,18,0.93); backdrop-filter:blur(10px);
-  display:none; align-items:center; justify-content:center;
-  padding:20px;
-}
-.lightbox-overlay.show { display:flex; }
-.lightbox-img {
-  max-width:90vw; max-height:85vh;
-  border-radius:12px; border:2px solid var(--border2);
-  box-shadow:0 24px 80px rgba(0,0,0,0.7);
-  object-fit:contain;
-}
-.lightbox-close {
-  position:fixed; top:20px; right:24px;
-  background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);
-  color:#fff; border-radius:8px; padding:8px 16px;
-  font-family:'Rajdhani',sans-serif; font-weight:700; font-size:0.9rem;
-  cursor:pointer; letter-spacing:1px; transition:background 0.2s;
-}
-.lightbox-close:hover { background:rgba(255,255,255,0.15); }
-.lightbox-caption {
-  position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
-  font-family:'Share Tech Mono',monospace; font-size:0.72rem;
-  color:var(--text2); letter-spacing:1px; text-align:center;
-  background:rgba(8,14,28,0.8); padding:7px 18px; border-radius:20px;
-}
-
-/* Foto no detalhe expandido da tabela */
-.detail-foto-grid {
-  display:flex; flex-wrap:wrap; gap:8px; margin-top:6px;
-}
-.detail-foto-thumb {
-  width:72px; height:72px; object-fit:cover;
-  border-radius:7px; border:2px solid var(--border);
-  cursor:pointer; transition:border-color 0.2s, transform 0.2s;
-}
-.detail-foto-thumb:hover { border-color:var(--accent); transform:scale(1.05); }
 
 /* ============================================================
    OBS GERAL
@@ -1246,15 +1156,6 @@ tbody tr:last-child td { border-bottom:none; }
 </div><!-- /main -->
 
 <!-- ============================================================
-     LIGHTBOX DE FOTO
-     ============================================================ -->
-<div id="lightbox-overlay" class="lightbox-overlay" onclick="fecharLightbox()">
-  <img id="lightbox-img" class="lightbox-img" src="" alt="Foto da inspeção" onclick="event.stopPropagation()">
-  <button class="lightbox-close" onclick="fecharLightbox()">✕ Fechar</button>
-  <div id="lightbox-caption" class="lightbox-caption"></div>
-</div>
-
-<!-- ============================================================
      TOAST
      ============================================================ -->
 <div id="toast" class="toast"></div>
@@ -1368,11 +1269,6 @@ function buildItems() {
           <div class="item-label">${item.label}</div>
           <div class="item-sub">${item.sub}</div>
         </div>
-        <label class="btn-camera" id="btn-camera-${item.id}" for="foto-input-${item.id}" title="Adicionar foto">
-          📷
-          <input type="file" id="foto-input-${item.id}" accept="image/*" capture="environment"
-            style="display:none" onchange="handleFotoUpload('${item.id}', this)">
-        </label>
         <select class="status-select" id="status-${item.id}" onchange="handleStatus('${item.id}',this)">
           <option value="">—</option>
           <option value="ok">✅ OK</option>
@@ -1382,19 +1278,11 @@ function buildItems() {
         </select>`;
       c.appendChild(card);
 
-      // Obs row — texto de observação + preview da foto
+      // Obs row (inside card as a full-width row)
       const obsRow = document.createElement('div');
       obsRow.className = 'obs-row'; obsRow.id = `obs-row-${item.id}`;
       obsRow.style.gridColumn = '1/-1';
-      obsRow.innerHTML = `
-        <textarea id="obs-${item.id}" placeholder="Observação para ${item.label}..." oninput="updateProgress()"></textarea>
-        <div class="foto-row" id="foto-row-${item.id}" style="display:none">
-          <div class="foto-preview-wrap" id="foto-preview-wrap-${item.id}">
-            <img class="foto-preview" id="foto-preview-${item.id}" src="" alt="Foto"
-              onclick="abrirLightbox('foto-preview-${item.id}','${item.label}')">
-            <button class="foto-remove-btn" onclick="removerFoto('${item.id}')" title="Remover foto">✕</button>
-          </div>
-        </div>`;
+      obsRow.innerHTML = `<textarea id="obs-${item.id}" placeholder="Observação para ${item.label}..." oninput="updateProgress()"></textarea>`;
       card.appendChild(obsRow);
     });
 
@@ -1418,13 +1306,8 @@ function handleStatus(itemId, sel) {
 
   const row = el(`obs-row-${itemId}`);
   if (row) {
-    if (v) {
-      row.classList.add('show');
-    } else {
-      row.classList.remove('show');
-      const o = el(`obs-${itemId}`); if(o) o.value='';
-      removerFoto(itemId);
-    }
+    if (v==='falha'||v==='manut') row.classList.add('show');
+    else { row.classList.remove('show'); const o=el(`obs-${itemId}`); if(o) o.value=''; }
   }
   updateProgress();
 }
@@ -1613,14 +1496,12 @@ function renderDB() {
       const sl = statusLabel[iv.status]||'N/A';
       const ic = iconMap[iid]||'🔹';
       const obsHtml = iv.obs ? `<div class="detail-item-obs">💬 ${iv.obs}</div>` : '';
-      const fotoHtml = iv.foto ? `<div class="detail-foto-grid"><img class="detail-foto-thumb" src="${iv.foto}" alt="Foto" onclick="abrirLightboxSrc('${iv.foto}','${iv.label||iid}')"></div>` : '';
       return `<div class="detail-item ${sc}">
         <span class="detail-item-icon">${ic}</span>
         <div class="detail-item-body">
           <div class="detail-item-label">${iv.label||iid}</div>
           <div class="detail-item-status" style="color:${iv.status==='ok'?'var(--green)':iv.status==='falha'?'var(--red)':iv.status==='manut'?'var(--yellow)':'var(--muted)'}">${sl}</div>
           ${obsHtml}
-          ${fotoHtml}
         </div>
       </div>`;
     }).join('');
@@ -1693,9 +1574,8 @@ function salvarInspecao() {
   getAllItems().forEach(item => {
     const s = el(`status-${item.id}`)?.value;
     const o = el(`obs-${item.id}`)?.value||'';
-    const f = el(`foto-preview-${item.id}`)?.src || '';
     if (!s) semStatus++;
-    itens[item.id] = { label:item.label, status:s||'na', obs:o, foto: f.startsWith('data:') ? f : '' };
+    itens[item.id] = { label:item.label, status:s||'na', obs:o };
   });
 
   const continuar = () => {
@@ -1733,73 +1613,9 @@ function limparForm() {
     const row = el(`obs-row-${item.id}`); if(row) row.classList.remove('show');
     const card = el(`card-${item.id}`);
     if (card) card.classList.remove('has-ok','has-falha','has-manut','has-na');
-    removerFoto(item.id);
   });
   updateProgress();
 }
-
-// ================================================================
-//  FOTO POR ITEM
-// ================================================================
-function handleFotoUpload(itemId, input) {
-  const file = input.files[0];
-  if (!file) return;
-  if (file.size > 5 * 1024 * 1024) {
-    showToast('⚠️ Foto muito grande. Máximo 5 MB.', 'red'); return;
-  }
-  const reader = new FileReader();
-  reader.onload = e => {
-    const src = e.target.result;
-    const preview  = el(`foto-preview-${itemId}`);
-    const fotoRow  = el(`foto-row-${itemId}`);
-    const btnCam   = el(`btn-camera-${itemId}`);
-    const obsRow   = el(`obs-row-${itemId}`);
-    if (preview)  preview.src = src;
-    if (fotoRow)  fotoRow.style.display = 'flex';
-    if (btnCam)   btnCam.classList.add('has-foto');
-    if (obsRow)   obsRow.classList.add('show');
-    showToast('📷 Foto adicionada!', 'green');
-  };
-  reader.readAsDataURL(file);
-  input.value = '';
-}
-
-function removerFoto(itemId) {
-  const preview = el(`foto-preview-${itemId}`);
-  const fotoRow = el(`foto-row-${itemId}`);
-  const btnCam  = el(`btn-camera-${itemId}`);
-  const input   = el(`foto-input-${itemId}`);
-  if (preview)  preview.src = '';
-  if (fotoRow)  fotoRow.style.display = 'none';
-  if (btnCam)   btnCam.classList.remove('has-foto');
-  if (input)    input.value = '';
-}
-
-// ================================================================
-//  LIGHTBOX
-// ================================================================
-function abrirLightbox(imgId, caption) {
-  const src = el(imgId)?.src;
-  if (!src) return;
-  abrirLightboxSrc(src, caption);
-}
-
-function abrirLightboxSrc(src, caption) {
-  el('lightbox-img').src          = src;
-  el('lightbox-caption').textContent = caption || '';
-  el('lightbox-overlay').classList.add('show');
-  document.body.style.overflow    = 'hidden';
-}
-
-function fecharLightbox() {
-  el('lightbox-overlay').classList.remove('show');
-  el('lightbox-img').src          = '';
-  document.body.style.overflow    = '';
-}
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { fecharLightbox(); fecharModal(); }
-});
 
 // ================================================================
 //  EXPORTAR EXCEL (XLSX profissional)
@@ -2226,7 +2042,7 @@ el('modal-confirm-btn').addEventListener('click', () => {
   if (cb) cb();
 });
 el('modal-overlay').addEventListener('click', e => { if(e.target===el('modal-overlay')) fecharModal(); });
-// Escape handled in lightbox section above
+document.addEventListener('keydown', e => { if(e.key==='Escape') fecharModal(); });
 
 // ================================================================
 //  TABS
