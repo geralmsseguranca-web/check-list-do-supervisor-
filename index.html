@@ -73,6 +73,67 @@ body::after {
 ::-webkit-scrollbar-thumb:hover { background: var(--accent2); }
 
 /* ============================================================
+   SYNC PANEL
+   ============================================================ */
+.sync-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.sync-panel-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent3);
+  white-space: nowrap;
+}
+.sync-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  flex: 1;
+}
+.sync-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--muted);
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+.sync-dot.ok   { background: var(--green); box-shadow: 0 0 6px var(--green); }
+.sync-dot.err  { background: var(--red);   box-shadow: 0 0 6px var(--red); }
+.sync-dot.busy { background: var(--yellow); box-shadow: 0 0 6px var(--yellow); animation: pulse-anim 0.8s infinite; }
+.sync-pat-wrap { display: flex; gap: 8px; align-items: center; }
+.sync-pat-wrap input {
+  width: 240px; font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem; letter-spacing: 1px;
+}
+.btn-sync {
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  color: #fff;
+  border: none; border-radius: 8px;
+  padding: 8px 16px;
+  font-family: 'Rajdhani', sans-serif; font-size: 0.82rem;
+  font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  white-space: nowrap;
+}
+.btn-sync:hover   { opacity: 0.88; }
+.btn-sync:active  { transform: scale(0.97); }
+.btn-sync:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ============================================================
    HEADER
    ============================================================ */
 header {
@@ -932,6 +993,20 @@ tbody tr:last-child td { border-bottom:none; }
     <!-- SUB: REGISTROS -->
     <div id="sub-registros" class="sub-section active">
 
+      <!-- PAINEL DE SINCRONIZAÇÃO GITHUB -->
+      <div class="sync-panel">
+        <span class="sync-panel-label">☁ Sync GitHub</span>
+        <div class="sync-status">
+          <span class="sync-dot" id="sync-dot"></span>
+          <span id="sync-msg">Não configurado — insira o token abaixo</span>
+        </div>
+        <div class="sync-pat-wrap">
+          <input type="password" id="sync-pat" placeholder="Token GitHub (ghp_...)" autocomplete="off">
+          <button class="btn-sync" onclick="salvarToken()">💾 Salvar</button>
+          <button class="btn-sync" style="background:linear-gradient(135deg,#1a3a60,#274a80)" onclick="sincronizarGitHub()">🔄 Sync</button>
+        </div>
+      </div>
+
       <div class="db-stats">
         <div class="stat-card">
           <span class="stat-num" id="stat-total">0</span>
@@ -1401,10 +1476,113 @@ function initCadastros() {
 }
 
 // ================================================================
-//  BANCO DE DADOS (localStorage)
+//  CONFIGURAÇÃO GITHUB
 // ================================================================
-function getDB()        { try { return JSON.parse(localStorage.getItem('inspecoes_grupoMS')||'[]'); } catch { return []; } }
-function saveDB(db)     { localStorage.setItem('inspecoes_grupoMS', JSON.stringify(db)); updateStats(db); }
+const GH_OWNER = 'geralmsseguranca-web';
+const GH_REPO  = 'check-list-do-supervisor-';
+const GH_FILE  = 'db.json';
+const GH_BRANCH = 'main';
+
+function getToken()  { return localStorage.getItem('gh_pat') || ''; }
+function saveToken(t){ localStorage.setItem('gh_pat', t); }
+
+function setSyncStatus(estado, msg) {
+  const dot = el('sync-dot');
+  const txt = el('sync-msg');
+  if (!dot || !txt) return;
+  dot.className = 'sync-dot ' + (estado || '');
+  txt.textContent = msg;
+}
+
+async function ghGetFile() {
+  const token = getToken();
+  if (!token) return null;
+  const url = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}?ref=${GH_BRANCH}`;
+  const r = await fetch(url, { headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' } });
+  if (r.status === 404) return { content: null, sha: null };
+  if (!r.ok) throw new Error(`GitHub ${r.status}: ${r.statusText}`);
+  const data = await r.json();
+  const content = JSON.parse(atob(data.content.replace(/\n/g, '')));
+  return { content, sha: data.sha };
+}
+
+async function ghPutFile(db, sha) {
+  const token = getToken();
+  if (!token) throw new Error('Token não configurado');
+  const url = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`;
+  const body = {
+    message: `Sync inspeções ${new Date().toISOString().slice(0,10)}`,
+    content: btoa(unescape(encodeURIComponent(JSON.stringify(db, null, 2)))),
+    branch: GH_BRANCH,
+  };
+  if (sha) body.sha = sha;
+  const r = await fetch(url, {
+    method: 'PUT',
+    headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  if (!r.ok) {
+    const err = await r.json().catch(() => ({}));
+    throw new Error(err.message || `GitHub ${r.status}`);
+  }
+}
+
+function salvarToken() {
+  const t = (el('sync-pat').value || '').trim();
+  if (!t) { showToast('⚠️ Insira um token válido.', 'red'); return; }
+  saveToken(t);
+  el('sync-pat').value = '';
+  showToast('🔑 Token salvo! Clique em Sync para sincronizar.', 'green');
+  setSyncStatus('', 'Token salvo — clique em Sync para sincronizar');
+}
+
+async function sincronizarGitHub() {
+  const token = getToken();
+  if (!token) { showToast('⚠️ Configure o token primeiro.', 'red'); return; }
+  setSyncStatus('busy', 'Sincronizando…');
+  try {
+    const remote = await ghGetFile();
+    const local  = getDB();
+
+    let merged = local;
+    if (remote && remote.content && Array.isArray(remote.content)) {
+      // Merge: remote IDs que não existem localmente são adicionados
+      const localIds = new Set(local.map(r => r.id));
+      const novos    = remote.content.filter(r => !localIds.has(r.id));
+      merged = [...local, ...novos].sort((a, b) => a.id - b.id);
+      if (novos.length > 0) {
+        localStorage.setItem('inspecoes_grupoMS', JSON.stringify(merged));
+        updateStats(merged);
+        renderDB();
+      }
+    }
+
+    // Enviar para GitHub
+    await ghPutFile(merged, remote ? remote.sha : null);
+    const total = merged.length;
+    setSyncStatus('ok', `Sincronizado ✔ — ${total} registros no GitHub · ${new Date().toLocaleTimeString('pt-BR')}`);
+    showToast(`☁ Sincronizado! ${total} registros.`, 'green');
+  } catch(e) {
+    setSyncStatus('err', `Erro: ${e.message}`);
+    showToast(`❌ Erro ao sincronizar: ${e.message}`, 'red');
+  }
+}
+
+// ================================================================
+//  BANCO DE DADOS (localStorage + GitHub)
+// ================================================================
+function getDB()    { try { return JSON.parse(localStorage.getItem('inspecoes_grupoMS')||'[]'); } catch { return []; } }
+function saveDB(db) {
+  localStorage.setItem('inspecoes_grupoMS', JSON.stringify(db));
+  updateStats(db);
+  // Auto-sync em background (sem bloquear UI)
+  if (getToken()) {
+    setSyncStatus('busy', 'Salvando no GitHub…');
+    ghGetFile().then(remote => ghPutFile(db, remote ? remote.sha : null))
+      .then(() => setSyncStatus('ok', `Auto-sync ✔ · ${new Date().toLocaleTimeString('pt-BR')}`))
+      .catch(e  => setSyncStatus('err', `Sync falhou: ${e.message}`));
+  }
+}
 
 function updateStats(db) {
   el('stat-total').textContent = db.length;
@@ -2071,6 +2249,18 @@ el('hora-inicio').value = new Date().toTimeString().slice(0,5);
 buildItems();
 initCadastros();
 renderDB();
+
+// Mostrar token mascarado se já existir
+(function initSync() {
+  const t = getToken();
+  if (t) {
+    setSyncStatus('', `Token configurado — clique Sync para sincronizar`);
+    // Auto-sync na carga
+    sincronizarGitHub();
+  } else {
+    setSyncStatus('', 'Não configurado — insira o token abaixo');
+  }
+})();
 </script>
 </body>
 </html>
