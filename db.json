@@ -1,1 +1,2459 @@
-[]
+[
+  {
+    "id": 1777367094584,
+    "posto": "Kodyve",
+    "supervisor": "Paulo Jardim",
+    "colaborador": "Anderson dos Santos Querido",
+    "data": "2026-04-28",
+    "horaInicio": "06:03",
+    "horaFim": "02:03",
+    "itens": {
+      "camera": {
+        "label": "Câmeras de Segurança",
+        "status": "ok",
+        "obs": ""
+      },
+      "dvr": {
+        "label": "DVR / NVR",
+        "status": "ok",
+        "obs": ""
+      },
+      "iluminacao": {
+        "label": "Iluminação",
+        "status": "ok",
+        "obs": ""
+      },
+      "cancela": {
+        "label": "Cancela",
+        "status": "na",
+        "obs": ""
+      },
+      "portao-principal": {
+        "label": "Portão Principal",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-servico": {
+        "label": "Portão de Serviço",
+        "status": "ok",
+        "obs": ""
+      },
+      "interfone": {
+        "label": "Interfone / Videofone",
+        "status": "na",
+        "obs": ""
+      },
+      "controle-acesso": {
+        "label": "Controle de Acesso",
+        "status": "ok",
+        "obs": ""
+      },
+      "vtr-moto": {
+        "label": "VTR Moto",
+        "status": "na",
+        "obs": ""
+      },
+      "vtr-carro": {
+        "label": "VTR Carro",
+        "status": "na",
+        "obs": ""
+      },
+      "combustivel": {
+        "label": "Nível de Combustível",
+        "status": "na",
+        "obs": ""
+      },
+      "geladeira": {
+        "label": "Geladeira",
+        "status": "ok",
+        "obs": ""
+      },
+      "microondas": {
+        "label": "Micro-ondas",
+        "status": "ok",
+        "obs": ""
+      },
+      "ar-cond": {
+        "label": "Ar-condicionado",
+        "status": "ok",
+        "obs": ""
+      },
+      "banheiro": {
+        "label": "Banheiro / Vestiário",
+        "status": "ok",
+        "obs": ""
+      },
+      "copa": {
+        "label": "Copa / Cantina",
+        "status": "ok",
+        "obs": ""
+      },
+      "computador": {
+        "label": "Computador",
+        "status": "ok",
+        "obs": ""
+      },
+      "sistema": {
+        "label": "Sistema de Gestão",
+        "status": "ok",
+        "obs": ""
+      },
+      "impressora": {
+        "label": "Impressora",
+        "status": "ok",
+        "obs": ""
+      },
+      "internet": {
+        "label": "Internet / Rede",
+        "status": "ok",
+        "obs": ""
+      },
+      "radio": {
+        "label": "Rádio Comunicador",
+        "status": "na",
+        "obs": ""
+      }
+    },
+    "obsGeral": ""
+  },
+  {
+    "id": 1777367368817,
+    "posto": "Garden",
+    "supervisor": "Paulo Jardim",
+    "colaborador": "João Cera",
+    "data": "2026-04-28",
+    "horaInicio": "23:04",
+    "horaFim": "01:08",
+    "itens": {
+      "camera": {
+        "label": "Câmeras de Segurança",
+        "status": "falha",
+        "obs": ""
+      },
+      "dvr": {
+        "label": "DVR / NVR",
+        "status": "na",
+        "obs": ""
+      },
+      "iluminacao": {
+        "label": "Iluminação",
+        "status": "falha",
+        "obs": ""
+      },
+      "cancela": {
+        "label": "Cancela",
+        "status": "na",
+        "obs": ""
+      },
+      "portao-principal": {
+        "label": "Portão Principal",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-servico": {
+        "label": "Portão de Serviço",
+        "status": "ok",
+        "obs": ""
+      },
+      "interfone": {
+        "label": "Interfone / Videofone",
+        "status": "na",
+        "obs": ""
+      },
+      "controle-acesso": {
+        "label": "Controle de Acesso",
+        "status": "na",
+        "obs": ""
+      },
+      "vtr-moto": {
+        "label": "VTR Moto",
+        "status": "na",
+        "obs": ""
+      },
+      "vtr-carro": {
+        "label": "VTR Carro",
+        "status": "falha",
+        "obs": "Está com o pneu careca e "
+      },
+      "combustivel": {
+        "label": "Nível de Combustível",
+        "status": "ok",
+        "obs": ""
+      },
+      "geladeira": {
+        "label": "Geladeira",
+        "status": "na",
+        "obs": ""
+      },
+      "microondas": {
+        "label": "Micro-ondas",
+        "status": "na",
+        "obs": ""
+      },
+      "ar-cond": {
+        "label": "Ar-condicionado",
+        "status": "na",
+        "obs": ""
+      },
+      "banheiro": {
+        "label": "Banheiro / Vestiário",
+        "status": "na",
+        "obs": ""
+      },
+      "copa": {
+        "label": "Copa / Cantina",
+        "status": "na",
+        "obs": ""
+      },
+      "computador": {
+        "label": "Computador",
+        "status": "na",
+        "obs": ""
+      },
+      "sistema": {
+        "label": "Sistema de Gestão",
+        "status": "na",
+        "obs": ""
+      },
+      "impressora": {
+        "label": "Impressora",
+        "status": "na",
+        "obs": ""
+      },
+      "internet": {
+        "label": "Internet / Rede",
+        "status": "na",
+        "obs": ""
+      },
+      "radio": {
+        "label": "Rádio Comunicador",
+        "status": "na",
+        "obs": ""
+      }
+    },
+    "obsGeral": ""
+  },
+  {
+    "id": 1777367594471,
+    "posto": "Almada",
+    "supervisor": "Paulo Jardim",
+    "colaborador": "Crodoaldo",
+    "data": "2026-04-27",
+    "horaInicio": "00:09",
+    "horaFim": "01:30",
+    "itens": {
+      "camera": {
+        "label": "Câmeras de Segurança",
+        "status": "falha",
+        "obs": ""
+      },
+      "dvr": {
+        "label": "DVR / NVR",
+        "status": "na",
+        "obs": ""
+      },
+      "iluminacao": {
+        "label": "Iluminação",
+        "status": "ok",
+        "obs": ""
+      },
+      "cancela": {
+        "label": "Cancela",
+        "status": "na",
+        "obs": ""
+      },
+      "portao-principal": {
+        "label": "Portão Principal",
+        "status": "na",
+        "obs": ""
+      },
+      "portao-servico": {
+        "label": "Portão de Serviço",
+        "status": "ok",
+        "obs": ""
+      },
+      "interfone": {
+        "label": "Interfone / Videofone",
+        "status": "na",
+        "obs": ""
+      },
+      "controle-acesso": {
+        "label": "Controle de Acesso",
+        "status": "na",
+        "obs": ""
+      },
+      "vtr-moto": {
+        "label": "VTR Moto",
+        "status": "ok",
+        "obs": ""
+      },
+      "vtr-carro": {
+        "label": "VTR Carro",
+        "status": "na",
+        "obs": ""
+      },
+      "combustivel": {
+        "label": "Nível de Combustível",
+        "status": "ok",
+        "obs": ""
+      },
+      "geladeira": {
+        "label": "Geladeira",
+        "status": "falha",
+        "obs": ""
+      },
+      "microondas": {
+        "label": "Micro-ondas",
+        "status": "falha",
+        "obs": ""
+      },
+      "ar-cond": {
+        "label": "Ar-condicionado",
+        "status": "na",
+        "obs": ""
+      },
+      "banheiro": {
+        "label": "Banheiro / Vestiário",
+        "status": "manut",
+        "obs": ""
+      },
+      "copa": {
+        "label": "Copa / Cantina",
+        "status": "na",
+        "obs": ""
+      },
+      "computador": {
+        "label": "Computador",
+        "status": "na",
+        "obs": ""
+      },
+      "sistema": {
+        "label": "Sistema de Gestão",
+        "status": "na",
+        "obs": ""
+      },
+      "impressora": {
+        "label": "Impressora",
+        "status": "na",
+        "obs": ""
+      },
+      "internet": {
+        "label": "Internet / Rede",
+        "status": "ok",
+        "obs": ""
+      },
+      "radio": {
+        "label": "Rádio Comunicador",
+        "status": "na",
+        "obs": ""
+      }
+    },
+    "obsGeral": ""
+  },
+  {
+    "id": 1777367676231,
+    "posto": "Fazenda Água Parada",
+    "supervisor": "Paulo Jardim",
+    "colaborador": "Gustavo Ferreira",
+    "data": "2026-04-27",
+    "horaInicio": "00:13",
+    "horaFim": "01:45",
+    "itens": {
+      "camera": {
+        "label": "Câmeras de Segurança",
+        "status": "ok",
+        "obs": ""
+      },
+      "dvr": {
+        "label": "DVR / NVR",
+        "status": "ok",
+        "obs": ""
+      },
+      "iluminacao": {
+        "label": "Iluminação",
+        "status": "ok",
+        "obs": ""
+      },
+      "cancela": {
+        "label": "Cancela",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-principal": {
+        "label": "Portão Principal",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-servico": {
+        "label": "Portão de Serviço",
+        "status": "ok",
+        "obs": ""
+      },
+      "interfone": {
+        "label": "Interfone / Videofone",
+        "status": "na",
+        "obs": ""
+      },
+      "controle-acesso": {
+        "label": "Controle de Acesso",
+        "status": "ok",
+        "obs": ""
+      },
+      "vtr-moto": {
+        "label": "VTR Moto",
+        "status": "na",
+        "obs": ""
+      },
+      "vtr-carro": {
+        "label": "VTR Carro",
+        "status": "na",
+        "obs": ""
+      },
+      "combustivel": {
+        "label": "Nível de Combustível",
+        "status": "na",
+        "obs": ""
+      },
+      "geladeira": {
+        "label": "Geladeira",
+        "status": "ok",
+        "obs": ""
+      },
+      "microondas": {
+        "label": "Micro-ondas",
+        "status": "ok",
+        "obs": ""
+      },
+      "ar-cond": {
+        "label": "Ar-condicionado",
+        "status": "falha",
+        "obs": ""
+      },
+      "banheiro": {
+        "label": "Banheiro / Vestiário",
+        "status": "ok",
+        "obs": ""
+      },
+      "copa": {
+        "label": "Copa / Cantina",
+        "status": "ok",
+        "obs": ""
+      },
+      "computador": {
+        "label": "Computador",
+        "status": "ok",
+        "obs": ""
+      },
+      "sistema": {
+        "label": "Sistema de Gestão",
+        "status": "ok",
+        "obs": ""
+      },
+      "impressora": {
+        "label": "Impressora",
+        "status": "ok",
+        "obs": ""
+      },
+      "internet": {
+        "label": "Internet / Rede",
+        "status": "ok",
+        "obs": ""
+      },
+      "radio": {
+        "label": "Rádio Comunicador",
+        "status": "na",
+        "obs": ""
+      }
+    },
+    "obsGeral": ""
+  },
+  {
+    "id": 1777392754021,
+    "posto": "Reserva do Lago",
+    "supervisor": "Paulo Jardim",
+    "colaborador": "José Carlos Germano",
+    "data": "2026-04-27",
+    "horaInicio": "23:08",
+    "horaFim": "00:00",
+    "itens": {
+      "camera": {
+        "label": "Câmeras de Segurança",
+        "status": "ok",
+        "obs": ""
+      },
+      "dvr": {
+        "label": "DVR / NVR",
+        "status": "ok",
+        "obs": ""
+      },
+      "iluminacao": {
+        "label": "Iluminação",
+        "status": "ok",
+        "obs": ""
+      },
+      "cancela": {
+        "label": "Cancela",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-principal": {
+        "label": "Portão Principal",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-servico": {
+        "label": "Portão de Serviço",
+        "status": "ok",
+        "obs": ""
+      },
+      "interfone": {
+        "label": "Interfone / Videofone",
+        "status": "ok",
+        "obs": ""
+      },
+      "controle-acesso": {
+        "label": "Controle de Acesso",
+        "status": "manut",
+        "obs": "Aguardando a instalação na nova maquina"
+      },
+      "vtr-moto": {
+        "label": "VTR Moto",
+        "status": "ok",
+        "obs": ""
+      },
+      "vtr-carro": {
+        "label": "VTR Carro",
+        "status": "na",
+        "obs": ""
+      },
+      "combustivel": {
+        "label": "Nível de Combustível",
+        "status": "ok",
+        "obs": ""
+      },
+      "geladeira": {
+        "label": "Geladeira",
+        "status": "ok",
+        "obs": ""
+      },
+      "microondas": {
+        "label": "Micro-ondas",
+        "status": "ok",
+        "obs": ""
+      },
+      "ar-cond": {
+        "label": "Ar-condicionado",
+        "status": "ok",
+        "obs": ""
+      },
+      "banheiro": {
+        "label": "Banheiro / Vestiário",
+        "status": "ok",
+        "obs": ""
+      },
+      "copa": {
+        "label": "Copa / Cantina",
+        "status": "ok",
+        "obs": ""
+      },
+      "computador": {
+        "label": "Computador",
+        "status": "ok",
+        "obs": ""
+      },
+      "sistema": {
+        "label": "Sistema de Gestão",
+        "status": "manut",
+        "obs": "Novo sistema a ser instalado "
+      },
+      "impressora": {
+        "label": "Impressora",
+        "status": "na",
+        "obs": ""
+      },
+      "internet": {
+        "label": "Internet / Rede",
+        "status": "ok",
+        "obs": ""
+      },
+      "radio": {
+        "label": "Rádio Comunicador",
+        "status": "na",
+        "obs": ""
+      }
+    },
+    "obsGeral": ""
+  },
+  {
+    "id": 1777430702857,
+    "posto": "Smalticeram Unicer do Brasil",
+    "supervisor": "Paulo Jardim",
+    "colaborador": "Tiago Fernandes",
+    "data": "2026-04-27",
+    "horaInicio": "23:41",
+    "horaFim": "00:44",
+    "itens": {
+      "camera": {
+        "label": "Câmeras de Segurança",
+        "status": "ok",
+        "obs": ""
+      },
+      "dvr": {
+        "label": "DVR / NVR",
+        "status": "ok",
+        "obs": ""
+      },
+      "iluminacao": {
+        "label": "Iluminação",
+        "status": "ok",
+        "obs": ""
+      },
+      "cancela": {
+        "label": "Cancela",
+        "status": "na",
+        "obs": ""
+      },
+      "portao-principal": {
+        "label": "Portão Principal",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-servico": {
+        "label": "Portão de Serviço",
+        "status": "ok",
+        "obs": ""
+      },
+      "interfone": {
+        "label": "Interfone / Videofone",
+        "status": "ok",
+        "obs": ""
+      },
+      "controle-acesso": {
+        "label": "Controle de Acesso",
+        "status": "ok",
+        "obs": ""
+      },
+      "vtr-moto": {
+        "label": "VTR Moto",
+        "status": "na",
+        "obs": ""
+      },
+      "vtr-carro": {
+        "label": "VTR Carro",
+        "status": "na",
+        "obs": ""
+      },
+      "combustivel": {
+        "label": "Nível de Combustível",
+        "status": "na",
+        "obs": ""
+      },
+      "geladeira": {
+        "label": "Geladeira",
+        "status": "ok",
+        "obs": ""
+      },
+      "microondas": {
+        "label": "Micro-ondas",
+        "status": "ok",
+        "obs": ""
+      },
+      "ar-cond": {
+        "label": "Ar-condicionado",
+        "status": "ok",
+        "obs": ""
+      },
+      "banheiro": {
+        "label": "Banheiro / Vestiário",
+        "status": "ok",
+        "obs": ""
+      },
+      "copa": {
+        "label": "Copa / Cantina",
+        "status": "ok",
+        "obs": ""
+      },
+      "computador": {
+        "label": "Computador",
+        "status": "ok",
+        "obs": ""
+      },
+      "sistema": {
+        "label": "Sistema de Gestão",
+        "status": "ok",
+        "obs": ""
+      },
+      "impressora": {
+        "label": "Impressora",
+        "status": "ok",
+        "obs": ""
+      },
+      "internet": {
+        "label": "Internet / Rede",
+        "status": "ok",
+        "obs": ""
+      },
+      "radio": {
+        "label": "Rádio Comunicador",
+        "status": "falha",
+        "obs": ""
+      }
+    },
+    "obsGeral": ""
+  },
+  {
+    "id": 1777527872002,
+    "posto": "VRV Miami",
+    "supervisor": "Paulo Jardim",
+    "colaborador": "André Medeiros",
+    "data": "2026-04-30",
+    "horaInicio": "02:42",
+    "horaFim": "02:55",
+    "itens": {
+      "camera": {
+        "label": "Câmeras de Segurança",
+        "status": "na",
+        "obs": ""
+      },
+      "dvr": {
+        "label": "DVR / NVR",
+        "status": "na",
+        "obs": ""
+      },
+      "iluminacao": {
+        "label": "Iluminação",
+        "status": "ok",
+        "obs": ""
+      },
+      "cancela": {
+        "label": "Cancela",
+        "status": "na",
+        "obs": ""
+      },
+      "portao-principal": {
+        "label": "Portão Principal",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-servico": {
+        "label": "Portão de Serviço",
+        "status": "ok",
+        "obs": ""
+      },
+      "interfone": {
+        "label": "Interfone / Videofone",
+        "status": "na",
+        "obs": ""
+      },
+      "controle-acesso": {
+        "label": "Controle de Acesso",
+        "status": "ok",
+        "obs": ""
+      },
+      "vtr-moto": {
+        "label": "VTR Moto",
+        "status": "na",
+        "obs": ""
+      },
+      "vtr-carro": {
+        "label": "VTR Carro",
+        "status": "na",
+        "obs": ""
+      },
+      "combustivel": {
+        "label": "Nível de Combustível",
+        "status": "na",
+        "obs": ""
+      },
+      "geladeira": {
+        "label": "Geladeira",
+        "status": "na",
+        "obs": ""
+      },
+      "microondas": {
+        "label": "Micro-ondas",
+        "status": "na",
+        "obs": ""
+      },
+      "ar-cond": {
+        "label": "Ar-condicionado",
+        "status": "na",
+        "obs": ""
+      },
+      "banheiro": {
+        "label": "Banheiro / Vestiário",
+        "status": "ok",
+        "obs": ""
+      },
+      "copa": {
+        "label": "Copa / Cantina",
+        "status": "na",
+        "obs": ""
+      },
+      "computador": {
+        "label": "Computador",
+        "status": "na",
+        "obs": ""
+      },
+      "sistema": {
+        "label": "Sistema de Gestão",
+        "status": "na",
+        "obs": ""
+      },
+      "impressora": {
+        "label": "Impressora",
+        "status": "na",
+        "obs": ""
+      },
+      "internet": {
+        "label": "Internet / Rede",
+        "status": "ok",
+        "obs": ""
+      },
+      "radio": {
+        "label": "Rádio Comunicador",
+        "status": "na",
+        "obs": ""
+      }
+    },
+    "obsGeral": ""
+  },
+  {
+    "id": 1777528005991,
+    "posto": "Reserva do Lago",
+    "supervisor": "Paulo Jardim",
+    "colaborador": "José Carlos Germano",
+    "data": "2026-04-29",
+    "horaInicio": "02:44",
+    "horaFim": "02:46",
+    "itens": {
+      "camera": {
+        "label": "Câmeras de Segurança",
+        "status": "ok",
+        "obs": ""
+      },
+      "dvr": {
+        "label": "DVR / NVR",
+        "status": "ok",
+        "obs": ""
+      },
+      "iluminacao": {
+        "label": "Iluminação",
+        "status": "ok",
+        "obs": ""
+      },
+      "cancela": {
+        "label": "Cancela",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-principal": {
+        "label": "Portão Principal",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-servico": {
+        "label": "Portão de Serviço",
+        "status": "ok",
+        "obs": ""
+      },
+      "interfone": {
+        "label": "Interfone / Videofone",
+        "status": "ok",
+        "obs": ""
+      },
+      "controle-acesso": {
+        "label": "Controle de Acesso",
+        "status": "ok",
+        "obs": ""
+      },
+      "vtr-moto": {
+        "label": "VTR Moto",
+        "status": "ok",
+        "obs": ""
+      },
+      "vtr-carro": {
+        "label": "VTR Carro",
+        "status": "na",
+        "obs": ""
+      },
+      "combustivel": {
+        "label": "Nível de Combustível",
+        "status": "ok",
+        "obs": ""
+      },
+      "geladeira": {
+        "label": "Geladeira",
+        "status": "ok",
+        "obs": ""
+      },
+      "microondas": {
+        "label": "Micro-ondas",
+        "status": "ok",
+        "obs": ""
+      },
+      "ar-cond": {
+        "label": "Ar-condicionado",
+        "status": "ok",
+        "obs": ""
+      },
+      "banheiro": {
+        "label": "Banheiro / Vestiário",
+        "status": "ok",
+        "obs": ""
+      },
+      "copa": {
+        "label": "Copa / Cantina",
+        "status": "ok",
+        "obs": ""
+      },
+      "computador": {
+        "label": "Computador",
+        "status": "ok",
+        "obs": ""
+      },
+      "sistema": {
+        "label": "Sistema de Gestão",
+        "status": "ok",
+        "obs": ""
+      },
+      "impressora": {
+        "label": "Impressora",
+        "status": "falha",
+        "obs": ""
+      },
+      "internet": {
+        "label": "Internet / Rede",
+        "status": "ok",
+        "obs": ""
+      },
+      "radio": {
+        "label": "Rádio Comunicador",
+        "status": "na",
+        "obs": ""
+      }
+    },
+    "obsGeral": ""
+  },
+  {
+    "id": 1777539183583,
+    "posto": "Samae ETE Av Brasil",
+    "supervisor": "Paulo Jardim",
+    "colaborador": "Adriano Parmezani",
+    "data": "2026-04-29",
+    "horaInicio": "03:50",
+    "horaFim": "05:52",
+    "itens": {
+      "camera": {
+        "label": "Câmeras de Segurança",
+        "status": "ok",
+        "obs": ""
+      },
+      "dvr": {
+        "label": "DVR / NVR",
+        "status": "ok",
+        "obs": ""
+      },
+      "iluminacao": {
+        "label": "Iluminação",
+        "status": "ok",
+        "obs": ""
+      },
+      "cancela": {
+        "label": "Cancela",
+        "status": "na",
+        "obs": ""
+      },
+      "portao-principal": {
+        "label": "Portão Principal",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-servico": {
+        "label": "Portão de Serviço",
+        "status": "ok",
+        "obs": ""
+      },
+      "interfone": {
+        "label": "Interfone / Videofone",
+        "status": "na",
+        "obs": ""
+      },
+      "controle-acesso": {
+        "label": "Controle de Acesso",
+        "status": "ok",
+        "obs": ""
+      },
+      "vtr-moto": {
+        "label": "VTR Moto",
+        "status": "na",
+        "obs": ""
+      },
+      "vtr-carro": {
+        "label": "VTR Carro",
+        "status": "na",
+        "obs": ""
+      },
+      "combustivel": {
+        "label": "Nível de Combustível",
+        "status": "na",
+        "obs": ""
+      },
+      "geladeira": {
+        "label": "Geladeira",
+        "status": "ok",
+        "obs": ""
+      },
+      "microondas": {
+        "label": "Micro-ondas",
+        "status": "ok",
+        "obs": ""
+      },
+      "ar-cond": {
+        "label": "Ar-condicionado",
+        "status": "na",
+        "obs": ""
+      },
+      "banheiro": {
+        "label": "Banheiro / Vestiário",
+        "status": "ok",
+        "obs": ""
+      },
+      "copa": {
+        "label": "Copa / Cantina",
+        "status": "ok",
+        "obs": ""
+      },
+      "computador": {
+        "label": "Computador",
+        "status": "na",
+        "obs": ""
+      },
+      "sistema": {
+        "label": "Sistema de Gestão",
+        "status": "na",
+        "obs": ""
+      },
+      "impressora": {
+        "label": "Impressora",
+        "status": "na",
+        "obs": ""
+      },
+      "internet": {
+        "label": "Internet / Rede",
+        "status": "ok",
+        "obs": ""
+      },
+      "radio": {
+        "label": "Rádio Comunicador",
+        "status": "na",
+        "obs": ""
+      }
+    },
+    "obsGeral": ""
+  },
+  {
+    "id": 1777539314528,
+    "posto": "Aeroclube",
+    "supervisor": "Paulo Jardim",
+    "colaborador": "Ezequiel Pereira",
+    "data": "2026-04-29",
+    "horaInicio": "00:00",
+    "horaFim": "05:54",
+    "itens": {
+      "camera": {
+        "label": "Câmeras de Segurança",
+        "status": "ok",
+        "obs": ""
+      },
+      "dvr": {
+        "label": "DVR / NVR",
+        "status": "na",
+        "obs": ""
+      },
+      "iluminacao": {
+        "label": "Iluminação",
+        "status": "ok",
+        "obs": ""
+      },
+      "cancela": {
+        "label": "Cancela",
+        "status": "na",
+        "obs": ""
+      },
+      "portao-principal": {
+        "label": "Portão Principal",
+        "status": "na",
+        "obs": ""
+      },
+      "portao-servico": {
+        "label": "Portão de Serviço",
+        "status": "na",
+        "obs": ""
+      },
+      "interfone": {
+        "label": "Interfone / Videofone",
+        "status": "na",
+        "obs": ""
+      },
+      "controle-acesso": {
+        "label": "Controle de Acesso",
+        "status": "na",
+        "obs": ""
+      },
+      "vtr-moto": {
+        "label": "VTR Moto",
+        "status": "na",
+        "obs": ""
+      },
+      "vtr-carro": {
+        "label": "VTR Carro",
+        "status": "na",
+        "obs": ""
+      },
+      "combustivel": {
+        "label": "Nível de Combustível",
+        "status": "na",
+        "obs": ""
+      },
+      "geladeira": {
+        "label": "Geladeira",
+        "status": "ok",
+        "obs": ""
+      },
+      "microondas": {
+        "label": "Micro-ondas",
+        "status": "ok",
+        "obs": ""
+      },
+      "ar-cond": {
+        "label": "Ar-condicionado",
+        "status": "falha",
+        "obs": ""
+      },
+      "banheiro": {
+        "label": "Banheiro / Vestiário",
+        "status": "ok",
+        "obs": ""
+      },
+      "copa": {
+        "label": "Copa / Cantina",
+        "status": "ok",
+        "obs": ""
+      },
+      "computador": {
+        "label": "Computador",
+        "status": "na",
+        "obs": ""
+      },
+      "sistema": {
+        "label": "Sistema de Gestão",
+        "status": "na",
+        "obs": ""
+      },
+      "impressora": {
+        "label": "Impressora",
+        "status": "na",
+        "obs": ""
+      },
+      "internet": {
+        "label": "Internet / Rede",
+        "status": "ok",
+        "obs": ""
+      },
+      "radio": {
+        "label": "Rádio Comunicador",
+        "status": "na",
+        "obs": ""
+      }
+    },
+    "obsGeral": ""
+  },
+  {
+    "id": 1777693023867,
+    "posto": "Residencial Veneto",
+    "supervisor": "Paulo Jardim",
+    "colaborador": "Thiago Vieira",
+    "data": "2026-05-02",
+    "horaInicio": "23:34",
+    "horaFim": "00:35",
+    "itens": {
+      "camera": {
+        "label": "Câmeras de Segurança",
+        "status": "ok",
+        "obs": ""
+      },
+      "dvr": {
+        "label": "DVR / NVR",
+        "status": "ok",
+        "obs": ""
+      },
+      "iluminacao": {
+        "label": "Iluminação",
+        "status": "ok",
+        "obs": ""
+      },
+      "cancela": {
+        "label": "Cancela",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-principal": {
+        "label": "Portão Principal",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-servico": {
+        "label": "Portão de Serviço",
+        "status": "ok",
+        "obs": ""
+      },
+      "interfone": {
+        "label": "Interfone / Videofone",
+        "status": "ok",
+        "obs": ""
+      },
+      "controle-acesso": {
+        "label": "Controle de Acesso",
+        "status": "ok",
+        "obs": ""
+      },
+      "vtr-moto": {
+        "label": "VTR Moto",
+        "status": "ok",
+        "obs": ""
+      },
+      "vtr-carro": {
+        "label": "VTR Carro",
+        "status": "na",
+        "obs": ""
+      },
+      "combustivel": {
+        "label": "Nível de Combustível",
+        "status": "ok",
+        "obs": ""
+      },
+      "geladeira": {
+        "label": "Geladeira",
+        "status": "ok",
+        "obs": ""
+      },
+      "microondas": {
+        "label": "Micro-ondas",
+        "status": "ok",
+        "obs": ""
+      },
+      "ar-cond": {
+        "label": "Ar-condicionado",
+        "status": "ok",
+        "obs": ""
+      },
+      "banheiro": {
+        "label": "Banheiro / Vestiário",
+        "status": "ok",
+        "obs": ""
+      },
+      "copa": {
+        "label": "Copa / Cantina",
+        "status": "ok",
+        "obs": ""
+      },
+      "computador": {
+        "label": "Computador",
+        "status": "ok",
+        "obs": ""
+      },
+      "sistema": {
+        "label": "Sistema de Gestão",
+        "status": "ok",
+        "obs": ""
+      },
+      "impressora": {
+        "label": "Impressora",
+        "status": "na",
+        "obs": ""
+      },
+      "internet": {
+        "label": "Internet / Rede",
+        "status": "ok",
+        "obs": ""
+      },
+      "radio": {
+        "label": "Rádio Comunicador",
+        "status": "ok",
+        "obs": ""
+      }
+    },
+    "obsGeral": ""
+  },
+  {
+    "id": 1777701717768,
+    "posto": "W Park",
+    "supervisor": "Paulo Jardim",
+    "colaborador": "Alessandro Jardim",
+    "data": "2026-05-02",
+    "horaInicio": "01:58",
+    "horaFim": "03:00",
+    "itens": {
+      "camera": {
+        "label": "Câmeras de Segurança",
+        "status": "ok",
+        "obs": ""
+      },
+      "dvr": {
+        "label": "DVR / NVR",
+        "status": "ok",
+        "obs": ""
+      },
+      "iluminacao": {
+        "label": "Iluminação",
+        "status": "ok",
+        "obs": ""
+      },
+      "cancela": {
+        "label": "Cancela",
+        "status": "manut",
+        "obs": "Cancela de saída está quebrada "
+      },
+      "portao-principal": {
+        "label": "Portão Principal",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-servico": {
+        "label": "Portão de Serviço",
+        "status": "ok",
+        "obs": ""
+      },
+      "interfone": {
+        "label": "Interfone / Videofone",
+        "status": "falha",
+        "obs": "Não funciona "
+      },
+      "controle-acesso": {
+        "label": "Controle de Acesso",
+        "status": "ok",
+        "obs": ""
+      },
+      "vtr-moto": {
+        "label": "VTR Moto",
+        "status": "na",
+        "obs": ""
+      },
+      "vtr-carro": {
+        "label": "VTR Carro",
+        "status": "na",
+        "obs": ""
+      },
+      "combustivel": {
+        "label": "Nível de Combustível",
+        "status": "na",
+        "obs": ""
+      },
+      "geladeira": {
+        "label": "Geladeira",
+        "status": "ok",
+        "obs": ""
+      },
+      "microondas": {
+        "label": "Micro-ondas",
+        "status": "ok",
+        "obs": ""
+      },
+      "ar-cond": {
+        "label": "Ar-condicionado",
+        "status": "ok",
+        "obs": ""
+      },
+      "banheiro": {
+        "label": "Banheiro / Vestiário",
+        "status": "ok",
+        "obs": ""
+      },
+      "copa": {
+        "label": "Copa / Cantina",
+        "status": "ok",
+        "obs": ""
+      },
+      "computador": {
+        "label": "Computador",
+        "status": "ok",
+        "obs": ""
+      },
+      "sistema": {
+        "label": "Sistema de Gestão",
+        "status": "ok",
+        "obs": ""
+      },
+      "impressora": {
+        "label": "Impressora",
+        "status": "falha",
+        "obs": "Faltando Tinta"
+      },
+      "internet": {
+        "label": "Internet / Rede",
+        "status": "ok",
+        "obs": ""
+      },
+      "radio": {
+        "label": "Rádio Comunicador",
+        "status": "na",
+        "obs": ""
+      }
+    },
+    "obsGeral": ""
+  },
+  {
+    "id": 1777701901616,
+    "posto": "Alvorada",
+    "supervisor": "Paulo Jardim",
+    "colaborador": "Miquéias fraleoni",
+    "data": "2026-05-01",
+    "horaInicio": "00:00",
+    "horaFim": "01:03",
+    "itens": {
+      "camera": {
+        "label": "Câmeras de Segurança",
+        "status": "ok",
+        "obs": ""
+      },
+      "dvr": {
+        "label": "DVR / NVR",
+        "status": "ok",
+        "obs": ""
+      },
+      "iluminacao": {
+        "label": "Iluminação",
+        "status": "ok",
+        "obs": ""
+      },
+      "cancela": {
+        "label": "Cancela",
+        "status": "na",
+        "obs": ""
+      },
+      "portao-principal": {
+        "label": "Portão Principal",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-servico": {
+        "label": "Portão de Serviço",
+        "status": "ok",
+        "obs": ""
+      },
+      "interfone": {
+        "label": "Interfone / Videofone",
+        "status": "ok",
+        "obs": ""
+      },
+      "controle-acesso": {
+        "label": "Controle de Acesso",
+        "status": "ok",
+        "obs": ""
+      },
+      "vtr-moto": {
+        "label": "VTR Moto",
+        "status": "ok",
+        "obs": ""
+      },
+      "vtr-carro": {
+        "label": "VTR Carro",
+        "status": "na",
+        "obs": ""
+      },
+      "combustivel": {
+        "label": "Nível de Combustível",
+        "status": "ok",
+        "obs": ""
+      },
+      "geladeira": {
+        "label": "Geladeira",
+        "status": "ok",
+        "obs": ""
+      },
+      "microondas": {
+        "label": "Micro-ondas",
+        "status": "ok",
+        "obs": ""
+      },
+      "ar-cond": {
+        "label": "Ar-condicionado",
+        "status": "ok",
+        "obs": ""
+      },
+      "banheiro": {
+        "label": "Banheiro / Vestiário",
+        "status": "ok",
+        "obs": ""
+      },
+      "copa": {
+        "label": "Copa / Cantina",
+        "status": "ok",
+        "obs": ""
+      },
+      "computador": {
+        "label": "Computador",
+        "status": "ok",
+        "obs": ""
+      },
+      "sistema": {
+        "label": "Sistema de Gestão",
+        "status": "ok",
+        "obs": ""
+      },
+      "impressora": {
+        "label": "Impressora",
+        "status": "na",
+        "obs": ""
+      },
+      "internet": {
+        "label": "Internet / Rede",
+        "status": "ok",
+        "obs": ""
+      },
+      "radio": {
+        "label": "Rádio Comunicador",
+        "status": "falha",
+        "obs": "No final da rua não pega"
+      }
+    },
+    "obsGeral": ""
+  },
+  {
+    "id": 1777702109772,
+    "posto": "Obra André Rossi",
+    "supervisor": "Paulo Jardim",
+    "colaborador": "Adilson dos Santos",
+    "data": "2026-05-02",
+    "horaInicio": "20:05",
+    "horaFim": "03:07",
+    "itens": {
+      "camera": {
+        "label": "Câmeras de Segurança",
+        "status": "na",
+        "obs": ""
+      },
+      "dvr": {
+        "label": "DVR / NVR",
+        "status": "na",
+        "obs": ""
+      },
+      "iluminacao": {
+        "label": "Iluminação",
+        "status": "na",
+        "obs": ""
+      },
+      "cancela": {
+        "label": "Cancela",
+        "status": "na",
+        "obs": ""
+      },
+      "portao-principal": {
+        "label": "Portão Principal",
+        "status": "na",
+        "obs": ""
+      },
+      "portao-servico": {
+        "label": "Portão de Serviço",
+        "status": "na",
+        "obs": ""
+      },
+      "interfone": {
+        "label": "Interfone / Videofone",
+        "status": "na",
+        "obs": ""
+      },
+      "controle-acesso": {
+        "label": "Controle de Acesso",
+        "status": "na",
+        "obs": ""
+      },
+      "vtr-moto": {
+        "label": "VTR Moto",
+        "status": "na",
+        "obs": ""
+      },
+      "vtr-carro": {
+        "label": "VTR Carro",
+        "status": "na",
+        "obs": ""
+      },
+      "combustivel": {
+        "label": "Nível de Combustível",
+        "status": "na",
+        "obs": ""
+      },
+      "geladeira": {
+        "label": "Geladeira",
+        "status": "na",
+        "obs": ""
+      },
+      "microondas": {
+        "label": "Micro-ondas",
+        "status": "na",
+        "obs": ""
+      },
+      "ar-cond": {
+        "label": "Ar-condicionado",
+        "status": "na",
+        "obs": ""
+      },
+      "banheiro": {
+        "label": "Banheiro / Vestiário",
+        "status": "na",
+        "obs": ""
+      },
+      "copa": {
+        "label": "Copa / Cantina",
+        "status": "na",
+        "obs": ""
+      },
+      "computador": {
+        "label": "Computador",
+        "status": "na",
+        "obs": ""
+      },
+      "sistema": {
+        "label": "Sistema de Gestão",
+        "status": "na",
+        "obs": ""
+      },
+      "impressora": {
+        "label": "Impressora",
+        "status": "na",
+        "obs": ""
+      },
+      "internet": {
+        "label": "Internet / Rede",
+        "status": "na",
+        "obs": ""
+      },
+      "radio": {
+        "label": "Rádio Comunicador",
+        "status": "na",
+        "obs": ""
+      }
+    },
+    "obsGeral": ""
+  },
+  {
+    "id": 1777703102004,
+    "posto": "Fazenda Água Parada",
+    "supervisor": "Paulo Jardim",
+    "colaborador": "Gustavo Ferreira",
+    "data": "2026-05-01",
+    "horaInicio": "23:00",
+    "horaFim": "23:30",
+    "itens": {
+      "camera": {
+        "label": "Câmeras de Segurança",
+        "status": "ok",
+        "obs": ""
+      },
+      "dvr": {
+        "label": "DVR / NVR",
+        "status": "ok",
+        "obs": ""
+      },
+      "iluminacao": {
+        "label": "Iluminação",
+        "status": "ok",
+        "obs": ""
+      },
+      "cancela": {
+        "label": "Cancela",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-principal": {
+        "label": "Portão Principal",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-servico": {
+        "label": "Portão de Serviço",
+        "status": "ok",
+        "obs": ""
+      },
+      "interfone": {
+        "label": "Interfone / Videofone",
+        "status": "na",
+        "obs": ""
+      },
+      "controle-acesso": {
+        "label": "Controle de Acesso",
+        "status": "ok",
+        "obs": ""
+      },
+      "vtr-moto": {
+        "label": "VTR Moto",
+        "status": "na",
+        "obs": ""
+      },
+      "vtr-carro": {
+        "label": "VTR Carro",
+        "status": "na",
+        "obs": ""
+      },
+      "combustivel": {
+        "label": "Nível de Combustível",
+        "status": "na",
+        "obs": ""
+      },
+      "geladeira": {
+        "label": "Geladeira",
+        "status": "ok",
+        "obs": ""
+      },
+      "microondas": {
+        "label": "Micro-ondas",
+        "status": "ok",
+        "obs": ""
+      },
+      "ar-cond": {
+        "label": "Ar-condicionado",
+        "status": "falha",
+        "obs": "Não tem"
+      },
+      "banheiro": {
+        "label": "Banheiro / Vestiário",
+        "status": "ok",
+        "obs": ""
+      },
+      "copa": {
+        "label": "Copa / Cantina",
+        "status": "ok",
+        "obs": ""
+      },
+      "computador": {
+        "label": "Computador",
+        "status": "ok",
+        "obs": ""
+      },
+      "sistema": {
+        "label": "Sistema de Gestão",
+        "status": "ok",
+        "obs": ""
+      },
+      "impressora": {
+        "label": "Impressora",
+        "status": "ok",
+        "obs": ""
+      },
+      "internet": {
+        "label": "Internet / Rede",
+        "status": "ok",
+        "obs": ""
+      },
+      "radio": {
+        "label": "Rádio Comunicador",
+        "status": "na",
+        "obs": ""
+      }
+    },
+    "obsGeral": ""
+  },
+  {
+    "id": 1777703228840,
+    "posto": "HFM Transportes e Logística",
+    "supervisor": "Paulo Jardim",
+    "colaborador": "Luiz Cláudio dos Santos",
+    "data": "2026-05-01",
+    "horaInicio": "00:00",
+    "horaFim": "00:20",
+    "itens": {
+      "camera": {
+        "label": "Câmeras de Segurança",
+        "status": "ok",
+        "obs": ""
+      },
+      "dvr": {
+        "label": "DVR / NVR",
+        "status": "ok",
+        "obs": ""
+      },
+      "iluminacao": {
+        "label": "Iluminação",
+        "status": "ok",
+        "obs": ""
+      },
+      "cancela": {
+        "label": "Cancela",
+        "status": "na",
+        "obs": ""
+      },
+      "portao-principal": {
+        "label": "Portão Principal",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-servico": {
+        "label": "Portão de Serviço",
+        "status": "ok",
+        "obs": ""
+      },
+      "interfone": {
+        "label": "Interfone / Videofone",
+        "status": "ok",
+        "obs": ""
+      },
+      "controle-acesso": {
+        "label": "Controle de Acesso",
+        "status": "ok",
+        "obs": ""
+      },
+      "vtr-moto": {
+        "label": "VTR Moto",
+        "status": "ok",
+        "obs": ""
+      },
+      "vtr-carro": {
+        "label": "VTR Carro",
+        "status": "na",
+        "obs": ""
+      },
+      "combustivel": {
+        "label": "Nível de Combustível",
+        "status": "ok",
+        "obs": ""
+      },
+      "geladeira": {
+        "label": "Geladeira",
+        "status": "ok",
+        "obs": ""
+      },
+      "microondas": {
+        "label": "Micro-ondas",
+        "status": "ok",
+        "obs": ""
+      },
+      "ar-cond": {
+        "label": "Ar-condicionado",
+        "status": "ok",
+        "obs": ""
+      },
+      "banheiro": {
+        "label": "Banheiro / Vestiário",
+        "status": "ok",
+        "obs": ""
+      },
+      "copa": {
+        "label": "Copa / Cantina",
+        "status": "ok",
+        "obs": ""
+      },
+      "computador": {
+        "label": "Computador",
+        "status": "ok",
+        "obs": ""
+      },
+      "sistema": {
+        "label": "Sistema de Gestão",
+        "status": "ok",
+        "obs": ""
+      },
+      "impressora": {
+        "label": "Impressora",
+        "status": "na",
+        "obs": ""
+      },
+      "internet": {
+        "label": "Internet / Rede",
+        "status": "ok",
+        "obs": ""
+      },
+      "radio": {
+        "label": "Rádio Comunicador",
+        "status": "ok",
+        "obs": ""
+      }
+    },
+    "obsGeral": ""
+  },
+  {
+    "id": 1777707599111,
+    "posto": "VRV Miami",
+    "supervisor": "Paulo Jardim",
+    "colaborador": "André Medeiros",
+    "data": "2026-05-02",
+    "horaInicio": "04:38",
+    "horaFim": "04:38",
+    "itens": {
+      "camera": {
+        "label": "Câmeras de Segurança",
+        "status": "ok",
+        "obs": ""
+      },
+      "dvr": {
+        "label": "DVR / NVR",
+        "status": "ok",
+        "obs": ""
+      },
+      "iluminacao": {
+        "label": "Iluminação",
+        "status": "ok",
+        "obs": ""
+      },
+      "cancela": {
+        "label": "Cancela",
+        "status": "na",
+        "obs": ""
+      },
+      "portao-principal": {
+        "label": "Portão Principal",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-servico": {
+        "label": "Portão de Serviço",
+        "status": "ok",
+        "obs": ""
+      },
+      "interfone": {
+        "label": "Interfone / Videofone",
+        "status": "na",
+        "obs": ""
+      },
+      "controle-acesso": {
+        "label": "Controle de Acesso",
+        "status": "ok",
+        "obs": ""
+      },
+      "vtr-moto": {
+        "label": "VTR Moto",
+        "status": "na",
+        "obs": ""
+      },
+      "vtr-carro": {
+        "label": "VTR Carro",
+        "status": "na",
+        "obs": ""
+      },
+      "combustivel": {
+        "label": "Nível de Combustível",
+        "status": "na",
+        "obs": ""
+      },
+      "geladeira": {
+        "label": "Geladeira",
+        "status": "falha",
+        "obs": "Não tem"
+      },
+      "microondas": {
+        "label": "Micro-ondas",
+        "status": "falha",
+        "obs": "Banho maria"
+      },
+      "ar-cond": {
+        "label": "Ar-condicionado",
+        "status": "falha",
+        "obs": ""
+      },
+      "banheiro": {
+        "label": "Banheiro / Vestiário",
+        "status": "ok",
+        "obs": ""
+      },
+      "copa": {
+        "label": "Copa / Cantina",
+        "status": "ok",
+        "obs": ""
+      },
+      "computador": {
+        "label": "Computador",
+        "status": "na",
+        "obs": ""
+      },
+      "sistema": {
+        "label": "Sistema de Gestão",
+        "status": "na",
+        "obs": ""
+      },
+      "impressora": {
+        "label": "Impressora",
+        "status": "na",
+        "obs": ""
+      },
+      "internet": {
+        "label": "Internet / Rede",
+        "status": "ok",
+        "obs": ""
+      },
+      "radio": {
+        "label": "Rádio Comunicador",
+        "status": "na",
+        "obs": ""
+      }
+    },
+    "obsGeral": ""
+  },
+  {
+    "id": 1777762346712,
+    "posto": "Obra André Rossi",
+    "supervisor": "Paulo Jardim",
+    "colaborador": "Alessandro Jardim",
+    "data": "2026-05-02",
+    "horaInicio": "19:25",
+    "horaFim": "19:51",
+    "itens": {
+      "camera": {
+        "label": "Câmeras de Segurança",
+        "status": "na",
+        "obs": ""
+      },
+      "dvr": {
+        "label": "DVR / NVR",
+        "status": "na",
+        "obs": ""
+      },
+      "iluminacao": {
+        "label": "Iluminação",
+        "status": "na",
+        "obs": ""
+      },
+      "cancela": {
+        "label": "Cancela",
+        "status": "na",
+        "obs": ""
+      },
+      "portao-principal": {
+        "label": "Portão Principal",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-servico": {
+        "label": "Portão de Serviço",
+        "status": "ok",
+        "obs": ""
+      },
+      "interfone": {
+        "label": "Interfone / Videofone",
+        "status": "na",
+        "obs": ""
+      },
+      "controle-acesso": {
+        "label": "Controle de Acesso",
+        "status": "na",
+        "obs": ""
+      },
+      "vtr-moto": {
+        "label": "VTR Moto",
+        "status": "na",
+        "obs": ""
+      },
+      "vtr-carro": {
+        "label": "VTR Carro",
+        "status": "ok",
+        "obs": ""
+      },
+      "combustivel": {
+        "label": "Nível de Combustível",
+        "status": "ok",
+        "obs": ""
+      },
+      "geladeira": {
+        "label": "Geladeira",
+        "status": "na",
+        "obs": ""
+      },
+      "microondas": {
+        "label": "Micro-ondas",
+        "status": "na",
+        "obs": ""
+      },
+      "ar-cond": {
+        "label": "Ar-condicionado",
+        "status": "na",
+        "obs": ""
+      },
+      "banheiro": {
+        "label": "Banheiro / Vestiário",
+        "status": "falha",
+        "obs": "Não tem"
+      },
+      "copa": {
+        "label": "Copa / Cantina",
+        "status": "na",
+        "obs": ""
+      },
+      "computador": {
+        "label": "Computador",
+        "status": "na",
+        "obs": ""
+      },
+      "sistema": {
+        "label": "Sistema de Gestão",
+        "status": "na",
+        "obs": ""
+      },
+      "impressora": {
+        "label": "Impressora",
+        "status": "na",
+        "obs": ""
+      },
+      "internet": {
+        "label": "Internet / Rede",
+        "status": "na",
+        "obs": ""
+      },
+      "radio": {
+        "label": "Rádio Comunicador",
+        "status": "na",
+        "obs": ""
+      }
+    },
+    "obsGeral": ""
+  },
+  {
+    "id": 1777791398287,
+    "posto": "CRK Baseio",
+    "supervisor": "Paulo Jardim",
+    "colaborador": "Marcelo Barbosa de Castro",
+    "data": "2026-05-02",
+    "horaInicio": "02:53",
+    "horaFim": "03:55",
+    "itens": {
+      "camera": {
+        "label": "Câmeras de Segurança",
+        "status": "ok",
+        "obs": ""
+      },
+      "dvr": {
+        "label": "DVR / NVR",
+        "status": "ok",
+        "obs": ""
+      },
+      "iluminacao": {
+        "label": "Iluminação",
+        "status": "ok",
+        "obs": ""
+      },
+      "cancela": {
+        "label": "Cancela",
+        "status": "na",
+        "obs": ""
+      },
+      "portao-principal": {
+        "label": "Portão Principal",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-servico": {
+        "label": "Portão de Serviço",
+        "status": "ok",
+        "obs": ""
+      },
+      "interfone": {
+        "label": "Interfone / Videofone",
+        "status": "falha",
+        "obs": "Não funciona "
+      },
+      "controle-acesso": {
+        "label": "Controle de Acesso",
+        "status": "ok",
+        "obs": ""
+      },
+      "vtr-moto": {
+        "label": "VTR Moto",
+        "status": "na",
+        "obs": ""
+      },
+      "vtr-carro": {
+        "label": "VTR Carro",
+        "status": "na",
+        "obs": ""
+      },
+      "combustivel": {
+        "label": "Nível de Combustível",
+        "status": "na",
+        "obs": ""
+      },
+      "geladeira": {
+        "label": "Geladeira",
+        "status": "ok",
+        "obs": ""
+      },
+      "microondas": {
+        "label": "Micro-ondas",
+        "status": "ok",
+        "obs": ""
+      },
+      "ar-cond": {
+        "label": "Ar-condicionado",
+        "status": "falha",
+        "obs": "Não tem"
+      },
+      "banheiro": {
+        "label": "Banheiro / Vestiário",
+        "status": "ok",
+        "obs": ""
+      },
+      "copa": {
+        "label": "Copa / Cantina",
+        "status": "ok",
+        "obs": ""
+      },
+      "computador": {
+        "label": "Computador",
+        "status": "ok",
+        "obs": ""
+      },
+      "sistema": {
+        "label": "Sistema de Gestão",
+        "status": "ok",
+        "obs": ""
+      },
+      "impressora": {
+        "label": "Impressora",
+        "status": "falha",
+        "obs": "Não tem"
+      },
+      "internet": {
+        "label": "Internet / Rede",
+        "status": "ok",
+        "obs": ""
+      },
+      "radio": {
+        "label": "Rádio Comunicador",
+        "status": "na",
+        "obs": ""
+      }
+    },
+    "obsGeral": ""
+  },
+  {
+    "id": 1777791556751,
+    "posto": "Oregon",
+    "supervisor": "Paulo Jardim",
+    "colaborador": "Paulo Cesar de Souza",
+    "data": "2026-05-02",
+    "horaInicio": "01:57",
+    "horaFim": "03:58",
+    "itens": {
+      "camera": {
+        "label": "Câmeras de Segurança",
+        "status": "ok",
+        "obs": ""
+      },
+      "dvr": {
+        "label": "DVR / NVR",
+        "status": "ok",
+        "obs": ""
+      },
+      "iluminacao": {
+        "label": "Iluminação",
+        "status": "ok",
+        "obs": ""
+      },
+      "cancela": {
+        "label": "Cancela",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-principal": {
+        "label": "Portão Principal",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-servico": {
+        "label": "Portão de Serviço",
+        "status": "ok",
+        "obs": ""
+      },
+      "interfone": {
+        "label": "Interfone / Videofone",
+        "status": "ok",
+        "obs": ""
+      },
+      "controle-acesso": {
+        "label": "Controle de Acesso",
+        "status": "ok",
+        "obs": ""
+      },
+      "vtr-moto": {
+        "label": "VTR Moto",
+        "status": "na",
+        "obs": ""
+      },
+      "vtr-carro": {
+        "label": "VTR Carro",
+        "status": "na",
+        "obs": ""
+      },
+      "combustivel": {
+        "label": "Nível de Combustível",
+        "status": "na",
+        "obs": ""
+      },
+      "geladeira": {
+        "label": "Geladeira",
+        "status": "ok",
+        "obs": ""
+      },
+      "microondas": {
+        "label": "Micro-ondas",
+        "status": "ok",
+        "obs": ""
+      },
+      "ar-cond": {
+        "label": "Ar-condicionado",
+        "status": "manut",
+        "obs": "Está fora para concertar "
+      },
+      "banheiro": {
+        "label": "Banheiro / Vestiário",
+        "status": "ok",
+        "obs": ""
+      },
+      "copa": {
+        "label": "Copa / Cantina",
+        "status": "ok",
+        "obs": ""
+      },
+      "computador": {
+        "label": "Computador",
+        "status": "ok",
+        "obs": ""
+      },
+      "sistema": {
+        "label": "Sistema de Gestão",
+        "status": "ok",
+        "obs": ""
+      },
+      "impressora": {
+        "label": "Impressora",
+        "status": "ok",
+        "obs": ""
+      },
+      "internet": {
+        "label": "Internet / Rede",
+        "status": "ok",
+        "obs": ""
+      },
+      "radio": {
+        "label": "Rádio Comunicador",
+        "status": "na",
+        "obs": ""
+      }
+    },
+    "obsGeral": ""
+  },
+  {
+    "id": 1777869626393,
+    "posto": "Reserva Central",
+    "supervisor": "Paulo Jardim",
+    "colaborador": "André Medeiros",
+    "data": "2026-05-03",
+    "horaInicio": "11:39",
+    "horaFim": "01:39",
+    "itens": {
+      "camera": {
+        "label": "Câmeras de Segurança",
+        "status": "ok",
+        "obs": ""
+      },
+      "dvr": {
+        "label": "DVR / NVR",
+        "status": "ok",
+        "obs": ""
+      },
+      "iluminacao": {
+        "label": "Iluminação",
+        "status": "ok",
+        "obs": ""
+      },
+      "cancela": {
+        "label": "Cancela",
+        "status": "na",
+        "obs": ""
+      },
+      "portao-principal": {
+        "label": "Portão Principal",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-servico": {
+        "label": "Portão de Serviço",
+        "status": "ok",
+        "obs": ""
+      },
+      "interfone": {
+        "label": "Interfone / Videofone",
+        "status": "ok",
+        "obs": ""
+      },
+      "controle-acesso": {
+        "label": "Controle de Acesso",
+        "status": "ok",
+        "obs": ""
+      },
+      "vtr-moto": {
+        "label": "VTR Moto",
+        "status": "na",
+        "obs": ""
+      },
+      "vtr-carro": {
+        "label": "VTR Carro",
+        "status": "na",
+        "obs": ""
+      },
+      "combustivel": {
+        "label": "Nível de Combustível",
+        "status": "na",
+        "obs": ""
+      },
+      "geladeira": {
+        "label": "Geladeira",
+        "status": "ok",
+        "obs": ""
+      },
+      "microondas": {
+        "label": "Micro-ondas",
+        "status": "ok",
+        "obs": ""
+      },
+      "ar-cond": {
+        "label": "Ar-condicionado",
+        "status": "ok",
+        "obs": ""
+      },
+      "banheiro": {
+        "label": "Banheiro / Vestiário",
+        "status": "ok",
+        "obs": ""
+      },
+      "copa": {
+        "label": "Copa / Cantina",
+        "status": "ok",
+        "obs": ""
+      },
+      "computador": {
+        "label": "Computador",
+        "status": "ok",
+        "obs": ""
+      },
+      "sistema": {
+        "label": "Sistema de Gestão",
+        "status": "ok",
+        "obs": ""
+      },
+      "impressora": {
+        "label": "Impressora",
+        "status": "falha",
+        "obs": "Não tem"
+      },
+      "internet": {
+        "label": "Internet / Rede",
+        "status": "ok",
+        "obs": ""
+      },
+      "radio": {
+        "label": "Rádio Comunicador",
+        "status": "na",
+        "obs": ""
+      }
+    },
+    "obsGeral": ""
+  }
+]
