@@ -9,7 +9,7 @@
     "horaFim": "02:03",
     "itens": {
       "camera": {
-        "label": "Câmeras de Segurança",
+        "label": "CÃ¢meras de SeguranÃ§a",
         "status": "ok",
         "obs": ""
       },
@@ -19,7 +19,7 @@
         "obs": ""
       },
       "iluminacao": {
-        "label": "Iluminação",
+        "label": "IluminaÃ§Ã£o",
         "status": "ok",
         "obs": ""
       },
@@ -29,12 +29,12 @@
         "obs": ""
       },
       "portao-principal": {
-        "label": "Portão Principal",
+        "label": "PortÃ£o Principal",
         "status": "ok",
         "obs": ""
       },
       "portao-servico": {
-        "label": "Portão de Serviço",
+        "label": "PortÃ£o de ServiÃ§o",
         "status": "ok",
         "obs": ""
       },
@@ -59,7 +59,7 @@
         "obs": ""
       },
       "combustivel": {
-        "label": "Nível de Combustível",
+        "label": "NÃ­vel de CombustÃ­vel",
         "status": "na",
         "obs": ""
       },
@@ -79,7 +79,7 @@
         "obs": ""
       },
       "banheiro": {
-        "label": "Banheiro / Vestiário",
+        "label": "Banheiro / VestiÃ¡rio",
         "status": "ok",
         "obs": ""
       },
@@ -94,7 +94,7 @@
         "obs": ""
       },
       "sistema": {
-        "label": "Sistema de Gestão",
+        "label": "Sistema de GestÃ£o",
         "status": "ok",
         "obs": ""
       },
@@ -109,7 +109,7 @@
         "obs": ""
       },
       "radio": {
-        "label": "Rádio Comunicador",
+        "label": "RÃ¡dio Comunicador",
         "status": "na",
         "obs": ""
       }
@@ -120,13 +120,13 @@
     "id": 1777367368817,
     "posto": "Garden",
     "supervisor": "Paulo Jardim",
-    "colaborador": "João Cera",
+    "colaborador": "JoÃ£o Cera",
     "data": "2026-04-28",
     "horaInicio": "23:04",
     "horaFim": "01:08",
     "itens": {
       "camera": {
-        "label": "Câmeras de Segurança",
+        "label": "CÃ¢meras de SeguranÃ§a",
         "status": "falha",
         "obs": ""
       },
@@ -136,7 +136,7 @@
         "obs": ""
       },
       "iluminacao": {
-        "label": "Iluminação",
+        "label": "IluminaÃ§Ã£o",
         "status": "falha",
         "obs": ""
       },
@@ -146,12 +146,12 @@
         "obs": ""
       },
       "portao-principal": {
-        "label": "Portão Principal",
+        "label": "PortÃ£o Principal",
         "status": "ok",
         "obs": ""
       },
       "portao-servico": {
-        "label": "Portão de Serviço",
+        "label": "PortÃ£o de ServiÃ§o",
         "status": "ok",
         "obs": ""
       },
@@ -173,10 +173,10 @@
       "vtr-carro": {
         "label": "VTR Carro",
         "status": "falha",
-        "obs": "Está com o pneu careca e "
+        "obs": "EstÃ¡ com o pneu careca e "
       },
       "combustivel": {
-        "label": "Nível de Combustível",
+        "label": "NÃ­vel de CombustÃ­vel",
         "status": "ok",
         "obs": ""
       },
@@ -196,7 +196,7 @@
         "obs": ""
       },
       "banheiro": {
-        "label": "Banheiro / Vestiário",
+        "label": "Banheiro / VestiÃ¡rio",
         "status": "na",
         "obs": ""
       },
@@ -211,7 +211,7 @@
         "obs": ""
       },
       "sistema": {
-        "label": "Sistema de Gestão",
+        "label": "Sistema de GestÃ£o",
         "status": "na",
         "obs": ""
       },
@@ -226,7 +226,7 @@
         "obs": ""
       },
       "radio": {
-        "label": "Rádio Comunicador",
+        "label": "RÃ¡dio Comunicador",
         "status": "na",
         "obs": ""
       }
@@ -243,7 +243,7 @@
     "horaFim": "01:30",
     "itens": {
       "camera": {
-        "label": "Câmeras de Segurança",
+        "label": "CÃ¢meras de SeguranÃ§a",
         "status": "falha",
         "obs": ""
       },
@@ -253,7 +253,7 @@
         "obs": ""
       },
       "iluminacao": {
-        "label": "Iluminação",
+        "label": "IluminaÃ§Ã£o",
         "status": "ok",
         "obs": ""
       },
@@ -263,12 +263,12 @@
         "obs": ""
       },
       "portao-principal": {
-        "label": "Portão Principal",
+        "label": "PortÃ£o Principal",
         "status": "na",
         "obs": ""
       },
       "portao-servico": {
-        "label": "Portão de Serviço",
+        "label": "PortÃ£o de ServiÃ§o",
         "status": "ok",
         "obs": ""
       },
@@ -293,7 +293,7 @@
         "obs": ""
       },
       "combustivel": {
-        "label": "Nível de Combustível",
+        "label": "NÃ­vel de CombustÃ­vel",
         "status": "ok",
         "obs": ""
       },
@@ -313,7 +313,7 @@
         "obs": ""
       },
       "banheiro": {
-        "label": "Banheiro / Vestiário",
+        "label": "Banheiro / VestiÃ¡rio",
         "status": "manut",
         "obs": ""
       },
@@ -328,7 +328,7 @@
         "obs": ""
       },
       "sistema": {
-        "label": "Sistema de Gestão",
+        "label": "Sistema de GestÃ£o",
         "status": "na",
         "obs": ""
       },
@@ -343,7 +343,7 @@
         "obs": ""
       },
       "radio": {
-        "label": "Rádio Comunicador",
+        "label": "RÃ¡dio Comunicador",
         "status": "na",
         "obs": ""
       }
@@ -352,7 +352,7 @@
   },
   {
     "id": 1777367676231,
-    "posto": "Fazenda Água Parada",
+    "posto": "Fazenda Ãgua Parada",
     "supervisor": "Paulo Jardim",
     "colaborador": "Gustavo Ferreira",
     "data": "2026-04-27",
@@ -360,7 +360,7 @@
     "horaFim": "01:45",
     "itens": {
       "camera": {
-        "label": "Câmeras de Segurança",
+        "label": "CÃ¢meras de SeguranÃ§a",
         "status": "ok",
         "obs": ""
       },
@@ -370,7 +370,7 @@
         "obs": ""
       },
       "iluminacao": {
-        "label": "Iluminação",
+        "label": "IluminaÃ§Ã£o",
         "status": "ok",
         "obs": ""
       },
@@ -380,12 +380,12 @@
         "obs": ""
       },
       "portao-principal": {
-        "label": "Portão Principal",
+        "label": "PortÃ£o Principal",
         "status": "ok",
         "obs": ""
       },
       "portao-servico": {
-        "label": "Portão de Serviço",
+        "label": "PortÃ£o de ServiÃ§o",
         "status": "ok",
         "obs": ""
       },
@@ -410,7 +410,7 @@
         "obs": ""
       },
       "combustivel": {
-        "label": "Nível de Combustível",
+        "label": "NÃ­vel de CombustÃ­vel",
         "status": "na",
         "obs": ""
       },
@@ -430,7 +430,7 @@
         "obs": ""
       },
       "banheiro": {
-        "label": "Banheiro / Vestiário",
+        "label": "Banheiro / VestiÃ¡rio",
         "status": "ok",
         "obs": ""
       },
@@ -445,7 +445,7 @@
         "obs": ""
       },
       "sistema": {
-        "label": "Sistema de Gestão",
+        "label": "Sistema de GestÃ£o",
         "status": "ok",
         "obs": ""
       },
@@ -460,7 +460,7 @@
         "obs": ""
       },
       "radio": {
-        "label": "Rádio Comunicador",
+        "label": "RÃ¡dio Comunicador",
         "status": "na",
         "obs": ""
       }
@@ -471,13 +471,13 @@
     "id": 1777392754021,
     "posto": "Reserva do Lago",
     "supervisor": "Paulo Jardim",
-    "colaborador": "José Carlos Germano",
+    "colaborador": "JosÃ© Carlos Germano",
     "data": "2026-04-27",
     "horaInicio": "23:08",
     "horaFim": "00:00",
     "itens": {
       "camera": {
-        "label": "Câmeras de Segurança",
+        "label": "CÃ¢meras de SeguranÃ§a",
         "status": "ok",
         "obs": ""
       },
@@ -487,7 +487,7 @@
         "obs": ""
       },
       "iluminacao": {
-        "label": "Iluminação",
+        "label": "IluminaÃ§Ã£o",
         "status": "ok",
         "obs": ""
       },
@@ -497,12 +497,12 @@
         "obs": ""
       },
       "portao-principal": {
-        "label": "Portão Principal",
+        "label": "PortÃ£o Principal",
         "status": "ok",
         "obs": ""
       },
       "portao-servico": {
-        "label": "Portão de Serviço",
+        "label": "PortÃ£o de ServiÃ§o",
         "status": "ok",
         "obs": ""
       },
@@ -514,7 +514,7 @@
       "controle-acesso": {
         "label": "Controle de Acesso",
         "status": "manut",
-        "obs": "Aguardando a instalação na nova maquina"
+        "obs": "Aguardando a instalaÃ§Ã£o na nova maquina"
       },
       "vtr-moto": {
         "label": "VTR Moto",
@@ -527,7 +527,7 @@
         "obs": ""
       },
       "combustivel": {
-        "label": "Nível de Combustível",
+        "label": "NÃ­vel de CombustÃ­vel",
         "status": "ok",
         "obs": ""
       },
@@ -547,7 +547,7 @@
         "obs": ""
       },
       "banheiro": {
-        "label": "Banheiro / Vestiário",
+        "label": "Banheiro / VestiÃ¡rio",
         "status": "ok",
         "obs": ""
       },
@@ -562,7 +562,7 @@
         "obs": ""
       },
       "sistema": {
-        "label": "Sistema de Gestão",
+        "label": "Sistema de GestÃ£o",
         "status": "manut",
         "obs": "Novo sistema a ser instalado "
       },
@@ -577,7 +577,7 @@
         "obs": ""
       },
       "radio": {
-        "label": "Rádio Comunicador",
+        "label": "RÃ¡dio Comunicador",
         "status": "na",
         "obs": ""
       }
@@ -594,7 +594,7 @@
     "horaFim": "00:44",
     "itens": {
       "camera": {
-        "label": "Câmeras de Segurança",
+        "label": "CÃ¢meras de SeguranÃ§a",
         "status": "ok",
         "obs": ""
       },
@@ -604,7 +604,7 @@
         "obs": ""
       },
       "iluminacao": {
-        "label": "Iluminação",
+        "label": "IluminaÃ§Ã£o",
         "status": "ok",
         "obs": ""
       },
@@ -614,12 +614,12 @@
         "obs": ""
       },
       "portao-principal": {
-        "label": "Portão Principal",
+        "label": "PortÃ£o Principal",
         "status": "ok",
         "obs": ""
       },
       "portao-servico": {
-        "label": "Portão de Serviço",
+        "label": "PortÃ£o de ServiÃ§o",
         "status": "ok",
         "obs": ""
       },
@@ -644,7 +644,7 @@
         "obs": ""
       },
       "combustivel": {
-        "label": "Nível de Combustível",
+        "label": "NÃ­vel de CombustÃ­vel",
         "status": "na",
         "obs": ""
       },
@@ -664,7 +664,7 @@
         "obs": ""
       },
       "banheiro": {
-        "label": "Banheiro / Vestiário",
+        "label": "Banheiro / VestiÃ¡rio",
         "status": "ok",
         "obs": ""
       },
@@ -679,7 +679,7 @@
         "obs": ""
       },
       "sistema": {
-        "label": "Sistema de Gestão",
+        "label": "Sistema de GestÃ£o",
         "status": "ok",
         "obs": ""
       },
@@ -694,7 +694,7 @@
         "obs": ""
       },
       "radio": {
-        "label": "Rádio Comunicador",
+        "label": "RÃ¡dio Comunicador",
         "status": "falha",
         "obs": ""
       }
@@ -705,13 +705,13 @@
     "id": 1777527872002,
     "posto": "VRV Miami",
     "supervisor": "Paulo Jardim",
-    "colaborador": "André Medeiros",
+    "colaborador": "AndrÃ© Medeiros",
     "data": "2026-04-30",
     "horaInicio": "02:42",
     "horaFim": "02:55",
     "itens": {
       "camera": {
-        "label": "Câmeras de Segurança",
+        "label": "CÃ¢meras de SeguranÃ§a",
         "status": "na",
         "obs": ""
       },
@@ -721,7 +721,7 @@
         "obs": ""
       },
       "iluminacao": {
-        "label": "Iluminação",
+        "label": "IluminaÃ§Ã£o",
         "status": "ok",
         "obs": ""
       },
@@ -731,12 +731,12 @@
         "obs": ""
       },
       "portao-principal": {
-        "label": "Portão Principal",
+        "label": "PortÃ£o Principal",
         "status": "ok",
         "obs": ""
       },
       "portao-servico": {
-        "label": "Portão de Serviço",
+        "label": "PortÃ£o de ServiÃ§o",
         "status": "ok",
         "obs": ""
       },
@@ -761,7 +761,7 @@
         "obs": ""
       },
       "combustivel": {
-        "label": "Nível de Combustível",
+        "label": "NÃ­vel de CombustÃ­vel",
         "status": "na",
         "obs": ""
       },
@@ -781,7 +781,7 @@
         "obs": ""
       },
       "banheiro": {
-        "label": "Banheiro / Vestiário",
+        "label": "Banheiro / VestiÃ¡rio",
         "status": "ok",
         "obs": ""
       },
@@ -796,7 +796,7 @@
         "obs": ""
       },
       "sistema": {
-        "label": "Sistema de Gestão",
+        "label": "Sistema de GestÃ£o",
         "status": "na",
         "obs": ""
       },
@@ -811,7 +811,7 @@
         "obs": ""
       },
       "radio": {
-        "label": "Rádio Comunicador",
+        "label": "RÃ¡dio Comunicador",
         "status": "na",
         "obs": ""
       }
@@ -822,13 +822,13 @@
     "id": 1777528005991,
     "posto": "Reserva do Lago",
     "supervisor": "Paulo Jardim",
-    "colaborador": "José Carlos Germano",
+    "colaborador": "JosÃ© Carlos Germano",
     "data": "2026-04-29",
     "horaInicio": "02:44",
     "horaFim": "02:46",
     "itens": {
       "camera": {
-        "label": "Câmeras de Segurança",
+        "label": "CÃ¢meras de SeguranÃ§a",
         "status": "ok",
         "obs": ""
       },
@@ -838,7 +838,7 @@
         "obs": ""
       },
       "iluminacao": {
-        "label": "Iluminação",
+        "label": "IluminaÃ§Ã£o",
         "status": "ok",
         "obs": ""
       },
@@ -848,12 +848,12 @@
         "obs": ""
       },
       "portao-principal": {
-        "label": "Portão Principal",
+        "label": "PortÃ£o Principal",
         "status": "ok",
         "obs": ""
       },
       "portao-servico": {
-        "label": "Portão de Serviço",
+        "label": "PortÃ£o de ServiÃ§o",
         "status": "ok",
         "obs": ""
       },
@@ -878,7 +878,7 @@
         "obs": ""
       },
       "combustivel": {
-        "label": "Nível de Combustível",
+        "label": "NÃ­vel de CombustÃ­vel",
         "status": "ok",
         "obs": ""
       },
@@ -898,7 +898,7 @@
         "obs": ""
       },
       "banheiro": {
-        "label": "Banheiro / Vestiário",
+        "label": "Banheiro / VestiÃ¡rio",
         "status": "ok",
         "obs": ""
       },
@@ -913,7 +913,7 @@
         "obs": ""
       },
       "sistema": {
-        "label": "Sistema de Gestão",
+        "label": "Sistema de GestÃ£o",
         "status": "ok",
         "obs": ""
       },
@@ -928,7 +928,7 @@
         "obs": ""
       },
       "radio": {
-        "label": "Rádio Comunicador",
+        "label": "RÃ¡dio Comunicador",
         "status": "na",
         "obs": ""
       }
@@ -945,7 +945,7 @@
     "horaFim": "05:52",
     "itens": {
       "camera": {
-        "label": "Câmeras de Segurança",
+        "label": "CÃ¢meras de SeguranÃ§a",
         "status": "ok",
         "obs": ""
       },
@@ -955,7 +955,7 @@
         "obs": ""
       },
       "iluminacao": {
-        "label": "Iluminação",
+        "label": "IluminaÃ§Ã£o",
         "status": "ok",
         "obs": ""
       },
@@ -965,12 +965,12 @@
         "obs": ""
       },
       "portao-principal": {
-        "label": "Portão Principal",
+        "label": "PortÃ£o Principal",
         "status": "ok",
         "obs": ""
       },
       "portao-servico": {
-        "label": "Portão de Serviço",
+        "label": "PortÃ£o de ServiÃ§o",
         "status": "ok",
         "obs": ""
       },
@@ -995,7 +995,7 @@
         "obs": ""
       },
       "combustivel": {
-        "label": "Nível de Combustível",
+        "label": "NÃ­vel de CombustÃ­vel",
         "status": "na",
         "obs": ""
       },
@@ -1015,7 +1015,7 @@
         "obs": ""
       },
       "banheiro": {
-        "label": "Banheiro / Vestiário",
+        "label": "Banheiro / VestiÃ¡rio",
         "status": "ok",
         "obs": ""
       },
@@ -1030,7 +1030,7 @@
         "obs": ""
       },
       "sistema": {
-        "label": "Sistema de Gestão",
+        "label": "Sistema de GestÃ£o",
         "status": "na",
         "obs": ""
       },
@@ -1045,7 +1045,7 @@
         "obs": ""
       },
       "radio": {
-        "label": "Rádio Comunicador",
+        "label": "RÃ¡dio Comunicador",
         "status": "na",
         "obs": ""
       }
@@ -1062,7 +1062,7 @@
     "horaFim": "05:54",
     "itens": {
       "camera": {
-        "label": "Câmeras de Segurança",
+        "label": "CÃ¢meras de SeguranÃ§a",
         "status": "ok",
         "obs": ""
       },
@@ -1072,7 +1072,7 @@
         "obs": ""
       },
       "iluminacao": {
-        "label": "Iluminação",
+        "label": "IluminaÃ§Ã£o",
         "status": "ok",
         "obs": ""
       },
@@ -1082,12 +1082,12 @@
         "obs": ""
       },
       "portao-principal": {
-        "label": "Portão Principal",
+        "label": "PortÃ£o Principal",
         "status": "na",
         "obs": ""
       },
       "portao-servico": {
-        "label": "Portão de Serviço",
+        "label": "PortÃ£o de ServiÃ§o",
         "status": "na",
         "obs": ""
       },
@@ -1112,7 +1112,7 @@
         "obs": ""
       },
       "combustivel": {
-        "label": "Nível de Combustível",
+        "label": "NÃ­vel de CombustÃ­vel",
         "status": "na",
         "obs": ""
       },
@@ -1132,7 +1132,7 @@
         "obs": ""
       },
       "banheiro": {
-        "label": "Banheiro / Vestiário",
+        "label": "Banheiro / VestiÃ¡rio",
         "status": "ok",
         "obs": ""
       },
@@ -1147,7 +1147,7 @@
         "obs": ""
       },
       "sistema": {
-        "label": "Sistema de Gestão",
+        "label": "Sistema de GestÃ£o",
         "status": "na",
         "obs": ""
       },
@@ -1162,7 +1162,7 @@
         "obs": ""
       },
       "radio": {
-        "label": "Rádio Comunicador",
+        "label": "RÃ¡dio Comunicador",
         "status": "na",
         "obs": ""
       }
@@ -1179,7 +1179,7 @@
     "horaFim": "00:35",
     "itens": {
       "camera": {
-        "label": "Câmeras de Segurança",
+        "label": "CÃ¢meras de SeguranÃ§a",
         "status": "ok",
         "obs": ""
       },
@@ -1189,7 +1189,7 @@
         "obs": ""
       },
       "iluminacao": {
-        "label": "Iluminação",
+        "label": "IluminaÃ§Ã£o",
         "status": "ok",
         "obs": ""
       },
@@ -1199,12 +1199,12 @@
         "obs": ""
       },
       "portao-principal": {
-        "label": "Portão Principal",
+        "label": "PortÃ£o Principal",
         "status": "ok",
         "obs": ""
       },
       "portao-servico": {
-        "label": "Portão de Serviço",
+        "label": "PortÃ£o de ServiÃ§o",
         "status": "ok",
         "obs": ""
       },
@@ -1229,7 +1229,7 @@
         "obs": ""
       },
       "combustivel": {
-        "label": "Nível de Combustível",
+        "label": "NÃ­vel de CombustÃ­vel",
         "status": "ok",
         "obs": ""
       },
@@ -1249,7 +1249,7 @@
         "obs": ""
       },
       "banheiro": {
-        "label": "Banheiro / Vestiário",
+        "label": "Banheiro / VestiÃ¡rio",
         "status": "ok",
         "obs": ""
       },
@@ -1264,7 +1264,7 @@
         "obs": ""
       },
       "sistema": {
-        "label": "Sistema de Gestão",
+        "label": "Sistema de GestÃ£o",
         "status": "ok",
         "obs": ""
       },
@@ -1279,7 +1279,7 @@
         "obs": ""
       },
       "radio": {
-        "label": "Rádio Comunicador",
+        "label": "RÃ¡dio Comunicador",
         "status": "ok",
         "obs": ""
       }
@@ -1296,7 +1296,7 @@
     "horaFim": "03:00",
     "itens": {
       "camera": {
-        "label": "Câmeras de Segurança",
+        "label": "CÃ¢meras de SeguranÃ§a",
         "status": "ok",
         "obs": ""
       },
@@ -1306,29 +1306,29 @@
         "obs": ""
       },
       "iluminacao": {
-        "label": "Iluminação",
+        "label": "IluminaÃ§Ã£o",
         "status": "ok",
         "obs": ""
       },
       "cancela": {
         "label": "Cancela",
         "status": "manut",
-        "obs": "Cancela de saída está quebrada "
+        "obs": "Cancela de saÃ­da estÃ¡ quebrada "
       },
       "portao-principal": {
-        "label": "Portão Principal",
+        "label": "PortÃ£o Principal",
         "status": "ok",
         "obs": ""
       },
       "portao-servico": {
-        "label": "Portão de Serviço",
+        "label": "PortÃ£o de ServiÃ§o",
         "status": "ok",
         "obs": ""
       },
       "interfone": {
         "label": "Interfone / Videofone",
         "status": "falha",
-        "obs": "Não funciona "
+        "obs": "NÃ£o funciona "
       },
       "controle-acesso": {
         "label": "Controle de Acesso",
@@ -1346,7 +1346,7 @@
         "obs": ""
       },
       "combustivel": {
-        "label": "Nível de Combustível",
+        "label": "NÃ­vel de CombustÃ­vel",
         "status": "na",
         "obs": ""
       },
@@ -1366,7 +1366,7 @@
         "obs": ""
       },
       "banheiro": {
-        "label": "Banheiro / Vestiário",
+        "label": "Banheiro / VestiÃ¡rio",
         "status": "ok",
         "obs": ""
       },
@@ -1381,7 +1381,7 @@
         "obs": ""
       },
       "sistema": {
-        "label": "Sistema de Gestão",
+        "label": "Sistema de GestÃ£o",
         "status": "ok",
         "obs": ""
       },
@@ -1396,7 +1396,7 @@
         "obs": ""
       },
       "radio": {
-        "label": "Rádio Comunicador",
+        "label": "RÃ¡dio Comunicador",
         "status": "na",
         "obs": ""
       }
@@ -1407,13 +1407,13 @@
     "id": 1777701901616,
     "posto": "Alvorada",
     "supervisor": "Paulo Jardim",
-    "colaborador": "Miquéias fraleoni",
+    "colaborador": "MiquÃ©ias fraleoni",
     "data": "2026-05-01",
     "horaInicio": "00:00",
     "horaFim": "01:03",
     "itens": {
       "camera": {
-        "label": "Câmeras de Segurança",
+        "label": "CÃ¢meras de SeguranÃ§a",
         "status": "ok",
         "obs": ""
       },
@@ -1423,7 +1423,7 @@
         "obs": ""
       },
       "iluminacao": {
-        "label": "Iluminação",
+        "label": "IluminaÃ§Ã£o",
         "status": "ok",
         "obs": ""
       },
@@ -1433,12 +1433,12 @@
         "obs": ""
       },
       "portao-principal": {
-        "label": "Portão Principal",
+        "label": "PortÃ£o Principal",
         "status": "ok",
         "obs": ""
       },
       "portao-servico": {
-        "label": "Portão de Serviço",
+        "label": "PortÃ£o de ServiÃ§o",
         "status": "ok",
         "obs": ""
       },
@@ -1463,7 +1463,7 @@
         "obs": ""
       },
       "combustivel": {
-        "label": "Nível de Combustível",
+        "label": "NÃ­vel de CombustÃ­vel",
         "status": "ok",
         "obs": ""
       },
@@ -1483,7 +1483,7 @@
         "obs": ""
       },
       "banheiro": {
-        "label": "Banheiro / Vestiário",
+        "label": "Banheiro / VestiÃ¡rio",
         "status": "ok",
         "obs": ""
       },
@@ -1498,7 +1498,7 @@
         "obs": ""
       },
       "sistema": {
-        "label": "Sistema de Gestão",
+        "label": "Sistema de GestÃ£o",
         "status": "ok",
         "obs": ""
       },
@@ -1513,16 +1513,16 @@
         "obs": ""
       },
       "radio": {
-        "label": "Rádio Comunicador",
+        "label": "RÃ¡dio Comunicador",
         "status": "falha",
-        "obs": "No final da rua não pega"
+        "obs": "No final da rua nÃ£o pega"
       }
     },
     "obsGeral": ""
   },
   {
     "id": 1777702109772,
-    "posto": "Obra André Rossi",
+    "posto": "Obra AndrÃ© Rossi",
     "supervisor": "Paulo Jardim",
     "colaborador": "Adilson dos Santos",
     "data": "2026-05-02",
@@ -1530,7 +1530,7 @@
     "horaFim": "03:07",
     "itens": {
       "camera": {
-        "label": "Câmeras de Segurança",
+        "label": "CÃ¢meras de SeguranÃ§a",
         "status": "na",
         "obs": ""
       },
@@ -1540,7 +1540,7 @@
         "obs": ""
       },
       "iluminacao": {
-        "label": "Iluminação",
+        "label": "IluminaÃ§Ã£o",
         "status": "na",
         "obs": ""
       },
@@ -1550,12 +1550,12 @@
         "obs": ""
       },
       "portao-principal": {
-        "label": "Portão Principal",
+        "label": "PortÃ£o Principal",
         "status": "na",
         "obs": ""
       },
       "portao-servico": {
-        "label": "Portão de Serviço",
+        "label": "PortÃ£o de ServiÃ§o",
         "status": "na",
         "obs": ""
       },
@@ -1580,7 +1580,7 @@
         "obs": ""
       },
       "combustivel": {
-        "label": "Nível de Combustível",
+        "label": "NÃ­vel de CombustÃ­vel",
         "status": "na",
         "obs": ""
       },
@@ -1600,7 +1600,7 @@
         "obs": ""
       },
       "banheiro": {
-        "label": "Banheiro / Vestiário",
+        "label": "Banheiro / VestiÃ¡rio",
         "status": "na",
         "obs": ""
       },
@@ -1615,7 +1615,7 @@
         "obs": ""
       },
       "sistema": {
-        "label": "Sistema de Gestão",
+        "label": "Sistema de GestÃ£o",
         "status": "na",
         "obs": ""
       },
@@ -1630,7 +1630,7 @@
         "obs": ""
       },
       "radio": {
-        "label": "Rádio Comunicador",
+        "label": "RÃ¡dio Comunicador",
         "status": "na",
         "obs": ""
       }
@@ -1639,7 +1639,7 @@
   },
   {
     "id": 1777703102004,
-    "posto": "Fazenda Água Parada",
+    "posto": "Fazenda Ãgua Parada",
     "supervisor": "Paulo Jardim",
     "colaborador": "Gustavo Ferreira",
     "data": "2026-05-01",
@@ -1647,7 +1647,7 @@
     "horaFim": "23:30",
     "itens": {
       "camera": {
-        "label": "Câmeras de Segurança",
+        "label": "CÃ¢meras de SeguranÃ§a",
         "status": "ok",
         "obs": ""
       },
@@ -1657,7 +1657,7 @@
         "obs": ""
       },
       "iluminacao": {
-        "label": "Iluminação",
+        "label": "IluminaÃ§Ã£o",
         "status": "ok",
         "obs": ""
       },
@@ -1667,12 +1667,12 @@
         "obs": ""
       },
       "portao-principal": {
-        "label": "Portão Principal",
+        "label": "PortÃ£o Principal",
         "status": "ok",
         "obs": ""
       },
       "portao-servico": {
-        "label": "Portão de Serviço",
+        "label": "PortÃ£o de ServiÃ§o",
         "status": "ok",
         "obs": ""
       },
@@ -1697,7 +1697,7 @@
         "obs": ""
       },
       "combustivel": {
-        "label": "Nível de Combustível",
+        "label": "NÃ­vel de CombustÃ­vel",
         "status": "na",
         "obs": ""
       },
@@ -1714,10 +1714,10 @@
       "ar-cond": {
         "label": "Ar-condicionado",
         "status": "falha",
-        "obs": "Não tem"
+        "obs": "NÃ£o tem"
       },
       "banheiro": {
-        "label": "Banheiro / Vestiário",
+        "label": "Banheiro / VestiÃ¡rio",
         "status": "ok",
         "obs": ""
       },
@@ -1732,7 +1732,7 @@
         "obs": ""
       },
       "sistema": {
-        "label": "Sistema de Gestão",
+        "label": "Sistema de GestÃ£o",
         "status": "ok",
         "obs": ""
       },
@@ -1747,7 +1747,7 @@
         "obs": ""
       },
       "radio": {
-        "label": "Rádio Comunicador",
+        "label": "RÃ¡dio Comunicador",
         "status": "na",
         "obs": ""
       }
@@ -1756,15 +1756,15 @@
   },
   {
     "id": 1777703228840,
-    "posto": "HFM Transportes e Logística",
+    "posto": "HFM Transportes e LogÃ­stica",
     "supervisor": "Paulo Jardim",
-    "colaborador": "Luiz Cláudio dos Santos",
+    "colaborador": "Luiz ClÃ¡udio dos Santos",
     "data": "2026-05-01",
     "horaInicio": "00:00",
     "horaFim": "00:20",
     "itens": {
       "camera": {
-        "label": "Câmeras de Segurança",
+        "label": "CÃ¢meras de SeguranÃ§a",
         "status": "ok",
         "obs": ""
       },
@@ -1774,7 +1774,7 @@
         "obs": ""
       },
       "iluminacao": {
-        "label": "Iluminação",
+        "label": "IluminaÃ§Ã£o",
         "status": "ok",
         "obs": ""
       },
@@ -1784,12 +1784,12 @@
         "obs": ""
       },
       "portao-principal": {
-        "label": "Portão Principal",
+        "label": "PortÃ£o Principal",
         "status": "ok",
         "obs": ""
       },
       "portao-servico": {
-        "label": "Portão de Serviço",
+        "label": "PortÃ£o de ServiÃ§o",
         "status": "ok",
         "obs": ""
       },
@@ -1814,7 +1814,7 @@
         "obs": ""
       },
       "combustivel": {
-        "label": "Nível de Combustível",
+        "label": "NÃ­vel de CombustÃ­vel",
         "status": "ok",
         "obs": ""
       },
@@ -1834,7 +1834,7 @@
         "obs": ""
       },
       "banheiro": {
-        "label": "Banheiro / Vestiário",
+        "label": "Banheiro / VestiÃ¡rio",
         "status": "ok",
         "obs": ""
       },
@@ -1849,7 +1849,7 @@
         "obs": ""
       },
       "sistema": {
-        "label": "Sistema de Gestão",
+        "label": "Sistema de GestÃ£o",
         "status": "ok",
         "obs": ""
       },
@@ -1864,7 +1864,7 @@
         "obs": ""
       },
       "radio": {
-        "label": "Rádio Comunicador",
+        "label": "RÃ¡dio Comunicador",
         "status": "ok",
         "obs": ""
       }
@@ -1875,13 +1875,13 @@
     "id": 1777707599111,
     "posto": "VRV Miami",
     "supervisor": "Paulo Jardim",
-    "colaborador": "André Medeiros",
+    "colaborador": "AndrÃ© Medeiros",
     "data": "2026-05-02",
     "horaInicio": "04:38",
     "horaFim": "04:38",
     "itens": {
       "camera": {
-        "label": "Câmeras de Segurança",
+        "label": "CÃ¢meras de SeguranÃ§a",
         "status": "ok",
         "obs": ""
       },
@@ -1891,7 +1891,7 @@
         "obs": ""
       },
       "iluminacao": {
-        "label": "Iluminação",
+        "label": "IluminaÃ§Ã£o",
         "status": "ok",
         "obs": ""
       },
@@ -1901,12 +1901,12 @@
         "obs": ""
       },
       "portao-principal": {
-        "label": "Portão Principal",
+        "label": "PortÃ£o Principal",
         "status": "ok",
         "obs": ""
       },
       "portao-servico": {
-        "label": "Portão de Serviço",
+        "label": "PortÃ£o de ServiÃ§o",
         "status": "ok",
         "obs": ""
       },
@@ -1931,14 +1931,14 @@
         "obs": ""
       },
       "combustivel": {
-        "label": "Nível de Combustível",
+        "label": "NÃ­vel de CombustÃ­vel",
         "status": "na",
         "obs": ""
       },
       "geladeira": {
         "label": "Geladeira",
         "status": "falha",
-        "obs": "Não tem"
+        "obs": "NÃ£o tem"
       },
       "microondas": {
         "label": "Micro-ondas",
@@ -1951,7 +1951,7 @@
         "obs": ""
       },
       "banheiro": {
-        "label": "Banheiro / Vestiário",
+        "label": "Banheiro / VestiÃ¡rio",
         "status": "ok",
         "obs": ""
       },
@@ -1966,7 +1966,7 @@
         "obs": ""
       },
       "sistema": {
-        "label": "Sistema de Gestão",
+        "label": "Sistema de GestÃ£o",
         "status": "na",
         "obs": ""
       },
@@ -1981,7 +1981,7 @@
         "obs": ""
       },
       "radio": {
-        "label": "Rádio Comunicador",
+        "label": "RÃ¡dio Comunicador",
         "status": "na",
         "obs": ""
       }
@@ -1990,7 +1990,7 @@
   },
   {
     "id": 1777762346712,
-    "posto": "Obra André Rossi",
+    "posto": "Obra AndrÃ© Rossi",
     "supervisor": "Paulo Jardim",
     "colaborador": "Alessandro Jardim",
     "data": "2026-05-02",
@@ -1998,7 +1998,7 @@
     "horaFim": "19:51",
     "itens": {
       "camera": {
-        "label": "Câmeras de Segurança",
+        "label": "CÃ¢meras de SeguranÃ§a",
         "status": "na",
         "obs": ""
       },
@@ -2008,7 +2008,7 @@
         "obs": ""
       },
       "iluminacao": {
-        "label": "Iluminação",
+        "label": "IluminaÃ§Ã£o",
         "status": "na",
         "obs": ""
       },
@@ -2018,12 +2018,12 @@
         "obs": ""
       },
       "portao-principal": {
-        "label": "Portão Principal",
+        "label": "PortÃ£o Principal",
         "status": "ok",
         "obs": ""
       },
       "portao-servico": {
-        "label": "Portão de Serviço",
+        "label": "PortÃ£o de ServiÃ§o",
         "status": "ok",
         "obs": ""
       },
@@ -2048,7 +2048,7 @@
         "obs": ""
       },
       "combustivel": {
-        "label": "Nível de Combustível",
+        "label": "NÃ­vel de CombustÃ­vel",
         "status": "ok",
         "obs": ""
       },
@@ -2068,9 +2068,9 @@
         "obs": ""
       },
       "banheiro": {
-        "label": "Banheiro / Vestiário",
+        "label": "Banheiro / VestiÃ¡rio",
         "status": "falha",
-        "obs": "Não tem"
+        "obs": "NÃ£o tem"
       },
       "copa": {
         "label": "Copa / Cantina",
@@ -2083,7 +2083,7 @@
         "obs": ""
       },
       "sistema": {
-        "label": "Sistema de Gestão",
+        "label": "Sistema de GestÃ£o",
         "status": "na",
         "obs": ""
       },
@@ -2098,7 +2098,7 @@
         "obs": ""
       },
       "radio": {
-        "label": "Rádio Comunicador",
+        "label": "RÃ¡dio Comunicador",
         "status": "na",
         "obs": ""
       }
@@ -2115,7 +2115,7 @@
     "horaFim": "03:55",
     "itens": {
       "camera": {
-        "label": "Câmeras de Segurança",
+        "label": "CÃ¢meras de SeguranÃ§a",
         "status": "ok",
         "obs": ""
       },
@@ -2125,7 +2125,7 @@
         "obs": ""
       },
       "iluminacao": {
-        "label": "Iluminação",
+        "label": "IluminaÃ§Ã£o",
         "status": "ok",
         "obs": ""
       },
@@ -2135,19 +2135,19 @@
         "obs": ""
       },
       "portao-principal": {
-        "label": "Portão Principal",
+        "label": "PortÃ£o Principal",
         "status": "ok",
         "obs": ""
       },
       "portao-servico": {
-        "label": "Portão de Serviço",
+        "label": "PortÃ£o de ServiÃ§o",
         "status": "ok",
         "obs": ""
       },
       "interfone": {
         "label": "Interfone / Videofone",
         "status": "falha",
-        "obs": "Não funciona "
+        "obs": "NÃ£o funciona "
       },
       "controle-acesso": {
         "label": "Controle de Acesso",
@@ -2165,7 +2165,7 @@
         "obs": ""
       },
       "combustivel": {
-        "label": "Nível de Combustível",
+        "label": "NÃ­vel de CombustÃ­vel",
         "status": "na",
         "obs": ""
       },
@@ -2182,10 +2182,10 @@
       "ar-cond": {
         "label": "Ar-condicionado",
         "status": "falha",
-        "obs": "Não tem"
+        "obs": "NÃ£o tem"
       },
       "banheiro": {
-        "label": "Banheiro / Vestiário",
+        "label": "Banheiro / VestiÃ¡rio",
         "status": "ok",
         "obs": ""
       },
@@ -2200,14 +2200,14 @@
         "obs": ""
       },
       "sistema": {
-        "label": "Sistema de Gestão",
+        "label": "Sistema de GestÃ£o",
         "status": "ok",
         "obs": ""
       },
       "impressora": {
         "label": "Impressora",
         "status": "falha",
-        "obs": "Não tem"
+        "obs": "NÃ£o tem"
       },
       "internet": {
         "label": "Internet / Rede",
@@ -2215,7 +2215,7 @@
         "obs": ""
       },
       "radio": {
-        "label": "Rádio Comunicador",
+        "label": "RÃ¡dio Comunicador",
         "status": "na",
         "obs": ""
       }
@@ -2232,7 +2232,7 @@
     "horaFim": "03:58",
     "itens": {
       "camera": {
-        "label": "Câmeras de Segurança",
+        "label": "CÃ¢meras de SeguranÃ§a",
         "status": "ok",
         "obs": ""
       },
@@ -2242,7 +2242,7 @@
         "obs": ""
       },
       "iluminacao": {
-        "label": "Iluminação",
+        "label": "IluminaÃ§Ã£o",
         "status": "ok",
         "obs": ""
       },
@@ -2252,12 +2252,12 @@
         "obs": ""
       },
       "portao-principal": {
-        "label": "Portão Principal",
+        "label": "PortÃ£o Principal",
         "status": "ok",
         "obs": ""
       },
       "portao-servico": {
-        "label": "Portão de Serviço",
+        "label": "PortÃ£o de ServiÃ§o",
         "status": "ok",
         "obs": ""
       },
@@ -2282,7 +2282,7 @@
         "obs": ""
       },
       "combustivel": {
-        "label": "Nível de Combustível",
+        "label": "NÃ­vel de CombustÃ­vel",
         "status": "na",
         "obs": ""
       },
@@ -2299,10 +2299,10 @@
       "ar-cond": {
         "label": "Ar-condicionado",
         "status": "manut",
-        "obs": "Está fora para concertar "
+        "obs": "EstÃ¡ fora para concertar "
       },
       "banheiro": {
-        "label": "Banheiro / Vestiário",
+        "label": "Banheiro / VestiÃ¡rio",
         "status": "ok",
         "obs": ""
       },
@@ -2317,7 +2317,7 @@
         "obs": ""
       },
       "sistema": {
-        "label": "Sistema de Gestão",
+        "label": "Sistema de GestÃ£o",
         "status": "ok",
         "obs": ""
       },
@@ -2332,7 +2332,7 @@
         "obs": ""
       },
       "radio": {
-        "label": "Rádio Comunicador",
+        "label": "RÃ¡dio Comunicador",
         "status": "na",
         "obs": ""
       }
@@ -2343,13 +2343,13 @@
     "id": 1777869626393,
     "posto": "Reserva Central",
     "supervisor": "Paulo Jardim",
-    "colaborador": "André Medeiros",
+    "colaborador": "AndrÃ© Medeiros",
     "data": "2026-05-03",
     "horaInicio": "11:39",
     "horaFim": "01:39",
     "itens": {
       "camera": {
-        "label": "Câmeras de Segurança",
+        "label": "CÃ¢meras de SeguranÃ§a",
         "status": "ok",
         "obs": ""
       },
@@ -2359,7 +2359,7 @@
         "obs": ""
       },
       "iluminacao": {
-        "label": "Iluminação",
+        "label": "IluminaÃ§Ã£o",
         "status": "ok",
         "obs": ""
       },
@@ -2369,12 +2369,12 @@
         "obs": ""
       },
       "portao-principal": {
-        "label": "Portão Principal",
+        "label": "PortÃ£o Principal",
         "status": "ok",
         "obs": ""
       },
       "portao-servico": {
-        "label": "Portão de Serviço",
+        "label": "PortÃ£o de ServiÃ§o",
         "status": "ok",
         "obs": ""
       },
@@ -2399,7 +2399,7 @@
         "obs": ""
       },
       "combustivel": {
-        "label": "Nível de Combustível",
+        "label": "NÃ­vel de CombustÃ­vel",
         "status": "na",
         "obs": ""
       },
@@ -2419,7 +2419,7 @@
         "obs": ""
       },
       "banheiro": {
-        "label": "Banheiro / Vestiário",
+        "label": "Banheiro / VestiÃ¡rio",
         "status": "ok",
         "obs": ""
       },
@@ -2434,14 +2434,14 @@
         "obs": ""
       },
       "sistema": {
-        "label": "Sistema de Gestão",
+        "label": "Sistema de GestÃ£o",
         "status": "ok",
         "obs": ""
       },
       "impressora": {
         "label": "Impressora",
         "status": "falha",
-        "obs": "Não tem"
+        "obs": "NÃ£o tem"
       },
       "internet": {
         "label": "Internet / Rede",
@@ -2449,7 +2449,7 @@
         "obs": ""
       },
       "radio": {
-        "label": "Rádio Comunicador",
+        "label": "RÃ¡dio Comunicador",
         "status": "na",
         "obs": ""
       }
