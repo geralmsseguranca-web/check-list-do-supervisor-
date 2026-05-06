@@ -3295,5 +3295,122 @@
       }
     },
     "obsGeral": ""
+  },
+  {
+    "id": 1778045570262,
+    "posto": "Smalticeram Unicer do Brasil",
+    "supervisor": "Paulo Jardim",
+    "colaborador": "Tiago Fernandes",
+    "data": "2026-05-05",
+    "horaInicio": "22:31",
+    "horaFim": "02:32",
+    "itens": {
+      "camera": {
+        "label": "Câmeras de Segurança",
+        "status": "ok",
+        "obs": ""
+      },
+      "dvr": {
+        "label": "DVR / NVR",
+        "status": "ok",
+        "obs": ""
+      },
+      "iluminacao": {
+        "label": "Iluminação",
+        "status": "ok",
+        "obs": ""
+      },
+      "cancela": {
+        "label": "Cancela",
+        "status": "na",
+        "obs": ""
+      },
+      "portao-principal": {
+        "label": "Portão Principal",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-servico": {
+        "label": "Portão de Serviço",
+        "status": "ok",
+        "obs": ""
+      },
+      "interfone": {
+        "label": "Interfone / Videofone",
+        "status": "ok",
+        "obs": ""
+      },
+      "controle-acesso": {
+        "label": "Controle de Acesso",
+        "status": "ok",
+        "obs": ""
+      },
+      "vtr-moto": {
+        "label": "VTR Moto",
+        "status": "na",
+        "obs": ""
+      },
+      "vtr-carro": {
+        "label": "VTR Carro",
+        "status": "na",
+        "obs": ""
+      },
+      "combustivel": {
+        "label": "Nível de Combustível",
+        "status": "na",
+        "obs": ""
+      },
+      "geladeira": {
+        "label": "Geladeira",
+        "status": "ok",
+        "obs": ""
+      },
+      "microondas": {
+        "label": "Micro-ondas",
+        "status": "ok",
+        "obs": ""
+      },
+      "ar-cond": {
+        "label": "Ar-condicionado",
+        "status": "ok",
+        "obs": ""
+      },
+      "banheiro": {
+        "label": "Banheiro / Vestiário",
+        "status": "ok",
+        "obs": ""
+      },
+      "copa": {
+        "label": "Copa / Cantina",
+        "status": "ok",
+        "obs": ""
+      },
+      "computador": {
+        "label": "Computador",
+        "status": "ok",
+        "obs": ""
+      },
+      "sistema": {
+        "label": "Sistema de Gestão",
+        "status": "ok",
+        "obs": ""
+      },
+      "impressora": {
+        "label": "Impressora",
+        "status": "ok",
+        "obs": ""
+      },
+      "internet": {
+        "label": "Internet / Rede",
+        "status": "ok",
+        "obs": ""
+      },
+      "radio": {
+        "label": "Rádio Comunicador",
+        "status": "ok",
+        "obs": ""
+      }
+    },
+    "obsGeral": ""
   }
 ]
