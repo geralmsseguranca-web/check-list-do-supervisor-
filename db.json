@@ -2710,5 +2710,122 @@
       }
     },
     "obsGeral": ""
+  },
+  {
+    "id": 1778034857354,
+    "posto": "Icobit Brasil",
+    "supervisor": "Paulo Roberto Jardim",
+    "colaborador": "Mateus Henrique Jardim",
+    "data": "2026-05-05",
+    "horaInicio": "22:00",
+    "horaFim": "23:33",
+    "itens": {
+      "camera": {
+        "label": "Câmeras de Segurança",
+        "status": "ok",
+        "obs": ""
+      },
+      "dvr": {
+        "label": "DVR / NVR",
+        "status": "ok",
+        "obs": ""
+      },
+      "iluminacao": {
+        "label": "Iluminação",
+        "status": "ok",
+        "obs": ""
+      },
+      "cancela": {
+        "label": "Cancela",
+        "status": "na",
+        "obs": ""
+      },
+      "portao-principal": {
+        "label": "Portão Principal",
+        "status": "ok",
+        "obs": ""
+      },
+      "portao-servico": {
+        "label": "Portão de Serviço",
+        "status": "ok",
+        "obs": ""
+      },
+      "interfone": {
+        "label": "Interfone / Videofone",
+        "status": "ok",
+        "obs": ""
+      },
+      "controle-acesso": {
+        "label": "Controle de Acesso",
+        "status": "ok",
+        "obs": ""
+      },
+      "vtr-moto": {
+        "label": "VTR Moto",
+        "status": "na",
+        "obs": ""
+      },
+      "vtr-carro": {
+        "label": "VTR Carro",
+        "status": "na",
+        "obs": ""
+      },
+      "combustivel": {
+        "label": "Nível de Combustível",
+        "status": "na",
+        "obs": ""
+      },
+      "geladeira": {
+        "label": "Geladeira",
+        "status": "ok",
+        "obs": ""
+      },
+      "microondas": {
+        "label": "Micro-ondas",
+        "status": "ok",
+        "obs": ""
+      },
+      "ar-cond": {
+        "label": "Ar-condicionado",
+        "status": "ok",
+        "obs": ""
+      },
+      "banheiro": {
+        "label": "Banheiro / Vestiário",
+        "status": "ok",
+        "obs": ""
+      },
+      "copa": {
+        "label": "Copa / Cantina",
+        "status": "ok",
+        "obs": ""
+      },
+      "computador": {
+        "label": "Computador",
+        "status": "ok",
+        "obs": ""
+      },
+      "sistema": {
+        "label": "Sistema de Gestão",
+        "status": "ok",
+        "obs": ""
+      },
+      "impressora": {
+        "label": "Impressora",
+        "status": "na",
+        "obs": ""
+      },
+      "internet": {
+        "label": "Internet / Rede",
+        "status": "ok",
+        "obs": ""
+      },
+      "radio": {
+        "label": "Rádio Comunicador",
+        "status": "na",
+        "obs": ""
+      }
+    },
+    "obsGeral": ""
   }
 ]
