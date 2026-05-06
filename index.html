@@ -11,23 +11,23 @@
    DESIGN TOKENS
    ============================================================ */
 :root {
-  --bg:       #080e1c;
-  --surface:  #0e1828;
-  --surface2: #141f33;
-  --surface3: #1a283f;
-  --border:   #1e3560;
-  --border2:  #274a80;
-  --accent:   #4d7cde;
-  --accent2:  #2a56b8;
-  --accent3:  #3a6cd0;
-  --green:    #00e5a0;
-  --red:      #ff4d75;
-  --yellow:   #ffcc44;
-  --text:     #dce8ff;
-  --text2:    #a0bbdf;
-  --muted:    #5678a0;
-  --glow:     0 0 18px rgba(58,92,200,0.30);
-  --glow-sm:  0 0 10px rgba(58,92,200,0.22);
+  --bg:       #f4f6fb;
+  --surface:  #ffffff;
+  --surface2: #f0f3fa;
+  --surface3: #e8edf8;
+  --border:   #dde3f0;
+  --border2:  #b8c6e8;
+  --accent:   #3b5de8;
+  --accent2:  #2344d0;
+  --accent3:  #4f6fe0;
+  --green:    #00c47a;
+  --red:      #f0284a;
+  --yellow:   #f59e0b;
+  --text:     #1a2340;
+  --text2:    #4a5880;
+  --muted:    #8a97b8;
+  --glow:     0 0 18px rgba(59,93,232,0.18);
+  --glow-sm:  0 0 10px rgba(59,93,232,0.14);
   --radius:   10px;
   --radius-lg:14px;
 }
@@ -51,15 +51,15 @@ body::before {
   content:'';
   position:fixed; inset:0; z-index:0; pointer-events:none;
   background:
-    radial-gradient(ellipse 60% 50% at 10% 5%,  rgba(0,130,204,0.10) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 40% at 90% 95%,  rgba(0,200,240,0.07) 0%, transparent 70%),
-    radial-gradient(ellipse 80% 60% at 50% 50%,  rgba(7,13,24,0)      0%, transparent 100%);
+    radial-gradient(ellipse 60% 50% at 10% 5%,  rgba(59,93,232,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 90% 95%,  rgba(0,196,122,0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 60% at 50% 50%,  rgba(244,246,251,0)  0%, transparent 100%);
 }
 
 /* Grain overlay */
 body::after {
   content:'';
-  position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.025;
+  position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.015;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 200px;
 }
@@ -113,6 +113,18 @@ body::after {
 .sync-dot.ok   { background: var(--green); box-shadow: 0 0 6px var(--green); }
 .sync-dot.err  { background: var(--red);   box-shadow: 0 0 6px var(--red); }
 .sync-dot.busy { background: var(--yellow); box-shadow: 0 0 6px var(--yellow); animation: pulse-anim 0.8s infinite; }
+.sync-live-badge {
+  display:inline-flex; align-items:center; gap:6px;
+  font-family:'Share Tech Mono',monospace; font-size:0.62rem; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--green);
+  background:rgba(0,229,160,0.08); border:1px solid rgba(0,229,160,0.25);
+  border-radius:20px; padding:3px 10px;
+}
+.sync-live-dot {
+  width:6px; height:6px; border-radius:50%; background:var(--green);
+  box-shadow:0 0 6px var(--green); animation:pulse-anim 1.2s infinite;
+  flex-shrink:0;
+}
 .sync-pat-wrap { display: flex; gap: 8px; align-items: center; }
 .sync-pat-wrap input {
   width: 240px; font-family: 'Share Tech Mono', monospace;
@@ -138,13 +150,13 @@ body::after {
    ============================================================ */
 header {
   position:sticky; top:0; z-index:200;
-  background: linear-gradient(180deg, #0b1528 0%, rgba(11,21,40,0.96) 100%);
+  background: linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0.97) 100%);
   border-bottom: 1px solid var(--border2);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   padding: 0 28px;
   display:flex; align-items:center; gap:16px; height:64px;
-  box-shadow: 0 4px 40px rgba(0,0,0,0.5), 0 1px 0 rgba(58,92,200,0.15);
+  box-shadow: 0 4px 24px rgba(59,93,232,0.10), 0 1px 0 rgba(59,93,232,0.08);
 }
 
 .logo-wrap {
@@ -169,7 +181,7 @@ header {
   font-family:'Rajdhani',sans-serif; font-size:1.45rem; font-weight:700;
   letter-spacing:3px; text-transform:uppercase; color:var(--accent);
   line-height:1;
-  text-shadow: 0 0 20px rgba(0,200,240,0.35);
+  text-shadow: 0 0 20px rgba(59,93,232,0.18);
 }
 .logo-text p {
   font-family:'Share Tech Mono',monospace; font-size:0.62rem;
@@ -185,7 +197,7 @@ header {
 }
 .header-clock .time {
   font-size:1.05rem; color:var(--accent); letter-spacing:2px;
-  text-shadow: 0 0 12px rgba(0,200,240,0.4);
+  text-shadow: 0 0 12px rgba(59,93,232,0.25);
 }
 .header-clock .date {
   font-size:0.65rem; color:var(--muted); letter-spacing:1.5px;
@@ -213,7 +225,7 @@ header {
    ============================================================ */
 .tabs-bar {
   position:sticky; top:64px; z-index:150;
-  background: var(--surface);
+  background: #ffffff;
   border-bottom:1px solid var(--border);
   display:flex; padding:0 24px; gap:2px; overflow-x:auto;
 }
@@ -228,10 +240,10 @@ header {
   display:flex; align-items:center; gap:7px; white-space:nowrap;
   transition:color 0.2s, border-color 0.2s, background 0.2s;
 }
-.tab-btn:hover { color:var(--text2); background:rgba(255,255,255,0.02); }
+.tab-btn:hover { color:var(--text2); background:rgba(59,93,232,0.04); }
 .tab-btn.active {
   color:var(--accent); border-bottom-color:var(--accent);
-  background:rgba(0,200,240,0.04);
+  background:rgba(59,93,232,0.06);
 }
 .tab-btn .tab-icon { font-size:1rem; }
 
@@ -259,7 +271,7 @@ header {
   border-radius:var(--radius-lg);
   padding:22px 24px;
   margin-bottom:28px;
-  box-shadow: 0 2px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.03);
+  box-shadow: 0 2px 16px rgba(59,93,232,0.08), inset 0 1px 0 rgba(255,255,255,0.9);
   display:grid;
   grid-template-columns:repeat(3, 1fr);
   gap:16px 20px;
@@ -291,15 +303,15 @@ textarea {
   appearance:none; -webkit-appearance:none;
 }
 select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M5 6L0 0h10z' fill='%2300c8f0'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M5 6L0 0h10z' fill='%233b5de8'/%3E%3C/svg%3E");
   background-repeat:no-repeat; background-position:right 13px center;
   padding-right:34px; cursor:pointer;
 }
-select option { background:#121e30; }
+select option { background:#ffffff; color:#1a2340; }
 select:focus, input:focus, textarea:focus {
   border-color:var(--accent);
-  box-shadow:0 0 0 3px rgba(0,200,240,0.12);
-  background:var(--surface3);
+  box-shadow:0 0 0 3px rgba(59,93,232,0.12);
+  background:var(--surface);
 }
 select:hover, input:hover { border-color:var(--border2); }
 
@@ -316,7 +328,7 @@ select:hover, input:hover { border-color:var(--border2); }
 .section-title .st-bar {
   width:3px; height:16px; border-radius:2px; flex-shrink:0;
   background:linear-gradient(to bottom, var(--accent), var(--accent2));
-  box-shadow:0 0 8px rgba(0,200,240,0.4);
+  box-shadow:0 0 8px rgba(59,93,232,0.35);
 }
 .section-title .st-count {
   margin-left:auto; font-family:'Share Tech Mono',monospace;
@@ -348,7 +360,7 @@ select:hover, input:hover { border-color:var(--border2); }
 .item-card:hover {
   border-color:var(--border2);
   background:var(--surface2);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  box-shadow: 0 4px 16px rgba(59,93,232,0.10);
 }
 .item-card.has-ok    { border-left:3px solid var(--green); }
 .item-card.has-falha { border-left:3px solid var(--red); }
@@ -386,10 +398,10 @@ select:hover, input:hover { border-color:var(--border2); }
 .obs-row.show { display:block; animation:fadeUp 0.2s ease; }
 .obs-row textarea {
   font-size:0.8rem; min-height:52px; resize:vertical;
-  border-color:rgba(255,204,68,0.35);
-  background:rgba(255,204,68,0.04);
+  border-color:rgba(245,158,11,0.40);
+  background:rgba(245,158,11,0.05);
 }
-.obs-row textarea:focus { border-color:var(--yellow); box-shadow:0 0 0 3px rgba(255,204,68,0.1); }
+.obs-row textarea:focus { border-color:var(--yellow); box-shadow:0 0 0 3px rgba(245,158,11,0.12); }
 
 /* ============================================================
    OBS GERAL
@@ -422,7 +434,7 @@ select:hover, input:hover { border-color:var(--border2); }
   height:100%; border-radius:4px;
   background:linear-gradient(90deg, var(--accent2), var(--accent));
   transition:width 0.3s ease;
-  box-shadow: 0 0 8px rgba(0,200,240,0.4);
+  box-shadow: 0 0 8px rgba(59,93,232,0.30);
 }
 
 /* ============================================================
@@ -438,11 +450,11 @@ select:hover, input:hover { border-color:var(--border2); }
 .btn-primary {
   background:linear-gradient(135deg, var(--accent2) 0%, var(--accent) 100%);
   color:#fff;
-  box-shadow:0 4px 18px rgba(0,130,204,0.35), var(--glow-sm);
+  box-shadow:0 4px 18px rgba(59,93,232,0.30), var(--glow-sm);
 }
 .btn-primary:hover {
   transform:translateY(-2px);
-  box-shadow:0 8px 28px rgba(0,200,240,0.4);
+  box-shadow:0 8px 28px rgba(59,93,232,0.40);
 }
 .btn-primary:active { transform:translateY(0); }
 
@@ -450,7 +462,7 @@ select:hover, input:hover { border-color:var(--border2); }
   background:transparent; border:1px solid var(--border2);
   color:var(--text2);
 }
-.btn-secondary:hover { border-color:var(--accent2); color:var(--accent); background:rgba(0,130,204,0.05); }
+.btn-secondary:hover { border-color:var(--accent2); color:var(--accent); background:rgba(59,93,232,0.05); }
 
 .btn-danger {
   background:transparent; border:1px solid rgba(255,77,117,0.35);
@@ -489,12 +501,12 @@ select:hover, input:hover { border-color:var(--border2); }
 .stat-num {
   display:block; font-family:'Share Tech Mono',monospace;
   font-size:2rem; font-weight:700; color:var(--accent);
-  text-shadow:0 0 16px rgba(0,200,240,0.3); line-height:1;
+  text-shadow:0 0 16px rgba(59,93,232,0.20); line-height:1;
   margin-bottom:6px;
 }
-.stat-num.green { color:var(--green); text-shadow:0 0 16px rgba(0,229,160,0.3); }
-.stat-num.yellow{ color:var(--yellow); text-shadow:0 0 16px rgba(255,204,68,0.3); }
-.stat-num.red   { color:var(--red); text-shadow:0 0 16px rgba(255,77,117,0.3); }
+.stat-num.green { color:var(--green); text-shadow:0 0 16px rgba(0,196,122,0.25); }
+.stat-num.yellow{ color:var(--yellow); text-shadow:0 0 16px rgba(245,158,11,0.25); }
+.stat-num.red   { color:var(--red); text-shadow:0 0 16px rgba(240,40,74,0.25); }
 .stat-label { font-size:0.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:1.5px; font-family:'Share Tech Mono',monospace; }
 
 /* ============================================================
@@ -510,7 +522,7 @@ select:hover, input:hover { border-color:var(--border2); }
   font-family:'Exo 2',sans-serif; font-size:0.875rem; outline:none;
   transition:border-color 0.2s, box-shadow 0.2s;
 }
-.search-box:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(0,200,240,0.1); }
+.search-box:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(59,93,232,0.10); }
 .search-box::placeholder { color:var(--muted); }
 
 /* ============================================================
@@ -518,11 +530,11 @@ select:hover, input:hover { border-color:var(--border2); }
    ============================================================ */
 .table-wrap {
   overflow-x:auto; border-radius:var(--radius-lg); border:1px solid var(--border);
-  margin-bottom:36px; box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  margin-bottom:36px; box-shadow: 0 4px 24px rgba(59,93,232,0.08);
 }
 table { width:100%; border-collapse:collapse; font-size:0.82rem; }
 thead {
-  background:linear-gradient(135deg, #0b1528, #122040);
+  background:linear-gradient(135deg, #eef1fb, #e4eaf8);
   position:sticky; top:0;
 }
 th {
@@ -532,11 +544,11 @@ th {
   border-bottom:1px solid var(--border2); white-space:nowrap;
 }
 td {
-  padding:13px 15px; border-bottom:1px solid rgba(28,51,82,0.5);
+  padding:13px 15px; border-bottom:1px solid var(--border);
   color:var(--text); vertical-align:middle;
 }
 tbody tr { transition:background 0.15s; }
-tbody tr:hover { background:rgba(0,200,240,0.03); }
+tbody tr:hover { background:rgba(59,93,232,0.04); }
 tbody tr:last-child td { border-bottom:none; }
 
 .badge {
@@ -568,7 +580,7 @@ tbody tr:last-child td { border-bottom:none; }
   font-weight:600; font-size:0.85rem; letter-spacing:1px;
   cursor:pointer; transition:all 0.2s; text-transform:uppercase;
 }
-.sub-tab-btn.active { background:rgba(0,200,240,0.1); border-color:var(--accent); color:var(--accent); }
+.sub-tab-btn.active { background:rgba(59,93,232,0.10); border-color:var(--accent); color:var(--accent); }
 .sub-tab-btn:hover:not(.active) { border-color:var(--border2); color:var(--text2); }
 
 .sub-section { display:none; }
@@ -585,7 +597,7 @@ tbody tr:last-child td { border-bottom:none; }
 .cadastro-panel:hover { border-color:var(--border2); }
 .cadastro-panel-header {
   padding:13px 18px;
-  background:linear-gradient(135deg, #0b1528, #122040);
+  background:linear-gradient(135deg, #eef1fb, #e4eaf8);
   border-bottom:1px solid var(--border);
   display:flex; align-items:center; gap:10px;
 }
@@ -626,7 +638,7 @@ tbody tr:last-child td { border-bottom:none; }
 .hint {
   color:var(--text2); font-size:0.78rem; line-height:1.7;
   font-family:'Share Tech Mono',monospace; letter-spacing:0.3px;
-  background:rgba(0,200,240,0.04); border:1px solid rgba(0,200,240,0.12);
+  background:rgba(59,93,232,0.05); border:1px solid rgba(59,93,232,0.15);
   border-radius:10px; padding:13px 18px; margin-bottom:22px;
 }
 
@@ -639,7 +651,7 @@ tbody tr:last-child td { border-bottom:none; }
 }
 .row-detail.open { display:table-row; }
 .row-detail td {
-  padding:16px 20px; border-bottom:1px solid rgba(28,51,82,0.5);
+  padding:16px 20px; border-bottom:1px solid var(--border);
 }
 .detail-inner {
   display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:10px;
@@ -661,7 +673,7 @@ tbody tr:last-child td { border-bottom:none; }
 .detail-item-obs { font-size:0.72rem; color:var(--text2); margin-top:4px; font-style:italic; }
 .detail-obs-geral {
   margin-top:12px; padding:10px 14px;
-  background:rgba(0,200,240,0.04); border:1px solid rgba(0,200,240,0.12);
+  background:rgba(59,93,232,0.05); border:1px solid rgba(59,93,232,0.15);
   border-radius:8px; font-size:0.8rem; color:var(--text2); line-height:1.6;
 }
 .detail-obs-geral strong { color:var(--accent3); font-family:'Share Tech Mono',monospace; font-size:0.68rem; letter-spacing:1px; display:block; margin-bottom:4px; }
@@ -675,7 +687,7 @@ tbody tr:last-child td { border-bottom:none; }
 }
 .detail-header-item span { color:var(--text2); }
 .tr-clickable { cursor:pointer; user-select:none; }
-.tr-clickable:hover td { background:rgba(77,124,222,0.06) !important; }
+.tr-clickable:hover td { background:rgba(59,93,232,0.05) !important; }
 .expand-icon { color:var(--muted); font-size:0.72rem; transition:transform 0.2s; display:inline-block; margin-right:6px; }
 .tr-clickable.expanded .expand-icon { transform:rotate(90deg); color:var(--accent); }
 
@@ -696,11 +708,11 @@ tbody tr:last-child td { border-bottom:none; }
   padding:13px 22px; border-radius:10px;
   font-family:'Rajdhani',sans-serif; font-weight:700;
   font-size:0.95rem; letter-spacing:1px;
-  box-shadow:0 8px 32px rgba(0,0,0,0.4);
+  box-shadow:0 8px 32px rgba(59,93,232,0.18);
   animation:toastIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
 }
 .toast.show { display:flex; }
-.toast-green { background:var(--green); color:#001a0d; }
+.toast-green { background:var(--green); color:#fff; }
 .toast-red   { background:var(--red);   color:#fff; }
 @keyframes toastIn {
   from { opacity:0; transform:translateY(20px) scale(0.95); }
@@ -712,7 +724,7 @@ tbody tr:last-child td { border-bottom:none; }
    ============================================================ */
 .modal-overlay {
   position:fixed; inset:0; z-index:500;
-  background:rgba(7,13,24,0.85); backdrop-filter:blur(8px);
+  background:rgba(26,35,64,0.55); backdrop-filter:blur(8px);
   display:none; align-items:center; justify-content:center;
   padding:20px;
 }
@@ -720,7 +732,7 @@ tbody tr:last-child td { border-bottom:none; }
 .modal {
   background:var(--surface); border:1px solid var(--border2);
   border-radius:var(--radius-lg); padding:28px 32px; max-width:420px; width:100%;
-  box-shadow:0 24px 64px rgba(0,0,0,0.6);
+  box-shadow:0 24px 64px rgba(59,93,232,0.18);
   animation:fadeUp 0.25s ease;
 }
 .modal h3 {
@@ -753,61 +765,163 @@ tbody tr:last-child td { border-bottom:none; }
 }
 
 /* ============================================================
-   DASHBOARD
+   DASHBOARD — REDESIGN
    ============================================================ */
+
+/* ── Barra de ações do Dashboard ── */
+.dash-action-bar {
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:12px;
+  margin-bottom:24px;
+}
+.dash-action-bar-left {
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+}
+.dash-action-bar-right {
+  display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+}
+.dash-title {
+  font-family:'Rajdhani',sans-serif; font-size:1.35rem; font-weight:700;
+  letter-spacing:2px; text-transform:uppercase; color:var(--text);
+}
+.dash-subtitle {
+  font-family:'Share Tech Mono',monospace; font-size:0.62rem;
+  color:var(--muted); letter-spacing:1.5px; text-transform:uppercase;
+  margin-top:2px;
+}
+
+/* ── Botões do Dashboard ── */
+.btn-dash {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:8px 16px; border-radius:8px; border:none;
+  font-family:'Rajdhani',sans-serif; font-size:0.8rem; font-weight:700;
+  letter-spacing:1.2px; text-transform:uppercase; cursor:pointer;
+  transition:all 0.2s; white-space:nowrap;
+}
+.btn-dash-primary {
+  background:linear-gradient(135deg, var(--accent2), var(--accent));
+  color:#fff;
+  box-shadow:0 4px 14px rgba(59,93,232,0.30);
+}
+.btn-dash-primary:hover { transform:translateY(-1px); box-shadow:0 6px 20px rgba(59,93,232,0.35); }
+.btn-dash-primary:active { transform:translateY(0); }
+
+.btn-dash-outline {
+  background:transparent; border:1px solid var(--border2); color:var(--text2);
+}
+.btn-dash-outline:hover { border-color:var(--accent2); color:var(--accent); background:rgba(59,93,232,0.05); }
+
+.btn-dash-success {
+  background:rgba(0,229,160,0.1); border:1px solid rgba(0,229,160,0.3); color:var(--green);
+}
+.btn-dash-success:hover { background:rgba(0,229,160,0.18); border-color:var(--green); }
+
+.btn-dash-warn {
+  background:rgba(255,204,68,0.1); border:1px solid rgba(255,204,68,0.3); color:var(--yellow);
+}
+.btn-dash-warn:hover { background:rgba(255,204,68,0.18); border-color:var(--yellow); }
+
+/* ── Painel de filtros ── */
 .dash-filters {
   display:flex; gap:16px; flex-wrap:wrap; align-items:flex-end;
   background:var(--surface); border:1px solid var(--border);
   border-radius:var(--radius-lg); padding:20px 24px; margin-bottom:28px;
-  box-shadow:0 2px 24px rgba(0,0,0,0.3);
+  box-shadow:0 2px 16px rgba(59,93,232,0.08);
+  position:relative;
+}
+.dash-filters::before {
+  content:'FILTROS';
+  position:absolute; top:-10px; left:20px;
+  font-family:'Share Tech Mono',monospace; font-size:0.6rem; letter-spacing:3px;
+  color:var(--accent3); background:var(--surface);
+  padding:0 8px;
 }
 
+/* ── KPI Cards melhorados ── */
 .dash-kpis {
-  display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:32px;
+  display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:28px;
 }
 .dash-kpi-card {
   background:var(--surface); border:1px solid var(--border);
-  border-radius:var(--radius); padding:18px 16px; text-align:center;
-  position:relative; overflow:hidden; transition:border-color 0.2s,transform 0.2s;
+  border-radius:var(--radius-lg); padding:20px 18px;
+  position:relative; overflow:hidden;
+  transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;
+  display:flex; flex-direction:column; align-items:flex-start; gap:6px;
 }
-.dash-kpi-card:hover { border-color:var(--border2); transform:translateY(-2px); }
+.dash-kpi-card:hover {
+  border-color:var(--border2); transform:translateY(-3px);
+  box-shadow:0 8px 28px rgba(59,93,232,0.12);
+}
 .dash-kpi-card::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:2px;
-  background:linear-gradient(90deg, transparent, var(--accent3), transparent); opacity:0.4;
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg, var(--accent2), var(--accent), transparent);
+  opacity:0.8;
+}
+.dash-kpi-card::after {
+  content:''; position:absolute; bottom:0; right:0;
+  width:70px; height:70px; border-radius:50%;
+  background:currentColor; opacity:0.04;
+  transform:translate(20px,20px);
+}
+.dash-kpi-icon {
+  font-size:1.5rem; line-height:1;
 }
 .dash-kpi-num {
   display:block; font-family:'Share Tech Mono',monospace;
-  font-size:2rem; font-weight:700; line-height:1; margin-bottom:6px;
-  text-shadow:0 0 16px rgba(0,200,240,0.3);
+  font-size:2.2rem; font-weight:700; line-height:1;
+  text-shadow:0 0 16px rgba(59,93,232,0.18);
 }
-.dash-kpi-label { font-size:0.65rem; color:var(--muted); text-transform:uppercase; letter-spacing:1.5px; font-family:'Share Tech Mono',monospace; }
-.dash-kpi-sub { font-size:0.62rem; margin-top:4px; font-family:'Share Tech Mono',monospace; opacity:0.65; }
+.dash-kpi-label {
+  font-size:0.66rem; color:var(--muted); text-transform:uppercase;
+  letter-spacing:1.5px; font-family:'Share Tech Mono',monospace; line-height:1.4;
+}
+.dash-kpi-sub {
+  font-size:0.62rem; margin-top:2px;
+  font-family:'Share Tech Mono',monospace; opacity:0.7;
+}
 
+/* ── Section titles do dashboard ── */
 .dash-section-title {
   display:flex; align-items:center; gap:12px;
   font-family:'Rajdhani',sans-serif; font-size:0.82rem; font-weight:700;
   letter-spacing:2.5px; text-transform:uppercase; color:var(--muted);
-  margin:28px 0 14px; padding-bottom:10px; border-bottom:1px solid var(--border);
+  margin:32px 0 14px; padding-bottom:10px; border-bottom:1px solid var(--border);
+}
+.dash-section-title .st-bar {
+  width:3px; height:16px; border-radius:2px; flex-shrink:0;
+  background:linear-gradient(to bottom, var(--accent), var(--accent2));
+  box-shadow:0 0 8px rgba(59,93,232,0.30);
 }
 
+/* ── Área dos gráficos lado a lado ── */
+.dash-charts-row {
+  display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:12px;
+}
 .dash-chart-wrap {
   background:var(--surface); border:1px solid var(--border);
-  border-radius:var(--radius-lg); padding:24px; margin-bottom:12px;
-  box-shadow:0 2px 24px rgba(0,0,0,0.3); overflow-x:auto;
+  border-radius:var(--radius-lg); padding:20px 22px;
+  box-shadow:0 2px 16px rgba(59,93,232,0.08); overflow-x:auto;
 }
-.dash-chart-bars { display:flex; flex-direction:column; gap:10px; min-width:300px; }
+.dash-chart-title {
+  font-family:'Rajdhani',sans-serif; font-size:0.82rem; font-weight:700;
+  letter-spacing:2px; text-transform:uppercase; color:var(--text2);
+  display:flex; align-items:center; gap:8px;
+  margin-bottom:16px; padding-bottom:10px; border-bottom:1px solid var(--border);
+}
+.dash-chart-bars { display:flex; flex-direction:column; gap:9px; min-width:260px; }
 
+/* ── Barras ── */
 .bar-row {
-  display:grid; grid-template-columns:160px 1fr 48px;
-  align-items:center; gap:12px;
+  display:grid; grid-template-columns:140px 1fr 44px;
+  align-items:center; gap:10px;
 }
 .bar-label {
-  font-family:'Share Tech Mono',monospace; font-size:0.72rem;
+  font-family:'Share Tech Mono',monospace; font-size:0.70rem;
   color:var(--text2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
   text-align:right;
 }
 .bar-track {
-  height:22px; background:var(--surface2); border-radius:4px; overflow:hidden;
+  height:20px; background:var(--surface2); border-radius:4px; overflow:hidden;
   border:1px solid var(--border); position:relative;
 }
 .bar-fill {
@@ -816,7 +930,7 @@ tbody tr:last-child td { border-bottom:none; }
 }
 .bar-fill::after {
   content:''; position:absolute; top:0; left:0; right:0; bottom:0;
-  background:linear-gradient(90deg, transparent 60%, rgba(255,255,255,0.08));
+  background:linear-gradient(90deg, transparent 60%, rgba(255,255,255,0.10));
 }
 .bar-val {
   font-family:'Share Tech Mono',monospace; font-size:0.75rem;
@@ -825,18 +939,22 @@ tbody tr:last-child td { border-bottom:none; }
 .bar-zero .bar-label { color:var(--muted); }
 .bar-zero .bar-val { color:var(--red); }
 
+/* ── Badges de alerta ── */
 .alert-badge-low  { background:rgba(255,77,117,0.12); color:var(--red);    border:1px solid rgba(255,77,117,0.3); padding:3px 9px; border-radius:20px; font-size:0.64rem; font-family:'Share Tech Mono',monospace; white-space:nowrap; }
 .alert-badge-mid  { background:rgba(255,204,68,0.12); color:var(--yellow); border:1px solid rgba(255,204,68,0.3); padding:3px 9px; border-radius:20px; font-size:0.64rem; font-family:'Share Tech Mono',monospace; white-space:nowrap; }
 .alert-badge-ok   { background:rgba(0,229,160,0.10);  color:var(--green);  border:1px solid rgba(0,229,160,0.3); padding:3px 9px; border-radius:20px; font-size:0.64rem; font-family:'Share Tech Mono',monospace; white-space:nowrap; }
 
+/* ── Responsive ── */
 @media(max-width:960px){
   .dash-kpis { grid-template-columns:repeat(2,1fr); }
+  .dash-charts-row { grid-template-columns:1fr; }
   .dash-filters { gap:12px; }
   .bar-row { grid-template-columns:110px 1fr 40px; }
 }
 @media(max-width:600px){
   .dash-kpis { grid-template-columns:1fr 1fr; }
   .bar-row { grid-template-columns:90px 1fr 36px; }
+  .dash-action-bar { flex-direction:column; align-items:flex-start; }
 }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -1000,6 +1118,12 @@ tbody tr:last-child td { border-bottom:none; }
           <span class="sync-dot" id="sync-dot"></span>
           <span id="sync-msg">Não configurado — insira o token abaixo</span>
         </div>
+        <div style="display:flex;align-items:center;gap:8px;margin-left:auto">
+          <span id="sync-live-badge" class="sync-live-badge" style="display:none">
+            <span class="sync-live-dot"></span> AUTO-SYNC ATIVO
+          </span>
+          <span id="sync-countdown" style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:var(--muted);display:none"></span>
+        </div>
         <div class="sync-pat-wrap">
           <input type="password" id="sync-pat" placeholder="Token GitHub (ghp_...)" autocomplete="off">
           <button class="btn-sync" onclick="salvarToken()">💾 Salvar</button>
@@ -1155,6 +1279,30 @@ tbody tr:last-child td { border-bottom:none; }
        ══════════════════════════════════════════ -->
   <div id="tab-dashboard" class="tab-content">
 
+    <!-- Barra de título + ações -->
+    <div class="dash-action-bar">
+      <div class="dash-action-bar-left">
+        <div>
+          <div class="dash-title">📊 Dashboard de Inspeções</div>
+          <div class="dash-subtitle">Análise e monitoramento operacional</div>
+        </div>
+      </div>
+      <div class="dash-action-bar-right">
+        <button class="btn-dash btn-dash-outline" onclick="renderDashboard()" title="Atualizar dados">
+          🔄 Atualizar
+        </button>
+        <button class="btn-dash btn-dash-success" onclick="exportarExcelDash()" title="Exportar para Excel">
+          📊 Excel
+        </button>
+        <button class="btn-dash btn-dash-warn" onclick="exportarPDFDash()" title="Exportar para PDF">
+          📄 PDF
+        </button>
+        <button class="btn-dash btn-dash-outline" onclick="imprimirDashboard()" title="Imprimir">
+          🖨️ Imprimir
+        </button>
+      </div>
+    </div>
+
     <!-- Filtros -->
     <div class="dash-filters">
       <div class="field-group" style="flex:1;min-width:160px">
@@ -1177,32 +1325,39 @@ tbody tr:last-child td { border-bottom:none; }
         <label>📅 Data Fim</label>
         <input type="date" id="dash-filter-fim" onchange="renderDashboard()">
       </div>
-      <button class="btn btn-secondary" onclick="limparFiltrosDash()" style="align-self:flex-end">↺ Limpar</button>
+      <button class="btn btn-secondary" onclick="limparFiltrosDash()" style="align-self:flex-end;white-space:nowrap">↺ Limpar filtros</button>
     </div>
 
     <!-- KPIs Dashboard -->
     <div class="dash-kpis" id="dash-kpis"></div>
 
-    <!-- Gráfico: Visitas por Supervisor -->
-    <div class="dash-section-title">
-      <span class="st-bar"></span> Visitas por Supervisor
-    </div>
-    <div class="dash-chart-wrap">
-      <div id="chart-supervisores" class="dash-chart-bars"></div>
-    </div>
+    <!-- Gráficos lado a lado -->
+    <div class="dash-charts-row">
+      <!-- Gráfico: Visitas por Supervisor -->
+      <div class="dash-chart-wrap">
+        <div class="dash-chart-title">
+          <span class="st-bar" style="width:3px;height:14px;border-radius:2px;background:linear-gradient(to bottom,var(--accent),var(--accent2));flex-shrink:0;display:inline-block;box-shadow:0 0 6px rgba(59,93,232,0.35)"></span>
+          👤 Visitas por Supervisor
+        </div>
+        <div id="chart-supervisores" class="dash-chart-bars"></div>
+      </div>
 
-    <!-- Gráfico: Postos Menos Visitados -->
-    <div class="dash-section-title">
-      <span class="st-bar" style="background:linear-gradient(to bottom,var(--yellow),var(--red))"></span> Postos — Ranking de Visitas
-      <span style="margin-left:auto;font-family:'Share Tech Mono',monospace;font-size:0.68rem;color:var(--muted)">Do menos ao mais visitado</span>
-    </div>
-    <div class="dash-chart-wrap">
-      <div id="chart-postos" class="dash-chart-bars"></div>
+      <!-- Gráfico: Ranking de Postos -->
+      <div class="dash-chart-wrap">
+        <div class="dash-chart-title">
+          <span class="st-bar" style="width:3px;height:14px;border-radius:2px;background:linear-gradient(to bottom,var(--yellow),var(--red));flex-shrink:0;display:inline-block;box-shadow:0 0 6px rgba(255,204,68,0.3)"></span>
+          📍 Postos — Ranking de Visitas
+          <span style="margin-left:auto;font-size:0.62rem;color:var(--muted);font-family:'Share Tech Mono',monospace;font-weight:400">↑ menos → mais</span>
+        </div>
+        <div id="chart-postos" class="dash-chart-bars"></div>
+      </div>
     </div>
 
     <!-- Tabela resumo -->
-    <div class="dash-section-title" style="margin-top:32px">
-      <span class="st-bar" style="background:linear-gradient(to bottom,var(--green),var(--accent))"></span> Detalhamento por Posto
+    <div class="dash-section-title" style="margin-top:24px">
+      <span class="st-bar" style="background:linear-gradient(to bottom,var(--green),var(--accent))"></span>
+      Detalhamento por Posto
+      <span style="margin-left:auto;font-family:'Share Tech Mono',monospace;font-size:0.68rem;color:var(--muted)">Ordenado por menor frequência</span>
     </div>
     <div class="table-wrap">
       <table>
@@ -2083,12 +2238,13 @@ function renderDashboard() {
   });
 
   el('dash-kpis').innerHTML = [
-    {num:db.length,   label:'Total de Visitas',   sub:'período filtrado',  color:'var(--accent)'},
-    {num:supervisoresSet.size, label:'Supervisores Ativos', sub:'no período', color:'var(--accent)'},
-    {num:ok,          label:'Inspeções Normais',  sub:'sem ocorrências',   color:'var(--green)'},
-    {num:falha+manut, label:'Com Ocorrências',    sub:`${falha} falha(s) · ${manut} manut.`, color:'var(--red)'},
+    {num:db.length,   label:'Total de Visitas',   sub:'período filtrado',  color:'var(--accent)',  icon:'🗓️'},
+    {num:supervisoresSet.size, label:'Supervisores Ativos', sub:'no período', color:'var(--accent)',  icon:'👤'},
+    {num:ok,          label:'Inspeções Normais',  sub:'sem ocorrências',   color:'var(--green)',   icon:'✅'},
+    {num:falha+manut, label:'Com Ocorrências',    sub:`${falha} falha(s) · ${manut} manut.`, color:'var(--red)', icon:'⚠️'},
   ].map(k=>`
-    <div class="dash-kpi-card">
+    <div class="dash-kpi-card" style="color:${k.color}">
+      <span class="dash-kpi-icon">${k.icon}</span>
       <span class="dash-kpi-num" style="color:${k.color}">${k.num}</span>
       <div class="dash-kpi-label">${k.label}</div>
       <div class="dash-kpi-sub" style="color:${k.color}">${k.sub}</div>
@@ -2170,8 +2326,42 @@ function renderDashboard() {
 }
 
 // ================================================================
-//  EXPORTAR CSV (mantido internamente)
+//  DASHBOARD EXPORTS / PRINT
 // ================================================================
+function exportarExcelDash() {
+  const db = getFilteredDB();
+  if (!db.length) { showToast('⚠️ Nenhum dado no período.','red'); return; }
+  exportarExcel();
+}
+
+function exportarPDFDash() {
+  const db = getFilteredDB();
+  if (!db.length) { showToast('⚠️ Nenhum dado no período.','red'); return; }
+  exportarPDF();
+}
+
+function getFilteredDB() {
+  // Re-usa os mesmos filtros do dashboard
+  const db = getDB();
+  const sup   = el('dash-filter-sup')?.value   || '';
+  const posto = el('dash-filter-posto')?.value  || '';
+  const ini   = el('dash-filter-inicio')?.value || '';
+  const fim   = el('dash-filter-fim')?.value    || '';
+  return db.filter(r=>{
+    if(sup   && r.supervisor !== sup)   return false;
+    if(posto && r.posto      !== posto) return false;
+    if(ini   && r.data       <  ini)    return false;
+    if(fim   && r.data       >  fim)    return false;
+    return true;
+  });
+}
+
+function imprimirDashboard() {
+  window.print();
+  showToast('🖨️ Enviando para impressão…','green');
+}
+
+
 function exportarCSV() {
   const db = getDB();
   if (!db.length) { showToast('⚠️ Nenhum dado para exportar.','red'); return; }
@@ -2261,6 +2451,89 @@ renderDB();
     setSyncStatus('', 'Não configurado — insira o token abaixo');
   }
 })();
+
+// ================================================================
+//  AUTO-SYNC EM TEMPO REAL
+// ================================================================
+const AUTO_SYNC_INTERVAL = 30; // segundos entre cada sync automático
+let autoSyncTimer   = null;
+let countdownTimer  = null;
+let countdownValue  = AUTO_SYNC_INTERVAL;
+
+function startAutoSync() {
+  stopAutoSync();
+  if (!getToken()) return;
+
+  // Exibe o badge "AUTO-SYNC ATIVO"
+  const badge     = el('sync-live-badge');
+  const countdown = el('sync-countdown');
+  if (badge)     badge.style.display     = 'inline-flex';
+  if (countdown) countdown.style.display = 'inline';
+
+  // Contador regressivo visível
+  countdownValue = AUTO_SYNC_INTERVAL;
+  function tickCountdown() {
+    if (countdown) countdown.textContent = `próx. sync em ${countdownValue}s`;
+    if (countdownValue <= 0) {
+      countdownValue = AUTO_SYNC_INTERVAL;
+      // Executa o sync e depois atualiza as views abertas
+      sincronizarGitHub().then(() => {
+        refreshAllViews();
+      }).catch(()=>{});
+    }
+    countdownValue--;
+  }
+  tickCountdown();
+  countdownTimer = setInterval(tickCountdown, 1000);
+}
+
+function stopAutoSync() {
+  clearInterval(autoSyncTimer);
+  clearInterval(countdownTimer);
+  const badge     = el('sync-live-badge');
+  const countdown = el('sync-countdown');
+  if (badge)     badge.style.display     = 'none';
+  if (countdown) { countdown.style.display = 'none'; countdown.textContent = ''; }
+}
+
+// Atualiza todas as views abertas sem precisar trocar de aba
+function refreshAllViews() {
+  // Sempre atualiza a aba DB (se visível)
+  const tabDB = el('tab-db');
+  if (tabDB && tabDB.classList.contains('active')) {
+    renderDB();
+    renderCadastro('postos');
+    renderCadastro('supervisores');
+    renderCadastro('colaboradores');
+  }
+  // Atualiza o dashboard (se visível)
+  const tabDash = el('tab-dashboard');
+  if (tabDash && tabDash.classList.contains('active')) {
+    renderDashboard();
+  }
+}
+
+// Inicia o auto-sync assim que houver token
+function tryStartAutoSync() {
+  if (getToken()) startAutoSync();
+}
+
+// Ao salvar token, ativa auto-sync automaticamente
+const _origSalvarToken = salvarToken;
+salvarToken = function() {
+  _origSalvarToken();
+  tryStartAutoSync();
+};
+
+// Inicia se já tiver token ao carregar
+tryStartAutoSync();
+
+// Também atualiza as views a cada 30s localmente (mesmo sem GitHub),
+// para capturar mudanças feitas em outra aba do mesmo navegador
+setInterval(() => {
+  refreshAllViews();
+}, AUTO_SYNC_INTERVAL * 1000);
+
 </script>
 </body>
 </html>
